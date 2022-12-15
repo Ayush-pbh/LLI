@@ -2,22 +2,18 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const router = express.Router();
-app.use(express.static(__dirname + '/site'));
+
+
 router.get('/',function(req,res){
-res.sendFile(path.join(__dirname+'/site/login.html'));
-  //__dirname : It will resolve to your project folder.
+  res.status(200).json({message:"Hello Its Working!"})
 });
 
-router.get('/about',function(req,res){
-res.sendFile(path.join(__dirname+'/about.html'));
-});
-
-router.get('/sitemap',function(req,res){
-res.sendFile(path.join(__dirname+'/sitemap.html'));
+router.get('/bye',function(req,res){
+  res.status(200).json({message:"Don't Say Bye!"})
 });
 
 //add the router
 app.use('/', router);
-app.listen(process.env.port || 3999);
+app.listen(process.env.port || 7823);
 
-console.log('Running at Port 3000');
+console.log('Running at Port http://localhost:7823');
