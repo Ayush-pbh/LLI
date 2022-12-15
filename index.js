@@ -14,6 +14,6 @@ router.get('/bye',function(req,res){
 
 //add the router
 app.use('/', router);
-app.listen(process.env.port || 7823);
+app.listen(process.env.port || 8080);
 
-console.log('Running at Port http://localhost:7823');
+console.log('Running at Port 8080');
