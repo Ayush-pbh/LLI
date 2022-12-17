@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application</title>
+    <!-- Materialize CSS & JS -->
+    <link rel="stylesheet" href="./css/materialize.min.css">
+    <script src="./js/materialize.min.js"></script>
+    <!-- Custom CSS & JS -->
+    <link rel="stylesheet" href="./css/materialfonts.css">
+    <link rel="stylesheet" href="./css/universal-style.css">
+    
+</head>
+<body >
+    
+    <div data-barba="wrapper">
+        <div class="load-container">
+            <div class="loading-screen"></div>
+        </div>
+        <main data-barba="container" data-barba-namespace="home-section">            
+            <ul id="slide-out" class="sidenav">
+                <li>
+                    <div class="user-view">
+                        <div class="background">
+                            <img src="img/wave-s.jpg">
+                        </div>
+                        <span id="position-tag"></span>
+                        <a href="#user"><img class="circle" src="img/dp.jpg"></a>
+                        <a href="#name"><span class="white-text name c_info_user_name">John Doe</span></a>
+                        <a href="#email"><span class="white-text email c_info_user_mail">jdandturk@gmail.com</span></a>
+                    </div>
+                </li>
+                <li ><a  href="./current_user_profile.html"><i class="material-icons">cloud</i>User Profile</a></li>
+                <li><div class="divider"></div></li>
+                <li><a class="subheader"><i>Menu</i></a></li>
+                <li><a class="waves-effect op-links" href="./create_new_case.html"><i class="material-icons">add</i> Create New Case</a></li>
+                <li><a class="waves-effect op-links caselist-link" href="./case_list.html"><i class="material-icons">list</i> Case List</a></li>
+                
+                <li><a class="waves-effect op-links invisible case-history" href="./case_list.html"><i class="material-icons">pets</i> Case History</a></li>
+                <li><a class="waves-effect op-links invisible my-gallery" href="./case_list.html"><i class="material-icons">insert_photo</i> My Gallery</a></li>
+                
+                <li><a class="waves-effect op-links" href="./mapview.html"><i class="material-icons">map</i>View Cases on Map</a></li>
+                <li><a class="waves-effect op-links" href="#!"><i class="material-icons">settings</i>App Settings</a></li>
+                <li><a class="waves-effect op-links" href="#!"><i class="material-icons">info_outline</i>About App</a></li>
+                <li><div class="divider"></div></li>
+                <li><a class="waves-effect op-links logout-link" href="#!"><i class="material-icons">directions_run</i>Logout</a></li>
+            </ul>
+            <div class="navbar-fixed">
+                <nav>
+                    <div class="nav-wrapper green lighten-1">
+                    <span class="left brand-logo my-nav-trigger" onclick="toggleSidenav()"><i class="material-icons sidenav-trigger">menu</i></span>
+                    <a class="right brand-logo"><i class="material-icons">chat</i></a>
+                    </div>
+                </nav>
+            </div>
+            
+            <div class="homepage-style">
+                <div class="row">
+                    <div class="container">
+                        <div class="white-box"></div>
+                    </div>
+                </div>
+                <div class="row animate-this">
+                    <div class="container">
+                        <div class="col s12 m6">
+                          <div class="card border-radius-curve">
+                            <div class="card-image">
+                              <img src="./img/map-example.png" class="border-radius-curve-img">
+                              <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">arrow_forward</i></a>
+                            </div>
+                            <div class="card-content">
+                                <span class="card-title">Map View</span>
+                              <p>View Cases On an Interactive Map.</p>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="container">
+                        <div class="col s6 animate-this">
+                            <div class="card-panel card-panel-custom green lighten-1 waves-effect waves-light border-radius-curve">
+                                <div class="holder">
+                                    <div class="white-text center-align">GALLERY</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s6 animate-this">
+                            <div class="card-panel card-panel-custom green lighten-1 waves-effect waves-light border-radius-curve">
+                                <div class="holder">
+                                    <div class="white-text center-align">HISTORY</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s6 animate-this">
+                            <div class="card-panel card-panel-custom green lighten-1 waves-effect waves-light border-radius-curve">
+                                <div class="holder">
+                                    <div class="white-text center-align help-inc">HELP</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s6 animate-this">
+                            <div class="card-panel card-panel-custom green lighten-1 waves-effect waves-light border-radius-curve">
+                                <div class="holder">
+                                    <div class="white-text center-align about-inc">ABOUT</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row report-case-block">
+                    <div class="container animate-this">
+                        <div class="col s12 m6">
+                          <div class="card red lighten-1 border-radius-curve">
+                            <div class="card-content white-text">
+                              <span class="card-title">Reoprt a case.</span>
+                              <p>You can report a case for an animal in need by filling a form.</p>
+                            </div>
+                            <div class="card-action border-radius-curve">
+                                <div class="card-panel card-panel-custom waves-effect waves-dark border-radius-curve">
+                                    <!-- <div class="holder"> -->
+                                        <div class=" center-align ">Continue</div>
+                                    <!-- </div> -->
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                        
+                <div class="row">
+                    <div class="container">
+
+                    </div>
+                </div>
+                <footer class="page-footer grey darken-4 animate-this">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col l6 s12">
+                          <h5 class="white-text">Lifeline India</h5>
+                          <p class="grey-text text-lighten-4">Towards peace.</p>
+                        </div>
+                        <div class="col l4 offset-l2 s12">
+                          <h5 class="white-text">Pages</h5>
+                          <ul>
+                            <li><a class="grey-text text-lighten-3" href="#!">About Us</a></li>
+                            <li><a class="grey-text text-lighten-3" href="#!">Privacy Policy</a></li>
+                            <li><a class="grey-text text-lighten-3" href="#!">Donation</a></li>
+                            <li><a class="grey-text text-lighten-3" href="#!">Help</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="footer-copyright">
+                      <div class="container">
+                      © 2022 Lifeline India
+                      <a class="grey-text text-lighten-4 right" href="#!">🐾</a>
+                      </div>
+                    </div>
+                </footer>
+            </div>
+        </main>
+    </div>
+    <script src="./js/universal-script.js" defer></script>
+    <script src="./js/homepage.js" defer></script>
+</body>
+</html>

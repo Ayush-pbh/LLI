@@ -1,21 +1,16 @@
 {
-    "name": "Lifeline India",
-    "short_name": "LLI",
-    "start_url": "../index.html",
-    "scope": "../",
+    "name": "Stick-it Notes by Tharun",
+    "short_name": "Stick-it",
+    "start_url": "login.html",
+    "scope": "./",
     "icons": [
       {
-        "src": "../img/main-icon-192.png",
-        "sizes": "192x192",
-        "type": "image/png"
-      },
-      {
-        "src": "../img/main-icon-512.png",
+        "src": "./img/main-icon-512.png",
         "sizes": "512x512",
         "type": "image/png"
       }
     ],
     "theme_color": "#ffd31d",
-    "background_color": "#ccc",
+    "background_color": "#333",
     "display": "standalone"
   }
