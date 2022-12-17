@@ -14,6 +14,8 @@ const jwt = require('jsonwebtoken')
 const jwtConfig = require('./config/auth.config')
 const bcrypt = require('bcrypt')
 const { USER } = require('./Database_Json_Models.js')
+const path = require('path')
+const fs = require('fs')
 var ObjectId = require('mongoose').Types.ObjectId; 
 const saltRounds = 10
 const cors = require('cors')
@@ -129,7 +131,7 @@ function addCaseToUserCaseList(userid,caseid) {
 
 //  '/' -> For Homepage 
 app.get('/', (req,res)=>{
-    res.sendFile("./site/login.html")
+    res.sendFile((path.join(__dirname, "./site/login.html")))
 })
 //  '/login' -> FOr Login
 app.post('/login', (req,res)=>{
