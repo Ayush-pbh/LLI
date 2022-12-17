@@ -25,7 +25,7 @@ const saltRounds = 10
 */
 const port  = 3000  // Port for Application in development
 const app = express()  
-app.use(express.static('site'))
+app.use(express.static('site/'))
 app.use(cors())
 app.use(bodyParser.json())
 //Database setup
@@ -133,7 +133,7 @@ function addCaseToUserCaseList(userid,caseid) {
 
 //  '/' -> For Homepage 
 app.get('/', (req,res)=>{
-    res.sendFile((path.join(__dirname, "./site/login.html")))
+    res.sendFile((path.join(__dirname, "/site/login.html")))
 })
 //  '/login' -> FOr Login
 app.post('/login', (req,res)=>{
