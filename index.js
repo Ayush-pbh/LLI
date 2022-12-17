@@ -129,7 +129,7 @@ function addCaseToUserCaseList(userid,caseid) {
 
 //  '/' -> For Homepage 
 app.get('/', (req,res)=>{
-    res.send("<h1>Namaste World!</h1>")
+    res.sendFile("./site/login.html")
 })
 //  '/login' -> FOr Login
 app.post('/login', (req,res)=>{
