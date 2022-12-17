@@ -8,6 +8,7 @@
 */
 const express = require('express')
 var bodyParser = require('body-parser')
+
 const mongoose = require('mongoose')
 const mongo_models = require('./Database_Json_Models.js')
 const jwt = require('jsonwebtoken')
@@ -17,13 +18,14 @@ const { USER } = require('./Database_Json_Models.js')
 const path = require('path')
 const fs = require('fs')
 var ObjectId = require('mongoose').Types.ObjectId; 
-const saltRounds = 10
 const cors = require('cors')
+const saltRounds = 10
 /*
     Import Setup Lines Below!
 */
 const port  = 3000  // Port for Application in development
 const app = express()  
+app.use(express.static('public'))
 app.use(cors())
 app.use(bodyParser.json())
 //Database setup
