@@ -25,7 +25,7 @@ const saltRounds = 10
 */
 const port  = 3000  // Port for Application in development
 const app = express()  
-app.use(express.static('public'))
+app.use(express.static('site'))
 app.use(cors())
 app.use(bodyParser.json())
 //Database setup
