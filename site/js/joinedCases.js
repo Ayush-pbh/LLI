@@ -1,21 +1,13 @@
+/*
+    Functions!!!
+    
+    getJoinedCases()
+    getJoinedCasesHtml()
 
-document.onload = init(); 
-function init(){
-    if(verifyLogin()){
-        setupCaselist()
-    }
-}
+*/
 
-document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.collapsible');
-    var instances = M.Collapsible.init(elems, {});
-});
-document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.materialboxed');
-    var instances = M.Materialbox.init(elems, {});
-});
 
-function getHtmlElement(obj,type,number=0){
+function getHtmlElement(obj,type){
     // Object is the case object 
     // type is the type of the user (user,volunteer)
     if(type==='volunteer'){
@@ -43,10 +35,9 @@ function getHtmlElement(obj,type,number=0){
                             </div>
                             <div class="card-action border-radius-curve-card-below">
                               <a class="activator">More Info</a>
-                              <a onclick="${(number==6)?'':'joinCase(\''+obj._id+'\')'}">${(number==6)?'':'JOIN'}</a>
-                              <i class="material-icons right white-text">people</i>
-                              <span class="right white-text case-vacany-counter">${number}/6
-                              </span>
+                              <a href="#">Jump to chat!</a>
+                              <i class="material-icons right green-text">people</i>
+                              <span class="right case-vacany-counter green-text lighten-2">4/6</span>
                             </div>
                             <div class="card-reveal white-text" style="background-color: #2D637A;">
                                 <span class="card-title ">${obj.caseAnimalName}<i class="material-icons right">close</i></span>
@@ -91,15 +82,15 @@ function getHtmlElement(obj,type,number=0){
     }
 }
 
-function setupCaselist(){
-    // This functions loads all the cases ...
+function getJoinedCases() {
+    // Fetch Joined Cases & then create list then write to innerHtml
     let loadingGif = document.getElementsByClassName('loading-gif')[0]
     // Check if the current user is a user or a volunteer
     pos = localGet('currentLoginUser',true).position
     
     if(pos==='volunteer'){
         // Get volunteer casesFeed from server
-        fetch(api_server+"getVolFeedCase/", {
+        fetch(api_server+"getVolJoinedCases/", {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -115,15 +106,12 @@ function setupCaselist(){
             let elemList = ""
             M.toast({html: `Cases Loaded!`})
             caselist.slice().reverse().forEach(mycase => {
-                let ll = mycase.volunteerList.length
-                elemList+=(getHtmlElement(mycase, 'volunteer',ll))
+                elemList+=(getHtmlElement(mycase, 'volunteer'))
             });
             // Push it into the ul tag!
             // console.log(elemList)
             caselistHolder = document.getElementsByClassName('volunteer-caselist-holder')[0]
             caselistHolder.innerHTML = elemList
-            
-            
         })
         .catch(err=>console.log(err))
     }
@@ -159,24 +147,6 @@ function setupCaselist(){
 }
 
 
-function joinCase(caseid){
-    console.log(caseid)
-    fetch(api_server+"joinACase/", {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'x-access-token' : localStorage.getItem('token'),
-        },
-        'body':JSON.stringify({caseId:caseid})
-    })
-    .then(response=>response.json())
-    .then((response)=>{
-        // Remove the loading gif animation
-            // 
-        M.toast({html: response.message})
-        
-        
-    })
-    .catch(err=>console.log(err))
+window.onload = function(){
+    getJoinedCases()
 }

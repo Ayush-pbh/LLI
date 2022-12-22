@@ -1,4 +1,5 @@
 // VARIABLES
+// api_server = "http://localhost:8080/"
 api_server = "https://lli.onrender.com/"
 
 // login_uri = "http://192.168.130.114:3000/login"
@@ -9,12 +10,11 @@ api_server = "https://lli.onrender.com/"
 // user_info_uri = "http://localhost:3000/userProfile"
 
 function toggleSidenav() {
+    setupSidenav()
     console.log("Wierd!")
     sidenav = M.Sidenav.init(document.querySelectorAll('#slide-out'));
     sidenav[0].open();
 }
-
-
 function fetch_user_details() {
     fetch(api_server+"userProfile/", {
         method: 'POST',
@@ -26,10 +26,12 @@ function fetch_user_details() {
     })
     .then(response=>response.json())
     .then((response)=>{
-        user_mail = document.getElementsByClassName('c_info_user_mail')[0]    
-        user_name = document.getElementsByClassName('c_info_user_name')[0]
-        user_name.innerHTML = response.fname    
-        user_mail.innerHTML = response.mail    
+        localSet('currentLoginUser',response,true)
+        console.log("Current User Login data set to localStorage")
+        // user_mail = document.getElementsByClassName('c_info_user_mail')[0]    
+        // user_name = document.getElementsByClassName('c_info_user_name')[0]
+        // user_name.innerHTML = response.fname    
+        // user_mail.innerHTML = response.mail    
         
         if(response.position==='user'){
             document.getElementsByClassName('report-case-block')[0].classList.add('visible');
@@ -37,12 +39,11 @@ function fetch_user_details() {
     })
     .catch(err=>console.log(err))
 }
-document.getElementsByClassName('logout-link')[0].addEventListener('click', logoutCurrentUser)
 function logoutCurrentUser() {
-    localStorage.setItem( 'token','' )
+    localStorage.setItem( 'token','false' )
+    localSet('currentLoginUser','')
     window.open('./login.html', '_self')
 }
-
 function setupSidenav(){
     let userInfo = localGet('currentLoginUser',true)
     document.getElementsByClassName('c_info_user_name')[0].innerHTML = userInfo.fname+' '+userInfo.lname    
@@ -55,9 +56,16 @@ function setupSidenav(){
         document.getElementsByClassName('case-history')[0].classList.remove('invisible')
         document.getElementsByClassName('my-gallery')[0].classList.remove('invisible')
     }
-
+    if(userInfo.position=='ngo-admin'){
+        document.getElementsByClassName('my-ngo-volunteers')[0].classList.remove('invisible')
+        document.getElementsByClassName('ongoing-cases')[0].classList.remove('invisible')
+        document.getElementsByClassName('my-ngo')[0].classList.remove('invisible')
+        
+        document.getElementsByClassName('caselist-link')[0].classList.add('invisible')
+        document.getElementsByClassName('create-new-case-link')[0].classList.add('invisible')
+        // document.getElementsByClassName('my-ngo')[0].classList.remove('invisible')
+    }
 }
-
 function localSet(key,value,obj=false){
     if(obj){
         localStorage.setItem(key,JSON.stringify(value))
@@ -75,6 +83,29 @@ function localGet(key,obj=false){
     }
 }
 function verifyLogin(){
-
+    if(localGet('token')=='false'){
+        return false;
+    }
+    else{
+        return true;
+    }
 }
-    
+window.onload = function(){
+    console.log("ON LOAD UNI")
+    if(verifyLogin()){
+        console.log("User Login Verified!")
+        fetch_user_details()
+        setTimeout(() => {
+            setupSidenav()
+            console.log("Sidenav setup!")
+        }, 500);
+    }
+    else{
+        console.log("User Login Verified!")
+    }
+}
+
+// export {
+//     localGet, localSet, verifyLogin,setupSidenav, fetch_user_details
+// }
+

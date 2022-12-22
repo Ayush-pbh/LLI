@@ -11,7 +11,13 @@
     <!-- Custom CSS & JS -->
     <link rel="stylesheet" href="./css/materialfonts.css">
     <link rel="stylesheet" href="./css/universal-style.css">
-    
+    <!-- Leaflet Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" 
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+    crossorigin=""/>
+    <link rel="stylesheet" href="./css/MarkerCluster.css">
+    <link rel="stylesheet" href="./css/MarkerCluster.Default.css">
+    <link href='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css' rel='stylesheet' />
 </head>
 <body >
     
@@ -53,12 +59,19 @@
             </div>
 
             <div class="row">
-                <div class="container">
-                    <h1 class="t-playfair">About</h1>
-                </div>
+                <div id="map"></div>
             </div>
+            <div class="mapcontrols">
+                <a class="btn-floating btn-large waves-effect waves-light green" onclick="getLocation()"><i class="material-icons">gps_fixed</i></a>
+                <a class="btn-floating btn-large waves-effect waves-light green" onclick="refreshMapClusterData()"><i class="material-icons">rotate_right
+                </i></a>
+                <a class="btn-floating btn-large waves-effect waves-light green"><i class="material-icons">list</i></a>
+                <a class="btn-floating btn-large waves-effect waves-light green"><i class="material-icons">exposure_plus_1
+                </i></a>
+            </div>
+            <img src="./img/reloading-gif.gif" class="reload-mapcluster z-depth-4">
+            <div class="dim-background off"></div>
             
-
             <div class="homepage-style">
                 <footer class="page-footer grey darken-4 animate-this">
                     <div class="container">
@@ -88,6 +101,14 @@
             </div>
         </main>
     </div>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+    crossorigin=""></script>
+    <script src='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.js'></script>
+
     <script src="./js/universal-script.js" defer></script>
+    <script src="./js/leaflet.markercluster.js"></script>
+    <script src="./js/map.js"></script>
 </body>
 </html>

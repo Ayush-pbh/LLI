@@ -10,8 +10,8 @@ function toggleUserProfileDP() {
     dpholder.classList.toggle('dp-holder-full');
 }
 
-window.onload = setup()
-window.onload = fetch_user_details()
+// window.onload = setup()
+// window.onload = fetch_user_details()
 
 function setup() {
     current_user_name = document.getElementsByClassName('current_user_name')[0];

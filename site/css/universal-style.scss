@@ -163,6 +163,9 @@ body{
 .border-radius-curve-card-below{
     border-radius: 0px 0px 21px 21px !important;
 }
+.border-radius-curve-card-above{
+    border-radius: 21px 21px 0px 0px !important;
+}
 .border-radius-curve{
     border-radius: 21px !important;
 }
@@ -259,4 +262,115 @@ body{
 .case-vacany-counter{
     font-size: 15px;
     margin-bottom:20px;
+}
+#map { 
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    top:0px;
+    left:0px;
+    z-index: 10;
+}
+
+.mapcontrols{
+    position: fixed;
+    height:30vh;
+    width: 75px;
+    z-index: 20;    
+    right:10px;
+    bottom:10px;
+    padding:10px;
+    a{
+        display: block;
+        margin-bottom: 10px;
+    }
+}
+
+.reload-mapcluster{
+    position: fixed;
+    width: 70%;
+    height: 200px;
+    left:15%;
+    top: calc(50vh - 100px);
+    background-color: #4bedc2;
+    z-index: 21;
+    display: none;
+    &.visible{
+        display: block;
+    }
+}
+.dim-background{
+    top:0px;
+    left:0px;
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(17, 17, 17, 0.486);
+    z-index: 20;
+    &.off{
+        display: none;
+    }
+}
+
+#minimap{
+    height: 300px;
+    z-index: 10;
+}
+.open-btn-minimap{
+    z-index: 11;
+}
+// Gallery grid!
+.grid-container{
+    // padding:20;
+    display:grid;
+    grid-gap:1.5rem;
+    grid-template-columns: repeat(auto-fit,minmax(140px,1fr));
+    grid-auto-rows:150px;
+}
+.grid-container div{
+    background-position:center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    font-size:50px;
+    text-align:center;
+    line-height:150px;
+    height:150px ;
+    //width:100px;
+    background: skyblue;
+    border-radius: 21px;
+    cursor:pointer;
+    transition:.3s ease;
+    // filter: invert(1);
+        // -webkit-text-stroke: 2px #ccc;
+    // font-weight:bold;
+}
+.grid-container div:hover{
+    box-shadow:0px 3px 5px 0px grey;
+    transform:translateY(-3px);
+}
+.card-tall{
+    // grid-row: span 2 / auto;
+    // height: 400px;
+}
+
+.custom-icon-margin{
+    margin-left:10px;
+    margin-right:15px;
+}
+
+.user-caselist {
+
+}
+.volunteer-caselist {
+
+}
+
+.hidden{
+    display: none;
+}
+
+.loading-gif{
+    img{
+        width: 100%;
+    }
 }

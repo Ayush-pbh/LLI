@@ -178,7 +178,6 @@ app.post('/login', (req,res)=>{
         res.status(202)
     }) 
 })
-
 app.post('/register', validate_register_details, (req,res)=>{
     
     const {fname, lname, mail, phone, password, cpassword, dob, position} = req.body
@@ -242,7 +241,6 @@ app.post('/register', validate_register_details, (req,res)=>{
     
 
 })
-
 app.post('/confirmEmail', (req,res)=>{
     const {mail, mailSecret} = req.body
     console.log(`Mail Id = ${mail} and Mail Secret = ${mailSecret}`)
@@ -274,7 +272,6 @@ app.post('/confirmEmail', (req,res)=>{
     })
     // res.status(200)
 })
-
 app.post('/userProfile',verify_token, (req,res)=>{
     // console.log(`Decoded User Id : ${req.userId.prototype.toString()}`)
     var query = { _id: new ObjectId(req.userId) };
@@ -350,9 +347,8 @@ app.post('/getUserGeneratedCases', verify_token, (req,res)=>{
             console.log("Err :"+ err)
             res.status(422).json({message:"Error "+err})
         }
-    })
+    }).sort({caseGenerateDate:-1})
 })
-
 app.post('/getCaseByStatus', verify_token, (req,res)=>{
     // Checking if the user is a volunteer then only showing him open cases to work on!
     if(req.body.caseFilter=="open" || req.body.caseFilter=="full" || req.body.caseFilter=="closed"){
@@ -413,18 +409,20 @@ app.post('/getCaseByStatus', verify_token, (req,res)=>{
         res.status(422).json({message:"Invalid Filter Passed!"})
     }
 })
-
 app.post('/joinACase', verify_token, (req,res)=>{
     // Check if the user is volunteer then only considering his request!
     // We can perform many checks here like, total-ongoing cases the user is part of. 
     // The Karma he has recived... On these basis we decide to allow him in the case.
     
     caseRequestedToJoin = req.body.caseId
-
+    console.log("Try Joining: "+caseRequestedToJoin)
     mongo_models.USER.findOne({_id : req.userId}).then((stat)=>{
         if(stat){
             if(stat.position==='volunteer'){
                 mongo_models.CASE.findOne({_id: caseRequestedToJoin}, (err,output)=>{
+                    console.log(output)
+                    console.log(err)
+
                     if(!err){
                         // Check if the user is not already a part of the case
                         let alreadyJoined = false
@@ -476,6 +474,46 @@ app.post('/joinACase', verify_token, (req,res)=>{
         }
     })
 })
+app.post('/getVolJoinedCases', verify_token, (req,res)=>{
+    // Cases Joined by the Volunteer Location case.
+    // Get User caselist then get each case and addit to the caselist to return
+    var query = { _id: new ObjectId(req.userId) };
+    mongo_models.USER.findOne(query).then((userdata)=>{
+        // caselist = userdata.
+        caselist = userdata.casesVolIn
+        // Update the caselist String to ObjectId type
+        for (let i = 0; i < caselist.length; i++) {
+            element = caselist[i];
+            caselist[i] = mongoose.Types.ObjectId(element)
+        }
+        console.log(caselist)
+        mongo_models.CASE.find({
+            '_id': { $in: caselist}
+        }, function(err, docs){
+            if(err){
+                res.status(422).json({message:"Error "+err})
+            }
+            else{
+                res.status(200).json({message:docs})
+            }
+        });        
+    }).catch((err)=>{
+        res.status(422);
+    })
+})
+
+app.post('/getVolFeedCase', verify_token, (req,res)=>{
+    // Cases for the Volunteer Location case.
+    mongo_models.CASE.find({}, function(err, docs){
+        if(err){
+            res.status(422).json({message:"Error "+err})
+        }
+        else{
+            res.status(200).json({message:docs})
+        }
+    });
+})
+
 app.listen(process.env.port || 8080, ()=>{
     console.log(`App Running @ http://localhost:${port}`)
 });

@@ -43,12 +43,12 @@
                             <i class="material-icons prefix">lock</i>
                             <input type="password" name="pass" id="login-form-pass">
                             <label for="login-form-pass">Password</label>
-                            <div class="center-align login-forgot-password">Forgot Password?</div>
+                            <div class="center-align login-forgot-password" onclick="window.open('forgotpassword.html','_self')">Forgot Password?</div>
                         </div>
-                        <button class="btn waves-effect waves-light login-form-login-button border-radius-curve green lighten-1 " type="submit" name="action">Login
+                        <button class="btn waves-effect waves-light login-form-login-button border-radius-curve green lighten-1 " type="submit" name="action" onclick="loginUser()">Login
                             <i class="material-icons right">send</i>
                         </button>
-                        <div class="center-align login-register-link">Don't have an account? Register Here.</div>
+                        <div class="center-align login-register-link" onclick="window.open('signup_user.html','_self')">Don't have an account? Register Here.</div>
                     </div>
                     
                 </div>

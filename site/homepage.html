@@ -11,6 +11,14 @@
     <!-- Custom CSS & JS -->
     <link rel="stylesheet" href="./css/materialfonts.css">
     <link rel="stylesheet" href="./css/universal-style.css">
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" 
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+    crossorigin=""/>
+    <link rel="stylesheet" href="./css/MarkerCluster.css">
+    <link rel="stylesheet" href="./css/MarkerCluster.Default.css">
+    <link href='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css' rel='stylesheet' />
+
     
 </head>
 <body >
@@ -35,17 +43,20 @@
                 <li ><a  href="./current_user_profile.html"><i class="material-icons">cloud</i>User Profile</a></li>
                 <li><div class="divider"></div></li>
                 <li><a class="subheader"><i>Menu</i></a></li>
-                <li><a class="waves-effect op-links" href="./create_new_case.html"><i class="material-icons">add</i> Create New Case</a></li>
-                <li><a class="waves-effect op-links caselist-link" href="./case_list.html"><i class="material-icons">list</i> Case List</a></li>
+                <li><a class="waves-effect op-links invisible my-ngo" href="./create_new_case.html"><i class="material-icons">domain</i> My NGO</a></li>
+                <li><a class="waves-effect op-links invisible ongoing-cases" href="./create_new_case.html"><i class="material-icons">list</i>Cases</a></li>
+                <li><a class="waves-effect op-links invisible my-ngo-volunteers" href="./create_new_case.html"><i class="material-icons">people</i> Volunteers</a></li>
+                <li><a class="waves-effect op-links create-new-case-link" href="./create_new_case.html"><i class="material-icons">add</i> Create New Case</a></li>
                 
-                <li><a class="waves-effect op-links invisible case-history" href="./case_list.html"><i class="material-icons">pets</i> Case History</a></li>
-                <li><a class="waves-effect op-links invisible my-gallery" href="./case_list.html"><i class="material-icons">insert_photo</i> My Gallery</a></li>
+                <li><a class="waves-effect op-links caselist-link" href="./case_list.html"><i class="material-icons">list</i> Nearby Cases</a></li>
+                <li><a class="waves-effect op-links invisible case-history" href="./joinedCases.html"><i class="material-icons">pets</i> Joined Cases</a></li>
+                <li><a class="waves-effect op-links invisible my-gallery" href="./gallery.html"><i class="material-icons">insert_photo</i> My Gallery</a></li>
                 
                 <li><a class="waves-effect op-links" href="./mapview.html"><i class="material-icons">map</i>View Cases on Map</a></li>
-                <li><a class="waves-effect op-links" href="#!"><i class="material-icons">settings</i>App Settings</a></li>
-                <li><a class="waves-effect op-links" href="#!"><i class="material-icons">info_outline</i>About App</a></li>
+                <li><a class="waves-effect op-links" href="./settings.html"><i class="material-icons">settings</i>App Settings</a></li>
+                <li><a class="waves-effect op-links" href="./about.html"><i class="material-icons">info_outline</i>About App</a></li>
                 <li><div class="divider"></div></li>
-                <li><a class="waves-effect op-links logout-link" href="#!"><i class="material-icons">directions_run</i>Logout</a></li>
+                <li><a class="waves-effect op-links logout-link" onclick="logoutCurrentUser()" href="#!"><i class="material-icons">directions_run</i>Logout</a></li>
             </ul>
             <div class="navbar-fixed">
                 <nav>
@@ -67,8 +78,8 @@
                         <div class="col s12 m6">
                           <div class="card border-radius-curve">
                             <div class="card-image">
-                              <img src="./img/map-example.png" class="border-radius-curve-img">
-                              <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">arrow_forward</i></a>
+                              <div id="minimap" class="border-radius-curve-card-above"></div>
+                              <a href="./mapview.html" class="btn-floating halfway-fab waves-effect waves-light red open-btn-minimap"><i class="material-icons">arrow_forward</i></a>
                             </div>
                             <div class="card-content">
                                 <span class="card-title">Map View</span>
@@ -81,28 +92,28 @@
                 
                 <div class="row">
                     <div class="container">
-                        <div class="col s6 animate-this">
+                        <div class="col s6 animate-this" onclick="window.open('./gallery.html','_self')">
                             <div class="card-panel card-panel-custom green lighten-1 waves-effect waves-light border-radius-curve">
                                 <div class="holder">
                                     <div class="white-text center-align">GALLERY</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col s6 animate-this">
+                        <div class="col s6 animate-this" onclick="window.open('./joinedCases.html','_self')">
                             <div class="card-panel card-panel-custom green lighten-1 waves-effect waves-light border-radius-curve">
                                 <div class="holder">
                                     <div class="white-text center-align">HISTORY</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col s6 animate-this">
+                        <div class="col s6 animate-this" onclick="window.open('./help.html','_self')">
                             <div class="card-panel card-panel-custom green lighten-1 waves-effect waves-light border-radius-curve">
                                 <div class="holder">
                                     <div class="white-text center-align help-inc">HELP</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col s6 animate-this">
+                        <div class="col s6 animate-this" onclick="window.open('./about.html','_self')">
                             <div class="card-panel card-panel-custom green lighten-1 waves-effect waves-light border-radius-curve">
                                 <div class="holder">
                                     <div class="white-text center-align about-inc">ABOUT</div>
@@ -164,6 +175,14 @@
             </div>
         </main>
     </div>
+    <!-- Leaflet -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+    crossorigin=""></script>
+    <script src='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.js'></script>
+
+    <script src="./js/leaflet.markercluster.js"></script>
+
     <script src="./js/universal-script.js" defer></script>
     <script src="./js/homepage.js" defer></script>
 </body>

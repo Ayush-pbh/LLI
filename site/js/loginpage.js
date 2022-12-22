@@ -74,4 +74,4 @@ async function loginUser(){
 }
 
 // @Listener
-document.getElementsByClassName('login-form-login-button')[0].addEventListener('click', loginUser);
+// document.getElementsByClassName('login-form-login-button')[0].addEventListener('click', loginUser);
