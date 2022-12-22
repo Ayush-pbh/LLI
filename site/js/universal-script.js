@@ -53,17 +53,32 @@ function setupSidenav(){
     if(userInfo.position=='volunteer'){
         // Add MyGallry Page
         // Add Case History Page
-        document.getElementsByClassName('case-history')[0].classList.remove('invisible')
-        document.getElementsByClassName('my-gallery')[0].classList.remove('invisible')
+        // document.getElementsByClassName('case-history')[0].classList.remove('invisible')
+        // document.getElementsByClassName('my-gallery')[0].classList.remove('invisible')
+        // Green Button changes
+        document.getElementsByClassName('voln-green-button')[0].classList.remove('hidden')
     }
     if(userInfo.position=='ngo-admin'){
-        document.getElementsByClassName('my-ngo-volunteers')[0].classList.remove('invisible')
-        document.getElementsByClassName('ongoing-cases')[0].classList.remove('invisible')
+        // document.getElementsByClassName('my-ngo-volunteers')[0].classList.remove('invisible')
+        // document.getElementsByClassName('ongoing-cases')[0].classList.remove('invisible')
         document.getElementsByClassName('my-ngo')[0].classList.remove('invisible')
         
         document.getElementsByClassName('caselist-link')[0].classList.add('invisible')
         document.getElementsByClassName('create-new-case-link')[0].classList.add('invisible')
+        document.getElementsByClassName('ngoadmin-green-button')[0].classList.remove('hidden')
+        document.getElementsByClassName('aboutapp-link')[0].classList.add('invisible')
+        document.getElementsByClassName('appsettings-link')[0].classList.add('invisible')
+        document.getElementsByClassName('apphelp-link')[0].classList.remove('invisible')
         // document.getElementsByClassName('my-ngo')[0].classList.remove('invisible')
+    }
+    if(userInfo.position=='user'){
+        document.getElementsByClassName('caselist-link')[0].classList.add('invisible')
+        document.getElementsByClassName('viewcaseonmap-link')[0].classList.add('invisible')
+        document.getElementsByClassName('create-new-case-link')[0].classList.add('invisible')
+        document.getElementsByClassName('aboutapp-link')[0].classList.add('invisible')
+        document.getElementsByClassName('appsettings-link')[0].classList.add('invisible')
+        document.getElementsByClassName('apphelp-link')[0].classList.remove('invisible')
+        document.getElementsByClassName('user-green-button')[0].classList.remove('hidden')
     }
 }
 function localSet(key,value,obj=false){

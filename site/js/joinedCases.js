@@ -7,7 +7,7 @@
 */
 
 
-function getHtmlElement(obj,type){
+function getHtmlElement(obj,type,number){
     // Object is the case object 
     // type is the type of the user (user,volunteer)
     if(type==='volunteer'){
@@ -37,7 +37,7 @@ function getHtmlElement(obj,type){
                               <a class="activator">More Info</a>
                               <a href="#">Jump to chat!</a>
                               <i class="material-icons right green-text">people</i>
-                              <span class="right case-vacany-counter green-text lighten-2">4/6</span>
+                              <span class="right case-vacany-counter green-text lighten-2">${number}/6</span>
                             </div>
                             <div class="card-reveal white-text" style="background-color: #2D637A;">
                                 <span class="card-title ">${obj.caseAnimalName}<i class="material-icons right">close</i></span>
@@ -51,8 +51,8 @@ function getHtmlElement(obj,type){
                                 </blockquote>
                                 <blockquote class="flow-text">
                                     <b>Location</b> <br>
-                                    <a href="">View on Map</a>
-                                    <a href="">Google_Map_Link</a>    
+                                    <a href="${obj.caseLocationGMapLink}">View on Map</a>
+                                    
                                 </blockquote>
                               </div>
                           </div>
@@ -106,7 +106,8 @@ function getJoinedCases() {
             let elemList = ""
             M.toast({html: `Cases Loaded!`})
             caselist.slice().reverse().forEach(mycase => {
-                elemList+=(getHtmlElement(mycase, 'volunteer'))
+                let number = mycase.volunteerList.length
+                elemList+=(getHtmlElement(mycase, 'volunteer',number))
             });
             // Push it into the ul tag!
             // console.log(elemList)
@@ -133,8 +134,10 @@ function getJoinedCases() {
             caselist = response.message
             let elemList = ""
             M.toast({html: `Cases Loaded!`})
+
             caselist.slice().reverse().forEach(mycase => {
-                elemList+=(getHtmlElement(mycase, 'user'))
+                let number = mycase.volunteerList.length
+                elemList+=(getHtmlElement(mycase, 'user',number))
             });
             // Push it into the ul tag!
             // console.log(elemList)

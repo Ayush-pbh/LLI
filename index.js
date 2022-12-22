@@ -514,6 +514,63 @@ app.post('/getVolFeedCase', verify_token, (req,res)=>{
     });
 })
 
+app.post('/sendForgotPasswordOtp', (req,res)=>{
+    // mail
+    // return OTP , also otp is stored in the database
+    let mail = req.body.mail
+    if(mail){
+        mongo_models.USER.findOne({mail:mail}).then((status)=>{
+            if(status){
+                // User found now we will send the mailSecret to the user
+                res.status(200).json({otp:status.mailSecret})   
+            }
+            else{
+                res.status(422).json({error:"No User Found!"})
+            }})
+    }
+    else{
+        res.status(422).json({message:"Empty Field!"})
+    }
+
+})
+
+app.post('/forgotPasswordVerify', (req,res)=>{
+    // mail, new password and otp
+    // if otpVerified then change password
+    let mail = req.body.mail
+    let otp = req.body.otp
+    let newPass = req.body.newPass
+    if(mail && otp && newPass){
+        mongo_models.USER.findOne({mail:mail}).then((status)=>{
+            if(status){
+                // User found now we will send the mailSecret to the user
+                if(otp==status.mailSecret){
+                    // replace to the new password!
+                    bcrypt.hash(newPass, saltRounds, function(err, hash) {
+                        if(hash){
+                            mongo_models.USER.findOneAndUpdate({ _id: new ObjectId(status._id) }, {password: hash}).then(()=>{
+                                console.log("Password Changed for User")
+                                res.status(200).json({message: "Password Changed Succesfully!"})
+                            }).catch((err)=>{
+                                console.log("Error in Password Changed for User"+err)
+                                res.status(422).json({message: "Error in Password Change!"+err})
+                            })
+                        }
+                    })
+                }
+                else{
+                    res.status(422).json({error:"Wrong OTP"})
+                }
+            }
+            else{
+                res.status(422).json({error:"No User Found!"})
+            }})
+    }
+    else{
+        res.status(422).json({message:"Empty Field!"})
+    }  
+})
+
 app.listen(process.env.port || 8080, ()=>{
     console.log(`App Running @ http://localhost:${port}`)
 });

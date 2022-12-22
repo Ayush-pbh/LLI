@@ -60,8 +60,8 @@ function getHtmlElement(obj,type,number=0){
                                 </blockquote>
                                 <blockquote class="flow-text">
                                     <b>Location</b> <br>
-                                    <a href="">View on Map</a>
-                                    <a href="">Google_Map_Link</a>    
+                                    <p>${obj.caseLocation}</p>
+                                    <a href="${obj.caseLocationGMapLink}">View on Map</a>
                                 </blockquote>
                               </div>
                           </div>

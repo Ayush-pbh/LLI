@@ -1,3 +1,4 @@
+
 api_server = "https://lli.onrender.com/"
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -40,4 +41,8 @@ function setup() {
         }
     })
     .catch(err=>console.log(err))
+}
+
+window.onload = function(){
+    setup()
 }

@@ -46,15 +46,16 @@
                 <li><a class="waves-effect op-links invisible my-ngo" href="./create_new_case.html"><i class="material-icons">domain</i> My NGO</a></li>
                 <li><a class="waves-effect op-links invisible ongoing-cases" href="./create_new_case.html"><i class="material-icons">list</i>Cases</a></li>
                 <li><a class="waves-effect op-links invisible my-ngo-volunteers" href="./create_new_case.html"><i class="material-icons">people</i> Volunteers</a></li>
-                <li><a class="waves-effect op-links create-new-case-link" href="./create_new_case.html"><i class="material-icons">add</i> Create New Case</a></li>
+                <li><a class="waves-effect op-links invisible create-new-case-link" href="./create_new_case.html"><i class="material-icons">add</i> Create New Case</a></li>
                 
-                <li><a class="waves-effect op-links caselist-link" href="./case_list.html"><i class="material-icons">list</i> Nearby Cases</a></li>
+                <li><a class="waves-effect op-links invisible caselist-link" href="./case_list.html"><i class="material-icons">list</i> Nearby Cases</a></li>
                 <li><a class="waves-effect op-links invisible case-history" href="./joinedCases.html"><i class="material-icons">pets</i> Joined Cases</a></li>
                 <li><a class="waves-effect op-links invisible my-gallery" href="./gallery.html"><i class="material-icons">insert_photo</i> My Gallery</a></li>
                 
-                <li><a class="waves-effect op-links" href="./mapview.html"><i class="material-icons">map</i>View Cases on Map</a></li>
-                <li><a class="waves-effect op-links" href="./settings.html"><i class="material-icons">settings</i>App Settings</a></li>
-                <li><a class="waves-effect op-links" href="./about.html"><i class="material-icons">info_outline</i>About App</a></li>
+                <li><a class="waves-effect op-links invisible viewcaseonmap-link" href="./mapview.html"><i class="material-icons">map</i>View Cases on Map</a></li>
+                <li><a class="waves-effect op-links appsettings-link" href="./settings.html"><i class="material-icons">settings</i>App Settings</a></li>
+                <li><a class="waves-effect op-links apphelp-link invisible" href="./settings.html"><i class="material-icons">info_outline</i>Help</a></li>
+                <li><a class="waves-effect op-links aboutapp-link" href="./about.html"><i class="material-icons">info_outline</i>About App</a></li>
                 <li><div class="divider"></div></li>
                 <li><a class="waves-effect op-links logout-link" onclick="logoutCurrentUser()" href="#!"><i class="material-icons">directions_run</i>Logout</a></li>
             </ul>
@@ -91,18 +92,25 @@
                 </div>
                 
                 <div class="row">
-                    <div class="container">
+                    <div class="container user-green-button hidden">
+                        <div class="col s6 animate-this" onclick="window.open('./joinedCases.html','_self')">
+                            <div class="card-panel card-panel-custom green lighten-1 waves-effect waves-light border-radius-curve">
+                                <div class="holder">
+                                    <div class="white-text center-align">CASE HISTORY</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s6 animate-this" onclick="window.open('./about.html','_self')">
+                            <div class="card-panel card-panel-custom green lighten-1 waves-effect waves-light border-radius-curve">
+                                <div class="holder">
+                                    <div class="white-text center-align about-incm">ABOUT US</div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col s6 animate-this" onclick="window.open('./gallery.html','_self')">
                             <div class="card-panel card-panel-custom green lighten-1 waves-effect waves-light border-radius-curve">
                                 <div class="holder">
                                     <div class="white-text center-align">GALLERY</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col s6 animate-this" onclick="window.open('./joinedCases.html','_self')">
-                            <div class="card-panel card-panel-custom green lighten-1 waves-effect waves-light border-radius-curve">
-                                <div class="holder">
-                                    <div class="white-text center-align">HISTORY</div>
                                 </div>
                             </div>
                         </div>
@@ -113,29 +121,82 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col s6 animate-this" onclick="window.open('./about.html','_self')">
+                    </div>
+                    <div class="container voln-green-button hidden">
+                        <div class="col s6 animate-this" onclick="window.open('./case_list.html','_self')">
                             <div class="card-panel card-panel-custom green lighten-1 waves-effect waves-light border-radius-curve">
                                 <div class="holder">
-                                    <div class="white-text center-align about-inc">ABOUT</div>
+                                    <div class="white-text center-align">Nearby Cases</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s6 animate-this" onclick="window.open('./joinedCases.html','_self')">
+                            <div class="card-panel card-panel-custom green lighten-1 waves-effect waves-light border-radius-curve">
+                                <div class="holder">
+                                    <div class="white-text center-align about-incm">Pending Cases</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s6 animate-this" onclick="window.open('./gallery.html','_self')">
+                            <div class="card-panel card-panel-custom green lighten-1 waves-effect waves-light border-radius-curve">
+                                <div class="holder">
+                                    <div class="white-text center-align">GALLERY</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s6 animate-this" onclick="window.open('./help.html','_self')">
+                            <div class="card-panel card-panel-custom green lighten-1 waves-effect waves-light border-radius-curve">
+                                <div class="holder">
+                                    <div class="white-text center-align help-inc">HELP</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container ngoadmin-green-button hidden">
+                        <div class="col s6 animate-this" onclick="window.open('./case_list.html','_self')">
+                            <div class="card-panel card-panel-custom green lighten-1 waves-effect waves-light border-radius-curve">
+                                <div class="holder">
+                                    <div class="white-text center-align">Add Ngo</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s6 animate-this" onclick="window.open('./joinedCases.html','_self')">
+                            <div class="card-panel card-panel-custom green lighten-1 waves-effect waves-light border-radius-curve">
+                                <div class="holder">
+                                    <div class="white-text center-align about-incm">Ngo Volunteers</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s6 animate-this" onclick="window.open('./gallery.html','_self')">
+                            <div class="card-panel card-panel-custom green lighten-1 waves-effect waves-light border-radius-curve">
+                                <div class="holder">
+                                    <div class="white-text center-align">Reports</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s6 animate-this" onclick="window.open('./help.html','_self')">
+                            <div class="card-panel card-panel-custom green lighten-1 waves-effect waves-light border-radius-curve">
+                                <div class="holder">
+                                    <div class="white-text center-align help-inc">Help</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row report-case-block">
-                    <div class="container animate-this">
+                    <div class="container animate-this" onclick="window.open('create_new_case.html','_self')">
                         <div class="col s12 m6">
                           <div class="card red lighten-1 border-radius-curve">
                             <div class="card-content white-text">
                               <span class="card-title">Reoprt a case.</span>
                               <p>You can report a case for an animal in need by filling a form.</p>
                             </div>
-                            <div class="card-action border-radius-curve">
+                            <!-- <div class="card-action border-radius-curve">
                                 <div class="card-panel card-panel-custom waves-effect waves-dark border-radius-curve">
-                                    <!-- <div class="holder"> -->
+                                    <div class="holder">
                                         <div class=" center-align ">Continue</div>
-                                    <!-- </div> -->
-                                </div>
+                                     </div>
+                                </div> -->
                             </div>
                           </div>
                         </div>
@@ -147,29 +208,9 @@
 
                     </div>
                 </div>
-                <footer class="page-footer grey darken-4 animate-this">
-                    <div class="container">
-                      <div class="row">
-                        <div class="col l6 s12">
-                          <h5 class="white-text">Lifeline India</h5>
-                          <p class="grey-text text-lighten-4">Towards peace.</p>
-                        </div>
-                        <div class="col l4 offset-l2 s12">
-                          <h5 class="white-text">Pages</h5>
-                          <ul>
-                            <li><a class="grey-text text-lighten-3" href="#!">About Us</a></li>
-                            <li><a class="grey-text text-lighten-3" href="#!">Privacy Policy</a></li>
-                            <li><a class="grey-text text-lighten-3" href="#!">Donation</a></li>
-                            <li><a class="grey-text text-lighten-3" href="#!">Help</a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="footer-copyright">
-                      <div class="container">
-                      © 2022 Lifeline India
-                      <a class="grey-text text-lighten-4 right" href="#!">🐾</a>
-                      </div>
+                <footer class="grey darken-4 animate-this center-align">
+                    <div class="container white-text">
+                        © 2022 Lifeline India
                     </div>
                 </footer>
             </div>
