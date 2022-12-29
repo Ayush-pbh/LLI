@@ -16,8 +16,9 @@
 */
 body {
   scroll-behavior: smooth;
-  height: 100vh;
-  width: 100%;
+  height: 100vh !important;
+  width: 100% !important;
+  overflow: hidden !important;
 }
 body .my-cont-login .text {
   margin-top: 20vh;
@@ -464,14 +465,15 @@ body .my-cont-register .form-holder .confirm-mail-form-confirm-mail-button .logi
   height: calc(100vh - 56px);
   width: 100%;
   background-color: white;
-  position: fixed;
+  position: absolute;
   top: 56px;
-  right: -100%;
   z-index: 20;
   transition: 0.3s ease;
+  left: 0px;
+  display: none !important;
 }
 .chatroom.visible {
-  right: 0;
+  display: block !important;
 }
 .chatroom .chats {
   overflow: hidden;

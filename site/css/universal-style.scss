@@ -16,9 +16,9 @@
 
 body{
     scroll-behavior: smooth;
-    height: 100vh;
-    width: 100%;
-    // overflow-x: hidden !important;
+    height: 100vh !important;
+    width: 100% !important;
+    overflow: hidden !important;
     .my-cont-login{
         .text{
             margin-top:20vh;
@@ -478,13 +478,14 @@ body{
     height: calc(100vh - 56px);
     width: 100%;
     background-color: white;
-    position: fixed;
+    position: absolute;
     top:56px;
-    right:-100%;
     z-index: 20;
     transition: .3s ease;
+    left:0px;
+    display: none !important;
     &.visible{
-        right: 0;
+        display: block !important;
     }
     .chats{
         overflow: hidden;
