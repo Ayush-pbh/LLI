@@ -582,4 +582,9 @@ body .my-cont-register .form-holder .confirm-mail-form-confirm-mail-button .logi
 }
 .my-nav-trigger.visible {
   display: block !important;
+}
+
+#dropdown-btn.disabled {
+  background-color: grey !important;
+  pointer-events: none !important;
 }/*# sourceMappingURL=universal-style.css.map */

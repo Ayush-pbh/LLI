@@ -42,7 +42,8 @@ function getHtmlElement(obj,type,number=0){
                               </div>
                             </div>
                             <div class="card-action border-radius-curve-card-below">
-                              <a onclick="${(number==6)?'':'joinCase(\''+obj._id+'\')'}">${(number==6)?'':'JOIN'}</a>
+                              <a class="activator">More Info</a>
+                              <a onclick="${(number==6)?'':'joinCase(\''+obj._id+'\')'}" class="case-join-cc-${obj._id}">${(number==6)?'':'JOIN'}</a>
                               <i class="material-icons right white-text">people</i>
                               <span class="right white-text case-vacany-counter case-vac-cc-${obj._id}">${number}/6
                               </span>
@@ -114,15 +115,15 @@ function setupCaselist(){
             let elemList = ""
             M.toast({html: `Cases Loaded!`})
             caselist.slice().reverse().forEach(mycase => {
-                let ll = mycase.volunteerList.length
-                elemList+=(getHtmlElement(mycase, 'volunteer',ll))
+                if(mycase.volunteerList.indexOf(localGet('currentLoginUser',true)._id)==-1){
+                    let ll = mycase.volunteerList.length
+                    elemList+=(getHtmlElement(mycase, 'volunteer',ll))
+                }
             });
             // Push it into the ul tag!
             // console.log(elemList)
             caselistHolder = document.getElementsByClassName('volunteer-caselist-holder')[0]
             caselistHolder.innerHTML = elemList
-            
-            
         })
         .catch(err=>console.log(err))
     }
@@ -180,6 +181,10 @@ function joinCase(caseid){
             ccu = (parseInt(ccu[0])+1) + '/6'
             console.log(ccu)
             document.getElementsByClassName('case-vac-cc-'+caseid)[0].innerHTML = ccu
+            // Change Join to Jump To Chat.
+            
+            document.getElementsByClassName('case-join-cc-'+caseid)[0].innerHTML = "Jump to Chat!"
+            document.getElementsByClassName('case-join-cc-'+caseid)[0].href = "chat.html"
         }
         
     })

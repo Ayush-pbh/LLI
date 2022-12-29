@@ -125,6 +125,7 @@
         function getHtmlElement(obj){
             // Object is the case object 
             // type is the type of the user (user,volunteer)
+            ddob = new Date(obj.dob)
             htmlquery = `<li>
                 <div class="collapsible-header">${obj.fname+" "+obj.lname}</div>
                 <div class="collapsible-body">
@@ -135,8 +136,8 @@
                         </div>
                         <div class="col s6">
                             <h5 class="t-playfair">${obj.mail}</h5>
-                            <p>${obj.phone}</p>
-                            <p>${obj.dob} (${obj.age} yrs)</p>
+                            <p>Phone : ${obj.phone}</p>
+                            <p>Date Of Birth : ${ddob.toDateString()} (${obj.age} yrs)</p>
                             <p>Cases Taken Part in :: ${obj.caselist.length}</p>
                         </div>
                     </div>

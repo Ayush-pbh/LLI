@@ -38,7 +38,7 @@ function addNGO(){
     // Check for empty values and reoprt them!
     if(!organisationFullname || !officalMailId || !contactNumber || !dateOfOrigin || !totalMembers || !totalActiveMembers || !address || !addCity || !addDistrict || !addState || !addPincode || !ngo_logo || !ngo_documents || !boardM1_fullname || !boardM1_mail || !boardM1_contact || !boardM1_position || !boardM2_fullname || !boardM2_mail || !boardM2_contact || !boardM2_position || !boardM3_fullname || !boardM3_mail || !boardM3_contact || !boardM3_position){
         alert("Please Don't Leave Any Field Empty!");
-        // return 1;
+        return 1;
     }
     jsonToGo = {
         ngoFullName : organisationFullname,
@@ -99,4 +99,38 @@ function addNGO(){
             console.log(response.json())
         }
     })
+}
+
+
+function shelterPropertyChanged(){
+    // Check if the Shelter is set to yes / no
+    // if YES
+        // Activate the Address Bars & the Bars Following them & set there default values
+    // if NO
+        // De-activate the Address Bars & the Bars Following them & set there default values to "000"
+    
+    let cc = document.getElementsByName('shelterGroup')
+    shelterAvailable = cc[0].checked
+    if(!shelterAvailable){
+        // Activate
+        document.getElementById('address').setAttribute('disabled', true)
+        document.getElementById('add-city').setAttribute('disabled', true)
+        document.getElementById('add-district').setAttribute('disabled', true)
+        document.getElementById('add-state').setAttribute('disabled', true)
+        document.getElementById('add-pincode').setAttribute('disabled', true)
+
+        document.getElementById('address').value = "."
+        document.getElementById('add-city').value = "."
+        document.getElementById('add-district').value = "."
+        document.getElementById('add-state').value = "."
+        document.getElementById('add-pincode').value = "."
+    }
+    else{
+        document.getElementById('address').removeAttribute('disabled')
+        document.getElementById('add-city').removeAttribute('disabled')
+        document.getElementById('add-district').removeAttribute('disabled')
+        document.getElementById('add-state').removeAttribute('disabled')
+        document.getElementById('add-pincode').removeAttribute('disabled')
+        // document.getElementById('add-pincode')
+    }
 }

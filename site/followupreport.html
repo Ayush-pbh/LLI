@@ -74,7 +74,36 @@
                   </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col s6">
+                    <div class="container">
                         
+                        <h5 class="center-align">Active Members:</h5>
+                    </div>
+                </div>
+                <div class="col s6">
+                    <div class="container">
+                        <label>
+                            <input name="activeMembers" type="checkbox" />
+                            <span>Kalpana Chawla</span>
+                        </label>
+                        <br>
+                        <label>
+                            <input name="activeMembers" type="checkbox" />
+                            <span>Manoj Tiwari</span>
+                        </label>
+                        <br>
+                        <label>
+                            <input name="activeMembers" type="checkbox" />
+                            <span>Sheela Sharan</span>
+                        </label>
+                        <label>
+                            <input name="activeMembers" type="checkbox" />
+                            <span>Riya Singh</span>
+                        </label>
+                    </div>
+                </div>
+            </div>  
             <div class="row">
                 <div class="col s12">
                     <div class="container">
@@ -106,16 +135,14 @@
             
             <div class="row">
                 <div class="col s12">
-
                     <div class="container">
-                        
                         Donation Recived : 
                         <label>
-                            <input name="shelterGroup" type="radio" />
+                            <input name="shelterGroup" onchange="shelterPropertyChanged()" type="radio" checked/>
                             <span>Yes</span>
                         </label>
                         <label>
-                            <input name="shelterGroup" type="radio" checked/>
+                            <input name="shelterGroup" onchange="shelterPropertyChanged()" type="radio" />
                             <span>No</span>
                         </label>
                     </div>
@@ -126,12 +153,12 @@
                 <div class="container">
 
                     <div class="col s6">
-                        <h6>Medium of Donation :</h6>
+                        <h6>Medium of Donation:</h6>
                         <input type="text" name="position" id="position">
                     </div>
                     
                     <div class="col s6">
-                        <a class='dropdown-trigger btn left-align' id="dropdown-btn" data-target='position-dropdown'>Select</a>
+                        <a class='dropdown-trigger btn left-align ' id="dropdown-btn" data-target='position-dropdown'>Select</a>
                         <!-- Dropdown Structure -->
                         <ul id='position-dropdown' class='dropdown-content'>
                             <li onclick="dropdownClicked('cash')"><a >Cash</a></li>
@@ -213,6 +240,33 @@
                     contact : ${userdata.contact}
                 `
                 document.getElementsByClassName('submitter-info')[0].innerHTML = d
+            }
+        }
+
+        
+        function shelterPropertyChanged(){
+            // Check if the Shelter is set to yes / no
+            // if YES
+                // Activate the Address Bars & the Bars Following them & set there default values
+            // if NO
+                // De-activate the Address Bars & the Bars Following them & set there default values to "000"
+            
+            let cc = document.getElementsByName('shelterGroup')
+            shelterAvailable = cc[0].checked
+            if(!shelterAvailable){
+                // Activate
+                document.getElementById('dropdown-btn').classList.add('disabled')
+                document.getElementById('donamtion-amount').setAttribute('disabled',true)
+                
+                document.getElementById('address').value = "."
+                document.getElementById('add-city').value = "."
+                document.getElementById('add-district').value = "."
+                document.getElementById('add-state').value = "."
+                document.getElementById('add-pincode').value = "."
+            }
+            else{
+                document.getElementById('dropdown-btn').classList.remove('disabled')
+                document.getElementById('donamtion-amount').removeAttribute('disabled')
             }
         }
     </script>

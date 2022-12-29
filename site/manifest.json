@@ -1,7 +1,7 @@
 {
     "name": "LifeLineIndia",
     "short_name": "LLI",
-    "start_url": "login.html",
+    "start_url": "homepage.html",
     "scope": "./",
     "icons": [
       {
