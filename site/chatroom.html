@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatroom</title>
+    <!-- Materialize CSS & JS -->
+    <link rel="stylesheet" href="./css/materialize.min.css">
+    <script src="./js/materialize.min.js"></script>
+    <!-- Custom CSS & JS -->
+    <link rel="stylesheet" href="./css/materialfonts.css">
+    <link rel="stylesheet" href="./css/universal-style.css">
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" 
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+    crossorigin=""/>
+    <link rel="stylesheet" href="./css/MarkerCluster.css">
+    <link rel="stylesheet" href="./css/MarkerCluster.Default.css">
+    <link href='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css' rel='stylesheet' />
+</head>
+<body>
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper green lighten-1">
+                <span class="left brand-logo chatroom-close-logo visible" onclick="window.open('homepage.html','_self')"><i class="material-icons sidenav-trigger">arrow_back</i></span>                
+            </div>
+        </nav>
+    </div>
+    <div class="chatSection visible">
+                
+        <div class="chatHolder waves-effect waves-dark">
+            <div class="dpHolder">
+                <img src="./img/dp.jpg" alt="" class="dp">
+            </div>
+            <div class="infoHolder">
+                <div class="uname">
+                    Ayush
+                </div>
+                <div class="lastmsg">
+                    Kill me once i'll die twice
+                </div>
+            </div>
+        </div>
+        <div class="chatHolder waves-effect waves-dark">
+            <div class="dpHolder">
+                <img src="./img/dp.jpg" alt="" class="dp">
+            </div>
+            <div class="infoHolder" onclick="openchatroom(1)">
+                <div class="uname">
+                    Ayush
+                </div>
+                <div class="lastmsg">
+                    Kill me once i'll die twice
+                </div>
+            </div>
+        </div>
+        <div class="chatHolder waves-effect waves-dark">
+            <div class="dpHolder">
+                <img src="./img/dp.jpg" alt="" class="dp">
+            </div>
+            <div class="infoHolder">
+                <div class="uname">
+                    Ayush
+                </div>
+                <div class="lastmsg">
+                    Kill me once i'll die twice
+                </div>
+            </div>
+        </div>
+              
+    </div> 
+    <script defer>
+        function openchatroom(n){
+            localStorage.setItem('chat-user-id','')
+            localStorage.setItem('chat-case-id','')
+            window.open('chat.html', '_self')
+        }
+    </script>
+</body>
+</html>

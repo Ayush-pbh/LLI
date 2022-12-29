@@ -385,11 +385,11 @@ body .my-cont-register .form-holder .confirm-mail-form-confirm-mail-button .logi
 }
 
 .volunteers-request-img {
-  height: 100px;
+  height: 70px;
 }
 
 .volunteers-request-id-proof {
-  height: 90px;
+  height: 70px;
 }
 
 .chatSection {
@@ -475,7 +475,9 @@ body .my-cont-register .form-holder .confirm-mail-form-confirm-mail-button .logi
   display: block !important;
 }
 .chatroom .chats {
-  overflow: hidden;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: calc(100vh - 116px);
 }
 .chatroom .chats .chat {
   width: 100%;
@@ -486,6 +488,11 @@ body .my-cont-register .form-holder .confirm-mail-form-confirm-mail-button .logi
 }
 .chatroom .chats .chat .chat-align-holder {
   display: block;
+}
+.chatroom .chats .chat .chat-align-holder .writer-name {
+  display: block;
+  color: #7a2d2d;
+  font-weight: 600;
 }
 .chatroom .chats .chat .chat-align-holder .chat-holder {
   display: inline-block;
@@ -524,10 +531,10 @@ body .my-cont-register .form-holder .confirm-mail-form-confirm-mail-button .logi
 .chatroom .input-f {
   width: 100%;
   height: 60px;
-  position: absolute;
+  background-color: #ffffff;
+  position: fixed;
   bottom: 0px;
   left: 0px;
-  border-top: 2px solid grey;
 }
 .chatroom .input-f input {
   margin-top: 10px;

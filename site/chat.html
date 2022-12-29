@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <!-- Materialize CSS & JS -->
+    <link rel="stylesheet" href="./css/materialize.min.css">
+    <script src="./js/materialize.min.js"></script>
+    <!-- Custom CSS & JS -->
+    <link rel="stylesheet" href="./css/materialfonts.css">
+    <link rel="stylesheet" href="./css/universal-style.css">
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" 
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+    crossorigin=""/>
+    <link rel="stylesheet" href="./css/MarkerCluster.css">
+    <link rel="stylesheet" href="./css/MarkerCluster.Default.css">
+    <link href='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css' rel='stylesheet' />
+      
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper green lighten-1">
+                <span class="left brand-logo chatroom-close-logo visible" onclick="window.open('chatroom.html','_self')"><i class="material-icons sidenav-trigger">arrow_back</i></span>
+            </div>
+        </nav>
+    </div>
+    <!-- Body -->
+    <div class="chatroom visible">
+        <div class="chats">
+            <div class="chat chat-recv ">
+                <div class="chat-align-holder">
+                    <div class="chat-holder">
+                        <span class="writer-name">Jhon</span>
+                        Hi, What medication do you prefer for skin infections?
+                    </div>
+                    <div class="time">
+                        12:08 AM
+                    </div>
+                </div>
+            </div>            
+            <div class="chat chat-send ">
+                <div class="chat-align-holder">
+                    <div class="chat-holder">
+                        Well I need to see that for my self first.
+                    </div>
+                    <div class="time">
+                        12:08 AM
+                    </div>
+                </div>
+            </div>            
+            <div class="chat chat-recv ">
+                <div class="chat-align-holder">
+                    <div class="chat-holder">
+                        <span class="writer-name">Mark</span>
+                        What else does the cat need?
+                    </div>
+                    <div class="time">
+                        12:08 AM
+                    </div>
+                </div>
+            </div>            
+            <div class="chat chat-recv ">
+                <div class="chat-align-holder">
+                    <div class="chat-holder">
+                        <span class="writer-name">Jhon</span>
+                        Apart from regular asprin dosage
+                    </div>
+                    <div class="time">
+                        12:08 AM
+                    </div>
+                </div>
+            </div>            
+            <div class="chat chat-send ">
+                <div class="chat-align-holder">
+                    <div class="chat-holder">
+                        I would recommend lowering the asprin dosage, and noticing the changes.
+                    </div>
+                    <div class="time">
+                        12:08 AM
+                    </div>
+                </div>
+            </div>            
+            <div class="chat chat-recv ">
+                <div class="chat-align-holder">
+                    <div class="chat-holder">
+                        <span class="writer-name">Jhon</span>
+                        Okay then!
+                    </div>
+                    <div class="time">
+                        12:08 AM
+                    </div>
+                </div>
+            </div>            
+            <div class="chat chat-send ">
+                <div class="chat-align-holder">
+                    <div class="chat-holder">
+                        Okay then!
+                    </div>
+                    <div class="time">
+                        12:08 AM
+                    </div>
+                </div>
+            </div>            
+        </div>
+        <div class="input-f">
+            <input type="text" placeholder="write-text-here!">            
+            <a class="btn-floating send waves-effect waves-light green lighten-1"><i class="material-icons">send</i></a>
+            <a class="btn-floating insertDocs waves-effect waves-light green lighten-1"><i class="material-icons">add</i></a>
+        </div>
+    </div>
+</body>
+</html>

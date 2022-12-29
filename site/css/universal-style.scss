@@ -394,11 +394,11 @@ body{
     }
 }
 .volunteers-request-img{
-    height: 100px;
+    height: 70px;
 }
 .volunteers-request-id-proof{
     
-    height: 90px;
+    height: 70px;
 }
 
 .chatSection{
@@ -487,7 +487,9 @@ body{
         display: block !important;
     }
     .chats{
-        overflow: hidden;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        height: calc(100vh - 116px);
         .chat{            
             width:100%;            
             height: auto;
@@ -497,6 +499,11 @@ body{
             
             .chat-align-holder{
                 display: block;
+                .writer-name{
+                    display: block;
+                    color:#7a2d2d;
+                    font-weight: 600;
+                }
                 .chat-holder{
                     // position: absolute;
                     display: inline-block;
@@ -546,11 +553,11 @@ body{
     .input-f{
         width: 100%;
         height: 60px;
-        // background-color: #2e9f82;
-        position: absolute;
-        bottom: 0px;
+        background-color: #ffffff;
+        position: fixed;
+        bottom:0px;
         left:0px;
-        border-top: 2px solid grey;
+        // border-top: 2px solid grey;
         input{
             margin-top: 10px;
             padding-left: 10px;
