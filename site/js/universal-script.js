@@ -1,6 +1,6 @@
 // VARIABLES
-api_server = "http://localhost:8080/"
-// api_server = "https://lli.onrender.com/"
+// api_server = "http://localhost:8080/"
+api_server = "https://lli.onrender.com/"
 
 // login_uri = "http://192.168.130.114:3000/login"
 // user_info_uri = "http://192.168.130.114:3000/userProfile"
