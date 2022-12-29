@@ -482,7 +482,10 @@ body{
     top:56px;
     right:-100%;
     z-index: 20;
-
+    transition: .3s ease;
+    &.visible{
+        right: 0;
+    }
     .chats{
         overflow: hidden;
         .chat{            
@@ -583,3 +586,15 @@ body{
     }
 }
 
+.chatroom-close-logo{
+    display: none !important;
+    &.visible{
+        display: block !important;
+    }
+}
+.my-nav-trigger{
+    display: none !important;
+    &.visible{
+        display: block !important;
+    }
+}

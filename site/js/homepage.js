@@ -187,3 +187,11 @@ function toggleChatSection(){
         chatSectionVisible = true
     }
 }
+
+function openchatroom(n){
+    document.getElementsByClassName('chatroom')[0].classList.toggle('visible')
+    // Now add / rmove visible from chatroom
+    document.getElementsByClassName('chatroom-close-logo')[0].classList.toggle('visible')
+    document.getElementsByClassName('my-nav-trigger')[0].classList.toggle('visible')
+    
+}

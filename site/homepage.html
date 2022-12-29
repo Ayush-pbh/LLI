@@ -63,7 +63,8 @@
             <div class="navbar-fixed">
                 <nav>
                     <div class="nav-wrapper green lighten-1">
-                    <span class="left brand-logo my-nav-trigger" onclick="toggleSidenav()"><i class="material-icons sidenav-trigger">menu</i></span>
+                    <span class="left brand-logo my-nav-trigger visible" onclick="toggleSidenav()"><i class="material-icons sidenav-trigger">menu</i></span>
+                    <span class="left brand-logo chatroom-close-logo" onclick="openchatroom()"><i class="material-icons sidenav-trigger">arrow_back</i></span>
                     <a class="right brand-logo top-right-navbar-icon navbar-icon-chat " onclick="toggleChatSection()"><i class="material-icons">chat</i></a>
                     <a class="right brand-logo top-right-navbar-icon navbar-icon-notifi" onclick="toggleNavigationPane()"><i class="material-icons">notifications</i></a>
                     </div>
@@ -265,7 +266,7 @@
                     <div class="dpHolder">
                         <img src="./img/dp.jpg" alt="" class="dp">
                     </div>
-                    <div class="infoHolder">
+                    <div class="infoHolder" onclick="openchatroom(1)">
                         <div class="uname">
                             Ayush
                         </div>

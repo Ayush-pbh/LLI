@@ -468,6 +468,10 @@ body .my-cont-register .form-holder .confirm-mail-form-confirm-mail-button .logi
   top: 56px;
   right: -100%;
   z-index: 20;
+  transition: 0.3s ease;
+}
+.chatroom.visible {
+  right: 0;
 }
 .chatroom .chats {
   overflow: hidden;
@@ -556,4 +560,18 @@ body .my-cont-register .form-holder .confirm-mail-form-confirm-mail-button .logi
 }
 .ngo-details.visible {
   display: block;
+}
+
+.chatroom-close-logo {
+  display: none !important;
+}
+.chatroom-close-logo.visible {
+  display: block !important;
+}
+
+.my-nav-trigger {
+  display: none !important;
+}
+.my-nav-trigger.visible {
+  display: block !important;
 }/*# sourceMappingURL=universal-style.css.map */
