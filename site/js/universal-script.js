@@ -57,8 +57,9 @@ function setupSidenav(){
         // document.getElementsByClassName('my-gallery')[0].classList.remove('invisible')
         // Green Button changes
         document.getElementsByClassName('voln-green-button')[0].classList.remove('hidden')
+        document.getElementsByClassName('navbar-icon-chat')[0].classList.add('visible')
     }
-    if(userInfo.position=='ngo-admin'){
+    else if(userInfo.position=='ngo-admin'){
         // document.getElementsByClassName('my-ngo-volunteers')[0].classList.remove('invisible')
         // document.getElementsByClassName('ongoing-cases')[0].classList.remove('invisible')
         document.getElementsByClassName('my-ngo')[0].classList.remove('invisible')
@@ -70,8 +71,11 @@ function setupSidenav(){
         document.getElementsByClassName('appsettings-link')[0].classList.add('invisible')
         document.getElementsByClassName('apphelp-link')[0].classList.remove('invisible')
         // document.getElementsByClassName('my-ngo')[0].classList.remove('invisible')
+        
+        // document.getElementsByClassName('top-right-navbar-icon')[1].innerHTML = '<i class="material-icons">notifications</i>'
+        document.getElementsByClassName('navbar-icon-notifi')[0].classList.add('visible')
     }
-    if(userInfo.position=='user'){
+    else if(userInfo.position=='user'){
         document.getElementsByClassName('caselist-link')[0].classList.add('invisible')
         document.getElementsByClassName('viewcaseonmap-link')[0].classList.add('invisible')
         document.getElementsByClassName('create-new-case-link')[0].classList.add('invisible')
@@ -79,6 +83,7 @@ function setupSidenav(){
         document.getElementsByClassName('appsettings-link')[0].classList.add('invisible')
         document.getElementsByClassName('apphelp-link')[0].classList.remove('invisible')
         document.getElementsByClassName('user-green-button')[0].classList.remove('hidden')
+        document.getElementsByClassName('navbar-icon-chat')[0].classList.add('visible')
     }
 }
 function localSet(key,value,obj=false){
@@ -105,20 +110,20 @@ function verifyLogin(){
         return true;
     }
 }
-window.onload = function(){
-    console.log("ON LOAD UNI")
-    if(verifyLogin()){
-        console.log("User Login Verified!")
-        fetch_user_details()
-        setTimeout(() => {
-            setupSidenav()
-            console.log("Sidenav setup!")
-        }, 500);
-    }
-    else{
-        console.log("User Login Verified!")
-    }
-}
+// window.onload = function(){
+//     console.log("ON LOAD UNI")
+//     if(verifyLogin()){
+//         console.log("User Login Verified!")
+//         fetch_user_details()
+//         setTimeout(() => {
+//             setupSidenav()
+//             console.log("Sidenav setup!")
+//         }, 500);
+//     }
+//     else{
+//         console.log("User Login Verified!")
+//     }
+// }
 
 // export {
 //     localGet, localSet, verifyLogin,setupSidenav, fetch_user_details

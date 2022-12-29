@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Ngo</title>
+    <!-- CSS Imports! -->
+    <!-- MaterializeCSS  -->
+    <link rel="stylesheet" href="./css/materialize.min.css">
+    <!-- Materialize Fonts -->
+    <link rel="stylesheet" href="./css/materialfonts.css">
+    <!-- Universal CSS -->
+    <link rel="stylesheet" href="./css/universal-style.css">
+    
+    <!-- JS Imports! -->
+    <!-- MaterializeCSS  -->
+    <script src="./js/materialize.min.js"></script>
+    
+    
+</head>
+
+<body>
+    <div class="row">
+        <div class="container my-cont-register">
+            <div class="illustration-holder">
+                <img src="./img/illustraion-green-box-1.svg" alt="" class="background-illustration-box">
+                <img src="./img/illustraion-dot-grid-2.svg" alt="" class="background-illustration-dot">
+            </div>
+            <div class="absolute-container">
+                <div class="text">                    
+                    <i class="heading-custom">Add NGO</i>
+                </div>
+
+                <div class="form-holder">
+                    <br>
+                    <div class="container">
+
+                        <h3 class="t-playfair">Enter Basic NGO Details</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="input-field">
+                                <input  id="organisationFullname" type="text" class="validate">
+                                <label for="organisationFullname">Full name of the Organisation</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="input-field">
+                                <input  id="officalMailId" type="text" class="validate">
+                                <label for="officalMailId">Offical Mail Id</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="input-field">
+                                <input  id="contactNumber" type="number" class="validate">
+                                <label for="contactNumber">Contact Number</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="dateOfOrigin" type="date" class="validate">
+                            <label for="dateOfOrigin">Date of Origin</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="totalMembers" type="number" class="validate">
+                            <label for="totalMembers">Total Members</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="totalActiveMembers" type="number" class="validate">
+                            <label for="totalActiveMembers">Total Active Members</label>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="container">
+                            
+                            Shelter : 
+                            <label>
+                                <input name="shelterGroup" type="radio" />
+                                <span>Shelter Provided</span>
+                            </label>
+                            <label>
+                                <input name="shelterGroup" type="radio" checked/>
+                                <span>Not Provided</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="address" type="text" class="validate">
+                            <label for="address">Address</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                          <div class="input-field">
+                            <input type="text" id="add-city">
+                            <label for="add-city">City</label>
+                          </div>  
+                        </div>
+                        <div class="col s6">
+                          <div class="input-field">
+                            <input type="text" id="add-district">
+                            <label for="add-district">District</label>
+                          </div>  
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                          <div class="input-field">
+                            <input type="text" id="add-state">
+                            <label for="add-state">State</label>
+                          </div>  
+                        </div>
+                        <div class="col s6">
+                          <div class="input-field">
+                            <input type="number" id="add-pincode">
+                            <label for="add-pincode">Pincode</label>
+                          </div>  
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="container">
+
+                        <h3 class="t-playfair">Enter Board Member Details</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <div class="input-field">
+                                <input  id="ngo_logo" type="file" class="validate">
+                                <label for="ngo_logo">NGO Logo</label>
+                            </div>
+                        </div>
+                        <div class="col s6">
+                            <div class="input-field">
+                                <input  id="ngo_documents" type="file" class="validate">
+                                <label for="ngo_documents">NGO Documents</label>
+                            </div>
+                        </div>
+                    </div>
+                    <h5 class="t-playfair red-text ">Please mention working phone numbers only!</h5>
+                    <div class="container blue lighten-5 border-radius-curve">
+                        <div class="row">
+                            <div class="col s12">
+                                <input  id="boardM1_fullname" type="text" class="validate">
+                                <label for="boardM1_fullname">Full Name</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <input  id="boardM1_mail" type="text" class="validate">
+                                <label for="boardM1_mail">Email ID</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <input  id="boardM1_contact" type="number" class="validate">
+                                <label for="boardM1_contact">Contact Number</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <input  id="boardM1_position" type="text" class="validate">
+                                <label for="boardM1_position">Position</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container blue lighten-5 border-radius-curve">
+                        <div class="row">
+                            <div class="col s12">
+                                <input  id="boardM2_fullname" type="text" class="validate">
+                                <label for="boardM2_fullname">Full Name</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <input  id="boardM2_mail" type="text" class="validate">
+                                <label for="boardM2_mail">Email ID</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <input  id="boardM2_contact" type="number" class="validate">
+                                <label for="boardM2_contact">Contact Number</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <input  id="boardM2_position" type="text" class="validate">
+                                <label for="boardM2_position">Position</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container blue lighten-5 border-radius-curve">
+                        <div class="row">
+                            <div class="col s12">
+                                <input  id="boardM3_fullname" type="text" class="validate">
+                                <label for="boardM3_fullname">Full Name</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <input  id="boardM3_mail" type="text" class="validate">
+                                <label for="boardM3_mail">Email ID</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <input  id="boardM3_contact" type="number" class="validate">
+                                <label for="boardM3_contact">Contact Number</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <input  id="boardM3_position" type="text" class="validate">
+                                <label for="boardM3_position">Position</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="container">
+                            <div class="col s12">
+                                <button class="btn waves-effect waves-light submit-new-case-btn border-radius-curve green lighten-1 " type="submit" name="action">Submit
+                                    <i class="material-icons right">send</i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./js/universal-script.js" defer></script>  
+    <script src="./js/addNgo.js"></script>      
+</body>
+
+</html>

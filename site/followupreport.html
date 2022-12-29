@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application</title>
+    <!-- Materialize CSS & JS -->
+    <link rel="stylesheet" href="./css/materialize.min.css">
+    <script src="./js/materialize.min.js"></script>
+    <!-- Custom CSS & JS -->
+    <link rel="stylesheet" href="./css/materialfonts.css">
+    <link rel="stylesheet" href="./css/universal-style.css">
+    
+</head>
+<body >
+    
+    <div data-barba="wrapper">
+        <div class="load-container">
+            <div class="loading-screen"></div>
+        </div>
+        <main data-barba="container" data-barba-namespace="home-section">            
+            <ul id="slide-out" class="sidenav">
+                <li>
+                    <div class="user-view">
+                        <div class="background">
+                            <img src="img/wave-s.jpg">
+                        </div>
+                        <span id="position-tag"></span>
+
+                        <a href="#user"><img class="circle" src="img/dp.jpg"></a>
+                        <a href="#name"><span class="white-text name c_info_user_name">John Doe</span></a>
+                        <a href="#email"><span class="white-text email c_info_user_mail">jdandturk@gmail.com</span></a>
+                        <div id="positon-tag">volent</div>
+                    </div>
+                </li>
+                <li ><a  href="./current_user_profile.html"><i class="material-icons">cloud</i>User Profile</a></li>
+                <li><div class="divider"></div></li>
+                <li><a class="subheader"><i>Menu</i></a></li>
+                <li><a class="waves-effect op-links" href="./create_new_case.html"><i class="material-icons">add</i> Create New Case</a></li>
+                <li><a class="waves-effect op-links" href="./create_new_case.html"><i class="material-icons">list</i> Case List</a></li>
+                <li><a class="waves-effect op-links" href="./mapview.html"><i class="material-icons">map</i>View Cases on Map</a></li>
+                <li><a class="waves-effect op-links" href="#!"><i class="material-icons">settings</i>App Settings</a></li>
+                <li><a class="waves-effect op-links" href="#!"><i class="material-icons">info_outline</i>About App</a></li>
+                <li><div class="divider"></div></li>
+                <li><a class="waves-effect op-links +" ><i class="material-icons">directions_run</i>Logout</a></li>
+            </ul>
+            <div class="navbar-fixed">
+                <nav>
+                    <div class="nav-wrapper green lighten-1">
+                        <span class="left brand-logo my-nav-trigger" onclick="window.open('./case.html','_self')"><i class="material-icons sidenav-trigger">keyboard_backspace</i></span>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="row">
+                <div class="container">
+                    <h1 class="t-playfair">Submit Follow Up Report</h1>
+                </div>
+            </div>
+            <hr>
+
+            <div class="row">
+                <div class="col s12 m6">
+                  <div class="card custom-color border-radius-curve">
+                    <div class="card-content white-text">
+                      <span class="card-title">Submitter Information</span>
+                      <div class="container">
+                        <div class="flow-text submitter-info">
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+                        
+            <div class="row">
+                <div class="col s12">
+                    <div class="container">
+                        <form >
+                            <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="medicine-used" class="materialize-textarea"></textarea>
+                                <label for="medicine-used">Medicine Used</label>
+                            </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <div class="container">
+                        <form >
+                            <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="remarks" class="materialize-textarea"></textarea>
+                                <label for="remarks">Remarks</label>
+                            </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col s12">
+
+                    <div class="container">
+                        
+                        Donation Recived : 
+                        <label>
+                            <input name="shelterGroup" type="radio" />
+                            <span>Yes</span>
+                        </label>
+                        <label>
+                            <input name="shelterGroup" type="radio" checked/>
+                            <span>No</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Dropdown Trigger -->
+                <div class="container">
+
+                    <div class="col s6">
+                        <h6>Medium of Donation :</h6>
+                        <input type="text" name="position" id="position">
+                    </div>
+                    
+                    <div class="col s6">
+                        <a class='dropdown-trigger btn left-align' id="dropdown-btn" data-target='position-dropdown'>Select</a>
+                        <!-- Dropdown Structure -->
+                        <ul id='position-dropdown' class='dropdown-content'>
+                            <li onclick="dropdownClicked('cash')"><a >Cash</a></li>
+                            <li onclick="dropdownClicked('upi')"><a >UPI/Online Wallet</a></li>
+                            <li onclick="dropdownClicked('cheque')"><a >Cheque</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <div class="container">
+                        <form >
+                            <div class="row">
+                            <div class="input-field col s12">
+                                <input id="donamtion-amount" type="number" class="">
+                                <label for="donamtion-amount">Donation Amount (in Rs.)</label>
+                            </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row my-cont-register">
+                <div class="col s12">
+                    <div class="container form-holder">
+                        <button class="center-align btn waves-effect waves-light register-form-register-button border-radius-curve" type="submit" name="action">Submit
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="homepage-style">
+                <footer class="grey darken-4 animate-this center-align">
+                    <div class="container white-text">
+                        © 2022 Lifeline India
+                    </div>
+                </footer>
+            </div>
+        </main>
+    </div>
+    <script src="./js/universal-script.js" defer></script>
+    <script>
+        
+        // For all the dropdowns
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.dropdown-trigger');
+            var instances = M.Dropdown.init(elems, {});
+            setupSubmitter()
+        });
+
+        function dropdownClicked(e){
+            let position_field = document.getElementById('position');
+            let dropdown_btn = document.getElementById('dropdown-btn');
+            if(e=="cash"){
+                position_field.value = "cash"
+                dropdown_btn.innerHTML = "Cash"
+            }
+            else if(e=="upi"){
+                position_field.value = "upi"
+                dropdown_btn.innerHTML = "UPI/Wallet"
+            }
+            else if(e=="cheque"){
+                position_field.value = "cheque"
+                dropdown_btn.innerHTML = "Cheque"
+            }
+            else{
+
+            }
+        }
+        
+        function setupSubmitter(){
+            let userdata = JSON.parse(localStorage['currentLoginUser'])
+            if(userdata){
+                // Write to the DOM content
+                let d = `
+                    Name : ${userdata.fname+" "+userdata.lname} <br>
+                    Email : ${userdata.mail} <br>
+                    contact : ${userdata.contact}
+                `
+                document.getElementsByClassName('submitter-info')[0].innerHTML = d
+            }
+        }
+    </script>
+</body>
+</html>

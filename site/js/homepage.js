@@ -134,7 +134,6 @@ function drawMiniMapCluster(){
         marker.bindPopup(`Case #${i+1} ${a.title}`);
         temp_markers.addLayer(marker);
     }
-    
     map.addLayer(temp_markers)
 }
 
@@ -152,7 +151,39 @@ window.onload = function(){
     fetch_user_details() 
     setTimeout(() => {
         setupSidenav()
-    }, 500);
+    }, 1500);
         setupMinimap()
         drawMiniMapCluster()
+}
+let notificationPaneVsible = false
+function toggleNavigationPane(){
+    if(notificationPaneVsible){
+        notificationPaneVsible = false
+        document.getElementsByClassName('top-right-navbar-icon')[0].innerHTML = '<i class="material-icons">notifications</i>'
+    }
+    else{
+        notificationPaneVsible = true
+        document.getElementsByClassName('top-right-navbar-icon')[0].innerHTML = '<i class="material-icons">clear</i>'
+    }
+    document.getElementsByClassName('notification-pane')[0].classList.toggle('visible')
+    console.log("JJ")
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.materialboxed');
+    var instances = M.Materialbox.init(elems, {});
+  });
+
+chatSectionVisible = false
+function toggleChatSection(){
+    // Just toggle Chat section visibility
+    document.getElementsByClassName('chatSection')[0].classList.toggle('visible');
+    if(chatSectionVisible){
+        document.getElementsByClassName('top-right-navbar-icon')[0].innerHTML = `<i class="material-icons">chat</i>`        
+        chatSectionVisible = false
+    }
+    else{
+        document.getElementsByClassName('top-right-navbar-icon')[0].innerHTML = `<i class="material-icons">clear</i>`        
+        chatSectionVisible = true
+    }
 }

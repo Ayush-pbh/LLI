@@ -39,6 +39,10 @@ function setup() {
         if(response.position==='volunteer'){
             document.getElementsByClassName('karma-section')[0].classList.add('visible');
         }
+        if(response.position==='ngo-admin'){
+            document.getElementsByClassName('ngo-karma-section')[0].classList.add('visible');
+
+        }
     })
     .catch(err=>console.log(err))
 }

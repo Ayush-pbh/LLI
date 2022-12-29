@@ -1,54 +1,3 @@
-const users = {
-    "id" :  "qwerty",
-    "name" : "Jay",
-    "m-name" : "",
-    "s-name" : "Dixit",
-    "mail" : "jay.dixit@gmail.com",
-    "phone" : "8964084967",
-    "position" : "user",
-    "dob" : {
-        "dd" : "12",
-        "mm" : "04",
-        "yy" : "2013"
-    },
-    "ngo-id" : "nog_to_which_the_user_belongs_given_by_MongoDB",
-    "ngo-admin-id" : "given_by_MongoDB",
-    "volunteer-id" : "given_by_MongoDB",
-    "case-list" : ["case_id_given_by_MongoDB", "case_id_given_by_MongoDB", "case_id_given_by_MongoDB",],
-    "karma" : 46,
-}
-const gallery = {
-    "gallery-id" : "given_by_MongoDB",
-    "case-id" : "case_to_which_gallery_belongs_to",
-    "collections" : [
-        {
-            "type" : "img/jpg",
-            "uri" : "https://--------",
-            "description" : "Pet Image"
-        },
-        {  
-            "type" : "doc/xlxs",
-            "uri" : "https://--------",
-            "description" : "Fund descripency"
-        },
-    ]
-}
-const mycase = {
-    "case_id" : "given_by_MongoDB",
-    "hero_heading" : "",
-    "description" : "",
-    "factory-date" : "",
-    "gallery-id" : "id_of_gallery_of_this_case",
-    "ngo-id" : "NGO_ID_given_by_MongoDB",
-    "verified-status" : "verified/un-verified",
-    "volunteer-head-id" : "given_by_MongoDB",
-    "volunteer-list" : [
-        {
-            "volunteer-id" : "given_by_MongoDB",
-            "karma-point" : 4
-        }
-    ]
-}
 
 // SCHEMA
 const mongoose = require('mongoose')
@@ -104,6 +53,10 @@ const userSchema = new mongoose.Schema({
     volunteerid : {
         type:String,
         required:true
+    },
+    volunteerRequestedNGO : {
+        type: String,
+        required:false
     },
     caselist : {
         type:Array,
@@ -216,14 +169,109 @@ const gallerySchema = new mongoose.Schema({
         required:true
     }
 })
+
+const ngoSchema = new mongoose.Schema({
+    ngoFullName : {
+        type: String,
+        required: true
+    },
+    ngoOfficialMail : {
+        type: String,
+        required: true
+    },
+    ngoOfficialContact : {
+        type: String,
+        required : true
+    },
+    ngoDateOfEstablishment : {
+        type: Date,
+        required : true
+    },
+    ngoTotalMembers : {
+        type: String,
+        required: true
+    },
+    ngoActiveMembers : {
+        type: String,
+        required: true
+    },
+    ngoShelterStatus : {
+        type: Boolean,
+        required: true
+    },
+    ngoAddress : {
+        type: String,
+        required: true
+    },
+    ngoAddCity : {
+        type: String,
+        required: true
+    },
+    ngoAddDistrict : {
+        type: String,
+        required: true
+    },
+    ngoAddState : {
+        type: String,
+        required: true
+    },
+    ngoAddPincode : {
+        type: String,
+        required: true
+    },
+    
+    ngoLogoUrl : {
+        type: String,
+        required: true
+    },
+    ngoDocumentsUrl : {
+        type: String,
+        required: true
+    },
+    ngoBoardMembers : {
+        type: Array,
+        required: true
+    },
+
+    ngoRefrenceCode : {
+        type: String,
+        required: true
+    },
+    ngoVolunteerList : {
+        type: Array,
+        required: true
+    },
+    ngoPendingRequestList : {
+        type: Array,
+        required: true
+    },
+    ngoDeclineRequestList : {
+        type: Array,
+        required: true
+    },
+    ngoKarma : {
+        type: String,
+        required: true
+    },
+    ngoKarmaList : {
+        type: Array,
+        required: true
+    },
+    ngoAdminId : {
+        type:String,
+        required:true
+    }
+})
 // MODELS
 const USER = mongoose.model('USER', userSchema)
 const CASE = mongoose.model('CASE', caseSchema)
 const GALLERY = mongoose.model('GALLERY', gallerySchema)
+const NGO = mongoose.model('NGO', ngoSchema)
 module.exports = {
     USER : USER,
     GALLERY : GALLERY,
-    CASE : CASE
+    CASE : CASE,
+    NGO: NGO
 }
 
 // const NGO = {

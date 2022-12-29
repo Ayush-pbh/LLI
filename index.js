@@ -486,7 +486,6 @@ app.post('/getVolJoinedCases', verify_token, (req,res)=>{
             element = caselist[i];
             caselist[i] = mongoose.Types.ObjectId(element)
         }
-        console.log(caselist)
         mongo_models.CASE.find({
             '_id': { $in: caselist}
         }, function(err, docs){
@@ -569,6 +568,155 @@ app.post('/forgotPasswordVerify', (req,res)=>{
     else{
         res.status(422).json({message:"Empty Field!"})
     }  
+})
+
+// NGO Stuff
+app.post('/registerNGO', verify_token,(req, res)=>{
+    // validate that the user is of a type admin. and does not already has a ngo registered.
+    mongo_models.USER.findOne({_id : new ObjectId(req.userId)}).then((ud)=>{
+        if(ud.position=='ngo-admin'){
+            // Now check if ngo-admin already has a ngo!
+            if(ud.ngoid=="000"){
+                // No prior ngo exsist
+                // Create NGO here!
+                let jsonD = {
+                    ngoFullName : req.body.ngoFullName,
+                    ngoOfficialMail : req.body.ngoOfficialMail,
+                    ngoOfficialContact : req.body.ngoOfficialContact,
+                    ngoDateOfEstablishment : req.body.ngoDateOfEstablishment,
+                    ngoTotalMembers : req.body.ngoTotalMembers,
+                    ngoActiveMembers : req.body.ngoActiveMembers,
+                    ngoShelterStatus : req.body.ngoShelterStatus,
+                    ngoAddress : req.body.ngoAddress,
+                    ngoAddCity : req.body.ngoAddCity,
+                    ngoAddDistrict : req.body.ngoAddDistrict,
+                    ngoAddState : req.body.ngoAddState,
+                    ngoAddPincode : req.body.ngoAddPincode,
+                    ngoLogoUrl : req.body.ngoLogoUrl,
+                    ngoDocumentsUrl : req.body.ngoDocumentsUrl,
+                    ngoBoardMembers : req.body.ngoBoardMembers,
+                    ngoRefrenceCode : req.userId,
+                    ngoVolunteerList : [],
+                    ngoPendingRequestList : [],
+                    ngoDeclineRequestList : [],
+                    ngoKarma : "000",
+                    ngoKarmaList : [],
+                    ngoAdminId : req.userId
+                }
+                const newNGO = mongo_models.NGO(jsonD)
+                newNGO.save().then((e)=>{
+                    console.log("Case created Successfully!")
+                    // Now add the Ngo Id to the Admins DB
+                    mongo_models.USER.updateOne({_id: req.userId}, {ngoid : newNGO._id}).catch((e)=>{
+                        console.log(`Error in Adding NGO ${newNGO._id} to Admin ${req.userId}.`)
+                    })
+                    res.status(200).json({message:"Case Created Successfully with CaseID : "+newNGO._id})
+                })
+                .catch((err)=>{
+                    console.log("Failed to create Case! "+err)
+                    res.status(500).json({message:err})
+                })
+            }
+            else{
+                // NGO already created by the ngo admin
+                res.status(406).json({message:"NGO is already created!"})
+            }
+        }
+        else{
+            res.status(400).json({message:"Only Admins are allowed to create ngo's"})
+        }
+    })
+    .catch((err)=>{
+        res.status(422).json({message:`Error Happended ${err}`})
+    })
+})
+
+app.post('/getMyNgoDetails',verify_token, (req,res)=>{
+    // Get NGO ID 
+    mongo_models.USER.findOne({_id : new ObjectId(req.userId)}).then((resp)=>{
+        if(resp.position=='ngo-admin'){
+            // Now get the NGO ID from here
+            if(resp.ngoid=='000'){
+                res.status(400).json({message:"You Don't Have an Ngo Yet!"})
+            }
+            else{
+                userNgoId = resp.ngoid
+                // Now find this Ngo from NGO mongo_models
+                mongo_models.NGO.findOne({_id : userNgoId}).then((rr)=>{
+                    res.status(200).json(rr)
+                })
+                .catch((err)=>{res.status(500).json({err:`Error is ${err}`})})
+
+            }
+        }
+        else{
+            res.status(402).json({message:"Only NGO admin can access NGO Details!"})
+        }
+    })
+    .catch((err)=>{res.status(500).json({err:`Error is ${err}`})})
+})
+
+app.post('/getCaseInfo', verify_token, (req,res)=>{
+    let caseid = req.body.caseid;
+    if(caseid){
+        mongo_models.CASE.findOne({_id: new ObjectId(req.body.caseid)})
+        .then((resp)=>{
+            res.status(200).json(resp)
+        })
+        .catch((err)=>{res.status(400).json({message:"Error : "+err})})
+        
+    }
+    else{
+        res.status(400).json({message:"CaseId Not Provided"})
+    }
+})
+
+app.post('/getVolunteerName', verify_token, (req,res)=>{
+    let caseId = req.body.caseid
+    if(caseId){
+        mongo_models.CASE.findOne({_id : new ObjectId(caseId)})
+        .then((resp)=>{
+            let volnList = resp.volunteerList
+           
+            for(let i=0;i<volnList.length;i++){
+                volnList[i] = new ObjectId(volnList[i])
+            }
+            mongo_models.USER.find({
+                _id : {$in : volnList}
+            }, function(err,docs){
+                if(err){
+                    res.status(403).json({m : "Error happened "+err})
+                }
+                else{
+                    // res.status(200).json({dd: docs})
+                    let names = []
+                    docs.forEach(doc => {
+                        let nn = doc.fname + " " + doc.lname
+                        names.push(nn)
+                    });
+                    res.status(200).json(names)
+                }
+            })
+            
+        })
+        .catch((err)=>{res.send(402).json({err : `Error : ${err}`})})
+    }
+    else{
+        res.status(400).json({message:"No CaseId Found!"})
+    }
+})
+
+app.post('/getAllVolunteers', verify_token, (req,res)=>{
+    mongo_models.USER.find({position:"volunteer"}, function(err,doc){
+        if(err){
+            console.log(err)
+            res.status(400).json({err : "Error "+err})
+        }
+        else{
+            console.log(doc)
+            res.status(200).json(doc)
+        }
+    })
 })
 
 app.listen(process.env.port || 8080, ()=>{

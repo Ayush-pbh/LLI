@@ -34,7 +34,7 @@ function getHtmlElement(obj,type,number){
                               </div>
                             </div>
                             <div class="card-action border-radius-curve-card-below">
-                              <a class="activator">More Info</a>
+                              <a class="" onclick="caseInfo('${obj._id}')">More Info</a>
                               <a href="#">Jump to chat!</a>
                               <i class="material-icons right green-text">people</i>
                               <span class="right case-vacany-counter green-text lighten-2">${number}/6</span>
@@ -152,4 +152,11 @@ function getJoinedCases() {
 
 window.onload = function(){
     getJoinedCases()
+}
+
+
+function caseInfo(caseId){
+    // Add Case Id to LocalStorage and Redirect to case.html
+    localStorage.setItem('case-info-case-id', caseId)
+    window.open('case.html', '_self')
 }

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application</title>
+    <!-- Materialize CSS & JS -->
+    <link rel="stylesheet" href="./css/materialize.min.css">
+    <script src="./js/materialize.min.js"></script>
+    <!-- Custom CSS & JS -->
+    <link rel="stylesheet" href="./css/materialfonts.css">
+    <link rel="stylesheet" href="./css/universal-style.css">
+    
+</head>
+<body >
+    
+    <div data-barba="wrapper">
+        <div class="load-container">
+            <div class="loading-screen"></div>
+        </div>
+        <main data-barba="container" data-barba-namespace="home-section">            
+            <ul id="slide-out" class="sidenav">
+                <li>
+                    <div class="user-view">
+                        <div class="background">
+                            <img src="img/wave-s.jpg">
+                        </div>
+                        <span id="position-tag"></span>
+
+                        <a href="#user"><img class="circle" src="img/dp.jpg"></a>
+                        <a href="#name"><span class="white-text name c_info_user_name">John Doe</span></a>
+                        <a href="#email"><span class="white-text email c_info_user_mail">jdandturk@gmail.com</span></a>
+                        <div id="positon-tag">volent</div>
+                    </div>
+                </li>
+                <li ><a  href="./current_user_profile.html"><i class="material-icons">cloud</i>User Profile</a></li>
+                <li><div class="divider"></div></li>
+                <li><a class="subheader"><i>Menu</i></a></li>
+                <li><a class="waves-effect op-links" href="./create_new_case.html"><i class="material-icons">add</i> Create New Case</a></li>
+                <li><a class="waves-effect op-links" href="./create_new_case.html"><i class="material-icons">list</i> Case List</a></li>
+                <li><a class="waves-effect op-links" href="./mapview.html"><i class="material-icons">map</i>View Cases on Map</a></li>
+                <li><a class="waves-effect op-links" href="#!"><i class="material-icons">settings</i>App Settings</a></li>
+                <li><a class="waves-effect op-links" href="#!"><i class="material-icons">info_outline</i>About App</a></li>
+                <li><div class="divider"></div></li>
+                <li><a class="waves-effect op-links +" ><i class="material-icons">directions_run</i>Logout</a></li>
+            </ul>
+            <div class="navbar-fixed">
+                <nav>
+                    <div class="nav-wrapper green lighten-1">
+                        <span class="left brand-logo my-nav-trigger" onclick="window.open('./homepage.html','_self')"><i class="material-icons sidenav-trigger">keyboard_backspace</i></span>
+                        <div class="brand-logo"></div>
+                            <a class="right custom-icon-margin"><i class="material-icons">chat</i></a>
+                            <a class="right "><i class="material-icons">rotate_right</i></a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="row">
+                <div class="container">
+                    <h1 class="t-playfair">Case Info</h1>
+                </div>
+            </div>
+            <!-- <div class="row">
+                <div class="loading-gif">
+                    <img src="./img/dog-running.gif" alt="">
+                </div>
+            </div>  -->
+            <div class="row">
+                <div class="col s12">
+                    <div class="container">
+                        <div class="card green border-radius-curve z-depth-2 custom-color">
+                            <div class="card-content white-text">
+                                <span class="card-title b1-fullname">Basic Details</span>
+                                <div class="row case-basic-details flow-text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <div class="container">
+                        <div class="card green border-radius-curve z-depth-2 custom-color">
+                            <div class="card-content white-text">
+                                <span class="card-title b1-fullname">Technical Details</span>
+                                <div class="row case-tech-details flow-text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <div class="container">
+                        <div class="card green border-radius-curve z-depth-2 custom-color">
+                            <div class="card-content white-text">
+                                <span class="card-title b1-fullname">Volunterr In this Case</span>
+                                <div class="collection voln-list-coll">
+                                    <a href="#!" class="collection-item">Alvin</a>
+                                    <a href="#!" class="collection-item active">Alvin</a>
+                                    <a href="#!" class="collection-item">Alvin</a>
+                                    <a href="#!" class="collection-item">Alvin</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col s12">
+                    <div class="container">
+                        <div class="card green border-radius-curve z-depth-2 custom-color">
+                            <div class="card-content white-text">
+                                <span class="card-title b1-fullname">Follow Up Report</span>
+                                <div class="card waves-effect waves-dark red lighten-1 border-radius-curve" onclick="window.open('followupreport.html','_self')">
+                                    <div class="card-content white-text">
+                                      <span class="card-title">Oops!</span>
+                                      <p class="flow-text">No Follow Up report Submitted, Submit one now!</p>
+                                        <div class="card-panel card-panel-custom border-radius-curve">
+                                            <div class="holder">
+                                                <div class=" center-align black-text">Continue</div>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <div class="container">
+                        <div class="card green border-radius-curve z-depth-2 custom-color">
+                            <div class="card-content white-text">
+                                <span class="card-title b1-fullname">Final Report</span>
+                                <div class="card waves-effect waves-dark red lighten-1 border-radius-curve">
+                                    <div class="card-content white-text">
+                                      <span class="card-title">Looks Empty here!</span>
+                                      <p class="flow-text">No Final report was found. Please submit a final report.</p>
+                                        <div class="card-panel card-panel-custom border-radius-curve">
+                                            <div class="holder">
+                                                <div class=" center-align black-text">Continue</div>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <div class="container">
+                        <div class="card green border-radius-curve z-depth-2 custom-color">
+                            <div class="card-content white-text">
+                                <span class="card-title b1-fullname">Financial Report</span>
+                                <div class="card waves-effect waves-dark red lighten-1 border-radius-curve">
+                                    <div class="card-content white-text">
+                                      <span class="card-title">Oops!</span>
+                                      <p class="flow-text">Looks like no Finances have been discussed for this case.</p>
+                                        <div class="card-panel card-panel-custom border-radius-curve">
+                                            <div class="holder">
+                                                <div class=" center-align black-text">Submit Financial Report Now.</div>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="homepage-style">
+                <footer class="grey darken-4 animate-this center-align">
+                    <div class="container white-text">
+                        © 2022 Lifeline India
+                    </div>
+                </footer>
+            </div>
+        </main>
+    </div>
+    <script src="./js/universal-script.js" defer></script>
+    <script src="./js/case.js"></script>
+</body>
+</html>

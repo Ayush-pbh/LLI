@@ -239,6 +239,12 @@ body{
         display: block !important;
     }
 }
+.ngo-karma-section{
+    display: none;
+    &.visible{
+        display: block !important;
+    }
+}
 .t-playfair{
     font-family: playfairdisplay;
 }
@@ -374,3 +380,206 @@ body{
         width: 100%;
     }
 }
+.notification-pane{
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top:0px;
+    right:-110vh;
+    background-color: white;
+    z-index: 11;
+    transition: right .5s ease-in-out;
+    box-shadow: 0px 0px 5px 0px #111;
+    &.visible{
+        right:0px;
+    }
+}
+.volunteers-request-img{
+    height: 100px;
+}
+.volunteers-request-id-proof{
+    
+    height: 90px;
+}
+
+.chatSection{
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    background-color: white;
+    top:0;
+    right:-100%;
+    z-index: 20;
+    transition: right .1s ease-in;
+    &.visible{
+        right:0px;
+    }
+}
+
+
+.evry-corner-round{
+    border-radius: 50%;
+}
+
+
+.top-right-navbar-icon{
+    display: none !important;
+    &.visible{
+        display: block !important;
+    }
+}
+
+.chatHolder:nth-child(1){
+    margin-top: 56px;
+
+}
+.chatHolder{
+    height: 70px;
+    background-color: white;
+    width: 100%;
+    border-bottom: 1px solid grey;
+    position: relative;
+    .dpHolder{
+        position: absolute;
+        top:5px;
+        left:5px;
+        width: 60px;
+        height: 60px;
+        .dp{
+            height: 100%;
+            width: 100%;
+            border-radius: 50%;
+        }
+    }
+
+    .infoHolder{
+        position: absolute;
+        width: calc(100% - 80px);
+        height: 60px;
+        left:80px;
+        top:5px;
+        .uname{
+            font-family:'Montserrat', sans-serif;
+            font-size: 13pt;
+            color:#262626;
+            line-height: 30px;
+        }
+        .lastmsg{
+            font-family:'Montserrat', sans-serif;
+            font-size: 10pt;
+            color:#6e6e6e;
+            line-height: 30px;
+        }
+    }
+
+}
+
+.chatroom{
+    height: calc(100vh - 56px);
+    width: 100%;
+    background-color: white;
+    position: fixed;
+    top:56px;
+    right:-100%;
+    z-index: 20;
+
+    .chats{
+        overflow: hidden;
+        .chat{            
+            width:100%;            
+            height: auto;
+            display: block !important;
+            margin-bottom: 30px;
+            position: relative;
+            
+            .chat-align-holder{
+                display: block;
+                .chat-holder{
+                    // position: absolute;
+                    display: inline-block;
+                    // background-color: coral;
+                    border-radius: 30px;
+                    padding: 10px;
+                    font-size: 15px;                
+                    min-width: 70px;
+                    max-width: 200px;
+                }
+                .time{
+                    margin-top: 5px;
+                    margin-left: 5px;                
+                    font-size: 9px;
+                    // display: none;
+                }
+            }
+            
+            &.chat-recv{
+                margin-left: 10px;
+                clear: both;
+                .chat-align-holder{
+                    .chat-holder{
+                        background-color: #f6f6f6;
+                    }
+                }
+            }
+            
+            &.chat-send{
+                clear: both;
+                .chat-align-holder{
+                    margin-right: 10px;
+                    float: right;
+                    .chat-holder{
+                        // margin-right: 10px;
+                        background-color: #e3effd;
+                    }
+                    .time{
+                        text-align: right;
+                        margin-right: 10px;
+
+                    }
+                }
+            }
+        }
+    }
+    .input-f{
+        width: 100%;
+        height: 60px;
+        // background-color: #2e9f82;
+        position: absolute;
+        bottom: 0px;
+        left:0px;
+        border-top: 2px solid grey;
+        input{
+            margin-top: 10px;
+            padding-left: 10px;
+            margin-left: 10px;
+            height: 40px;
+            width: calc(100% - 140px);
+            border-radius: 50px;
+            border: 1px solid grey;   
+            position: absolute;
+        }
+        .insertDocs{
+            float: right;
+            margin: 10px;            
+        }
+        .send{
+            float: right;                        
+            margin-top: 10px;            
+            margin-right: 10px;            
+        }
+    }
+}
+
+.create-ngo-button{
+    display: none;
+    &.visible{
+        display: block;
+    }
+}
+.ngo-details{
+    display: none;
+    &.visible{
+        display: block;
+    }
+}
+

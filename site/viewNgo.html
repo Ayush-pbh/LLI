@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View NGO</title>
+    <!-- Materialize CSS & JS -->
+    <link rel="stylesheet" href="./css/materialize.min.css">
+    <script src="./js/materialize.min.js"></script>
+    <!-- Custom CSS & JS -->
+    <link rel="stylesheet" href="./css/materialfonts.css">
+    <link rel="stylesheet" href="./css/universal-style.css">
+    
+</head>
+<body >
+    
+    <div data-barba="wrapper">
+        <div class="load-container">
+            <div class="loading-screen"></div>
+        </div>
+        <main data-barba="container" data-barba-namespace="home-section">
+            <script src="./js/current_user_profile.js" defer></script>
+            <ul id="slide-out" class="sidenav">
+                <li>
+                    <div class="user-view">
+                        <div class="background">
+                            <img src="img/wave-s.jpg">
+                        </div>
+                        <span id="position-tag"></span>
+                        <a href="#user"><img class="circle" src="img/dp.jpg"></a>
+                        <a href="#name"><span class="white-text name c_info_user_name">John Doe</span></a>
+                        <a href="#email"><span class="white-text email c_info_user_mail">jdandturk@gmail.com</span></a>
+                    </div>
+                </li>
+                <li ><a  href="./homepage.html"><i class="material-icons">home</i>Home Page </a></li>
+                <li><div class="divider"></div></li>
+                <li><a class="subheader"><i>Menu</i></a></li>
+                <li><a class="waves-effect op-links" href="./create_new_case.html"><i class="material-icons">add</i> Create New Case</a></li>
+                <li><a class="waves-effect op-links caselist-link" href="./case_list.html"><i class="material-icons">list</i> Case List</a></li>
+                
+                <li><a class="waves-effect op-links invisible case-history" href="./case_list.html"><i class="material-icons">pets</i> Case History</a></li>
+                <li><a class="waves-effect op-links invisible my-gallery" href="./case_list.html"><i class="material-icons">insert_photo</i> My Gallery</a></li>
+                
+                <li><a class="waves-effect op-links" href="./mapview.html"><i class="material-icons">map</i>View Cases on Map</a></li>
+                <li><a class="waves-effect op-links" href="#!"><i class="material-icons">settings</i>App Settings</a></li>
+                <li><a class="waves-effect op-links" href="#!"><i class="material-icons">info_outline</i>About App</a></li>
+                <li><div class="divider"></div></li>
+                <li><a class="waves-effect op-links logout-link" href="#!"><i class="material-icons">directions_run</i>Logout</a></li>
+            </ul>
+            <div class="navbar-fixed">
+                <nav>
+                    <div class="nav-wrapper green lighten-1">
+                    <a href="./homepage.html" class="left brand-logo my-nav-trigger" ><i class="material-icons sidenav-trigger">keyboard_backspace</i></a>
+                    <a class="right brand-logo"><i class="material-icons">chat</i></a>
+                    </div>
+                </nav>
+            </div>
+            <div class="row create-ngo-button">
+                <div class="col s12">
+                    <div class="container">
+                        <br>
+                        <br>
+                        <br>
+                        <div class="card waves-effect red lighten-1 border-radius-curve z-depth-2 " onclick="window.open('addNgo.html','_self')">
+                            <div class="card-content white-text">
+                                <span class="card-title">Oops!</span>
+                                You Don't Have any NGO's yet.
+                                <br>
+                                Lets Create One!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="homepage-style ngo-details visible">
+                <div class="row">
+                    <div class="col s12">
+                        <h1 class="t-playfair center-align vN-fullname">My Very Cute Trust</h1>
+                    </div>
+                </div>
+                <div class="container  visible">
+                    <div class="card green lighten-1 border-radius-curve z-depth-2">
+                        <div class="card-content white-text vN-ngodetails">
+                            <div class="row">
+                                <div class="col s12">
+                                    <h1 class="center-align vN-logo" style="margin-top:0">
+                                        <img src="./img/main-icon.png" alt="">
+                                    </h1>
+                                </div>
+                                <div class="col s12">
+                                    <h5 class="center-align vN-mail">
+                                        yush.pbh@gmail.com
+                                    </h5>
+                                </div>
+                                <div class="col s12">
+                                    <h5 class="center-align vN-contact">
+                                        8960704965
+                                    </h5>
+                                </div>
+                                <div class="col s12">
+                                    <h5 class="center-align vN-totalMem">
+                                        Total Members : 1023
+                                    </h5>
+                                </div>
+                                <div class="col s12">
+                                    <h5 class="center-align vN-activeMem">
+                                        Active Members : 678
+                                    </h5>
+                                </div>
+                                <div class="col s12">
+                                    <h5 class="center-align vN-address">
+                                        3/304 Virat Khand Gomti Nagar
+                                    </h5>
+                                </div>
+                                <div class="col s12">
+                                    <h5 class="center-align vN-address">
+                                        3/304 Virat Khand Gomti Nagar
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card red border-radius-curve z-depth-2">
+                        <div class="card-content white-text vN-BM1-details">
+                            <span class="card-title b1-fullname">Ayush Tripathi</span>
+                            <div class="row">
+                                <div class="col s12">
+                                    <h5 class="center-align vN-address">
+                                        yush.pbh@gmail.com
+                                    </h5>
+                                </div>
+                                <div class="col s12">
+                                    <h5 class="center-align vN-address">
+                                        8960704965
+                                    </h5>
+                                </div>
+                                <div class="col s12">
+                                    <h5 class="center-align vN-address">
+                                        Founder
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card red border-radius-curve z-depth-2">
+                        <div class="card-content white-text vN-BM2-details">
+                            <span class="card-title b1-fullname">Ayush Tripathi</span>
+                            <div class="row">
+                                <div class="col s12">
+                                    <h5 class="center-align vN-address">
+                                        yush.pbh@gmail.com
+                                    </h5>
+                                </div>
+                                <div class="col s12">
+                                    <h5 class="center-align vN-address">
+                                        8960704965
+                                    </h5>
+                                </div>
+                                <div class="col s12">
+                                    <h5 class="center-align vN-address">
+                                        Founder
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card red border-radius-curve z-depth-2">
+                        <div class="card-content white-text vN-BM3-details">
+                            <span class="card-title b1-fullname">Ajay Devgun</span>
+                            <div class="row">
+                                <div class="col s12">
+                                    <h5 class="center-align vN-address">
+                                        ahay@devgun.com
+                                    </h5>
+                                </div>
+                                <div class="col s12">
+                                    <h5 class="center-align vN-address">
+                                        3534965121
+                                    </h5>
+                                </div>
+                                <div class="col s12">
+                                    <h5 class="center-align vN-address">
+                                        CEO
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <footer class="grey darken-4 animate-this center-align">
+                    <div class="container white-text">
+                        © 2022 Lifeline India
+                    </div>
+                </footer>
+            </div>
+        </main>
+    </div>
+    <script src="./js/universal-script.js" defer></script>
+    <script defer>
+        function setupPage(){
+            fetch(api_server+'getMyNgoDetails/', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'x-access-token' : localStorage.getItem('token')
+            }})
+            .then((rr)=>{
+                if(rr.status==200){
+                    return rr.json()
+                    document.getElementsByClassName('create-ngo-button')[0].classList.remove('visible')
+                    document.getElementsByClassName('ngo-details')[0].classList.add('visible')
+                }  
+                else if(rr.status == 400){
+
+                    document.getElementsByClassName('create-ngo-button')[0].classList.add('visible')
+                    document.getElementsByClassName('ngo-details')[0].classList.remove('visible')
+                }
+                else{
+                    console.log(`Error : ${rr}`)
+                }
+            })
+            .then((rr)=>{
+                // We will start writing here
+                document.getElementsByClassName('vN-fullname')[0].innerHTML = rr.ngoFullName
+                let ngo_details = `<div class="row">
+                                <div class="col s12">
+                                    <h1 class="center-align vN-logo" style="margin-top:0">
+                                        <img src="./img/main-icon.png" alt="">
+                                    </h1>
+                                </div>
+                                <div class="col s12">
+                                    <h5 class="center-align vN-mail">
+                                        ${rr.ngoOfficialMail}
+                                    </h5>
+                                </div>
+                                <div class="col s12">
+                                    <h5 class="center-align vN-contact">
+                                        ${rr.ngoOfficialContact}
+                                    </h5>
+                                </div>
+                                <div class="col s12">
+                                    <h5 class="center-align vN-totalMem">
+                                        Total Members : ${rr.ngoTotalMembers}
+                                    </h5>
+                                </div>
+                                <div class="col s12">
+                                    <h5 class="center-align vN-activeMem">
+                                        Active Members : ${rr.ngoActiveMembers}
+                                    </h5>
+                                </div>
+                                <div class="col s12">
+                                    <h5 class="center-align vN-address">
+                                        ${rr.ngoAddress}
+                                    </h5>
+                                </div>
+                                <div class="col s12">
+                                    <h5 class="center-align vN-address">
+                                        Refrence Code : <b>${rr.ngoRefrenceCode}</b>
+                                    </h5>
+                                    <h6>(This code is shared to the Volunteers for their Signup.)</h6>
+                                </div>
+                            </div>`
+                let boardM1 = `<span class="card-title b1-fullname">${rr.ngoBoardMembers[0].fullname}</span>
+                            <div class="row">
+                                <div class="col s12">
+                                    <h5 class="center-align vN-address">
+                                        ${rr.ngoBoardMembers[0].mail}
+                                    </h5>
+                                </div>
+                                <div class="col s12">
+                                    <h5 class="center-align vN-address">
+                                        ${rr.ngoBoardMembers[0].contact}
+                                    </h5>
+                                </div>
+                                <div class="col s12">
+                                    <h5 class="center-align vN-address">
+                                        ${rr.ngoBoardMembers[0].position}
+                                    </h5>
+                                </div>
+                            </div>`
+                
+                let boardM2 = `<span class="card-title b1-fullname">${rr.ngoBoardMembers[1].fullname}</span>
+                            <div class="row">
+                                <div class="col s12">
+                                    <h5 class="center-align vN-address">
+                                        ${rr.ngoBoardMembers[1].mail}
+                                    </h5>
+                                </div>
+                                <div class="col s12">
+                                    <h5 class="center-align vN-address">
+                                        ${rr.ngoBoardMembers[1].contact}
+                                    </h5>
+                                </div>
+                                <div class="col s12">
+                                    <h5 class="center-align vN-address">
+                                        ${rr.ngoBoardMembers[1].position}
+                                    </h5>
+                                </div>
+                            </div>`
+                
+                let boardM3 = `<span class="card-title b1-fullname">${rr.ngoBoardMembers[2].fullname}</span>
+                            <div class="row">
+                                <div class="col s12">
+                                    <h5 class="center-align vN-address">
+                                        ${rr.ngoBoardMembers[2].mail}
+                                    </h5>
+                                </div>
+                                <div class="col s12">
+                                    <h5 class="center-align vN-address">
+                                        ${rr.ngoBoardMembers[2].contact}
+                                    </h5>
+                                </div>
+                                <div class="col s12">
+                                    <h5 class="center-align vN-address">
+                                        ${rr.ngoBoardMembers[2].position}
+                                    </h5>
+                                </div>
+                            </div>`
+                
+                document.getElementsByClassName('vN-ngodetails')[0].innerHTML = ngo_details
+                
+                document.getElementsByClassName('vN-BM1-details')[0].innerHTML = boardM1
+                document.getElementsByClassName('vN-BM2-details')[0].innerHTML = boardM2
+                document.getElementsByClassName('vN-BM3-details')[0].innerHTML = boardM3
+
+            })
+        }
+        window.addEventListener('load', ()=>{
+            setupPage()
+        })
+    </script>
+</body>
+</html>

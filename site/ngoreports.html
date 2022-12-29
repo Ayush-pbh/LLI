@@ -26,6 +26,8 @@
                         <div class="background">
                             <img src="img/wave-s.jpg">
                         </div>
+                        <span id="position-tag"></span>
+
                         <a href="#user"><img class="circle" src="img/dp.jpg"></a>
                         <a href="#name"><span class="white-text name c_info_user_name">John Doe</span></a>
                         <a href="#email"><span class="white-text email c_info_user_mail">jdandturk@gmail.com</span></a>
@@ -47,56 +49,30 @@
                 <nav>
                     <div class="nav-wrapper green lighten-1">
                         <span class="left brand-logo my-nav-trigger" onclick="window.open('./homepage.html','_self')"><i class="material-icons sidenav-trigger">keyboard_backspace</i></span>
-                        <a class="right brand-logo"><i class="material-icons">chat</i></a>
+                        <div class="brand-logo"></div>
+                            <a class="right custom-icon-margin"><i class="material-icons">chat</i></a>
+                            <a class="right "><i class="material-icons">rotate_right</i></a>
+                        </div>
                     </div>
                 </nav>
             </div>
 
             <div class="row">
                 <div class="container">
-                    <h1 class="t-playfair">Help</h1>
-                    <h5 class="t-playfair">Sumbit a help query!</h5>
-                </div>
-            </div>
-            <div class="container">
-
-                <div class="row">
-                    <div class="col s12">
-                        <input  id="query_fullname" type="text" class="validate">
-                        <label for="query_fullname">Full Name</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s12">
-                        <input  id="query_contact" type="number" class="validate">
-                        <label for="query_contact">Contact Number</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s12">
-                        <input  id="query_mail" type="text" class="validate">
-                        <label for="query_mail">Email ID</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s12">
-                        <input  id="query_subject" type="text" class="validate">
-                        <label for="query_subject">Subject</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s12">
-                        <textarea style = "height: 150px;" name="query_body" id="query_body" cols="30" rows="10" placeholder="Describe your query here..."></textarea>
-                    </div>
+                    <h1 class="t-playfair">Reports</h1>
+                    <h5>Select volunteer to view reports submitted by him/her.</h5>
                 </div>
             </div>
             <div class="row">
-                <div class="container">
-                    <div class="col s12">
-                        <button class="btn waves-effect waves-light submit-new-case-btn border-radius-curve green lighten-1 " type="submit" name="action">Submit
-                            <i class="material-icons right">send</i>
-                        </button>
-                    </div>
+                <div class="loading-gif">
+                    <img src="./img/dog-running.gif" alt="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <ul class="collection volhol">
+                    </ul>
+
                 </div>
             </div>
             <div class="homepage-style">
@@ -109,5 +85,52 @@
         </main>
     </div>
     <script src="./js/universal-script.js" defer></script>
+    <script>
+        function setup(){
+             // Get user created cases from server
+             let loadingGif = document.getElementsByClassName('loading-gif')[0]
+
+            fetch(api_server+"getAllVolunteers/", {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'x-access-token' : localStorage.getItem('token')
+                },
+            })
+            .then(response=>response.json())
+            .then((response)=>{
+                // Remove the loading gif animation
+                console.log(response)
+                loadingGif.style.display = 'none';
+                userlist = response
+                let elemList = ""
+                M.toast({html: `Cases Loaded!`})
+                userlist.slice().reverse().forEach(mycase => {
+                    elemList+=(getHtmlElement(mycase, 'user'))
+                });
+                // Push it into the ul tag!
+                // console.log(elemList)
+                caselistHolder = document.getElementsByClassName('volhol')[0]
+                caselistHolder.innerHTML = elemList
+            })
+            .catch(err=>console.log(err))
+            
+        }
+        function getHtmlElement(obj){
+            // Object is the case object 
+            // type is the type of the user (user,volunteer)
+            htmlquery = `<li class="collection-item waves-effect waves-dark" onclick="noreportfound('${obj.fname}')" style="width:100%"><h5>${obj.fname+" "+obj.lname}</h5></li><br>`
+            return htmlquery
+        }
+        function noreportfound(name){
+            alert(`Oops! Volunteer ${name} has not submitted any reports till now`)
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.collapsible');
+            var instances = M.Collapsible.init(elems, {});
+            setup();
+        });
+    </script>
 </body>
 </html>

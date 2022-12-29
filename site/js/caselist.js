@@ -42,10 +42,9 @@ function getHtmlElement(obj,type,number=0){
                               </div>
                             </div>
                             <div class="card-action border-radius-curve-card-below">
-                              <a class="activator">More Info</a>
                               <a onclick="${(number==6)?'':'joinCase(\''+obj._id+'\')'}">${(number==6)?'':'JOIN'}</a>
                               <i class="material-icons right white-text">people</i>
-                              <span class="right white-text case-vacany-counter">${number}/6
+                              <span class="right white-text case-vacany-counter case-vac-cc-${obj._id}">${number}/6
                               </span>
                             </div>
                             <div class="card-reveal white-text" style="background-color: #2D637A;">
@@ -175,8 +174,20 @@ function joinCase(caseid){
         // Remove the loading gif animation
             // 
         M.toast({html: response.message})
-        
+        // Changing number here
+        if(response.message=='Joined!'){
+            ccu = document.getElementsByClassName('case-vac-cc-'+caseid)[0].innerHTML
+            ccu = (parseInt(ccu[0])+1) + '/6'
+            console.log(ccu)
+            document.getElementsByClassName('case-vac-cc-'+caseid)[0].innerHTML = ccu
+        }
         
     })
     .catch(err=>console.log(err))
+}
+
+function caseInfo(caseId){
+    // Add Case Id to LocalStorage and Redirect to case.html
+    localStorage.setItem('case-info-case-id', caseId)
+    window.open('case.html', '_self')
 }
