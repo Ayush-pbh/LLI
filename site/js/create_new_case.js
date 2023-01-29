@@ -1,5 +1,7 @@
-api_server = "https://lli.onrender.com/"
+// api_server = "https://lli.onrender.com/"
 
+// const e = require("express");
+let caseId  = 'none';
 function createNewCase() {
     // Animate the Button
     default_inner_text = 'Submit<i class="material-icons right">send</i>';
@@ -63,8 +65,15 @@ function createNewCase() {
         .then((response)=>{
             if(response){
                 console.log(response)
+                caseId = response.caseId
                 btn.innerHTML = `Case Created!`
-                M.toast({html: `Case Created Successfully!`})
+                M.toast({html: `Case Created Successfully! Now Upload Files for the Case.`})
+                setTimeout(
+                    function(){
+                        document.getElementById('caseDetail').classList.toggle('visible')
+                        document.getElementById('caseFileUploader').classList.toggle('visible')
+                    }
+                    ,1000)
             }
         })
         .catch((err)=>{
@@ -76,4 +85,34 @@ function createNewCase() {
 
 }
 
+function uploadfile() {
+    if(document.getElementById('case_docs').value){
+        let fd = document.getElementById('myform')
+        document.getElementById('uploadCaseId').value = 'doc'
+
+        fetch('/upload-case-file', {
+            method: 'POST',
+            headers : {
+                'x-access-token' : localStorage.getItem('token')
+            },
+            body: fd
+        })
+        .then((res)=>{
+            if(res.status == 200){
+                M.toast({html: `Success Uploading Your File!`})
+            }
+        })
+    }
+    else{
+        alert("Select a file first!")
+    }
+}
+
+
 document.getElementsByClassName('submit-new-case-btn')[0].addEventListener('click',createNewCase)
+document.getElementsByClassName('upload-file-btn')[0].addEventListener('click',uploadfile)
+
+
+function removePlate() {
+    gsap.to('.plate', { left: '100%', duration: .3 })
+}

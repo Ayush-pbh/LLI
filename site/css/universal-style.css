@@ -587,4 +587,32 @@ body .my-cont-register .form-holder .confirm-mail-form-confirm-mail-button .logi
 #dropdown-btn.disabled {
   background-color: grey !important;
   pointer-events: none !important;
+}
+
+.plate {
+  position: fixed;
+  top: 0;
+  left: 0%;
+  height: 100vh;
+  width: 100%;
+  background-color: rgb(184, 236, 160);
+  z-index: 1000;
+}
+
+.greenbtn {
+  width: 100% !important;
+}
+
+#caseDetail {
+  display: none;
+}
+#caseDetail.visible {
+  display: block !important;
+}
+
+#caseFileUploader {
+  display: none;
+}
+#caseFileUploader.visible {
+  display: block !important;
 }/*# sourceMappingURL=universal-style.css.map */

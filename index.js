@@ -8,7 +8,7 @@
 */
 const express = require('express')
 var bodyParser = require('body-parser')
-
+const multer = require('multer')
 const mongoose = require('mongoose')
 const mongo_models = require('./Database_Json_Models.js')
 const jwt = require('jsonwebtoken')
@@ -19,13 +19,29 @@ const path = require('path')
 const fs = require('fs')
 var ObjectId = require('mongoose').Types.ObjectId; 
 const cors = require('cors')
+const util = require('util')
+const nodemailer = require('nodemailer')
+
 const saltRounds = 10
+const maxSize = 50 * 1024 * 1024; // 50 Mb File Max Size.
+
 /*
     Import Setup Lines Below!
 */
+const transporter = nodemailer.createTransport({
+    port: 465,               // true for 465, false for other ports
+    host: "smtp.gmail.com",
+       auth: {
+            user: 'ayushmediagroup.noreply@gmail.com',
+            pass: 'mzrcilxtjuonhclp',
+         },
+    secure: true,
+});
+
 const port  = 3000  // Port for Application in development
 const app = express()  
 app.use(express.static('site/'))
+app.use(express.static('uploads/'))
 app.use(cors())
 app.use(bodyParser.json())
 //Database setup
@@ -113,7 +129,22 @@ function addCaseToUserCaseList(userid,caseid) {
         }
     }).catch(err=>console.log(`Erorr in updating the caselist of the user ${err}`))
 }
-
+function getMailConfirmObj(otp,mail) {
+    const mailData = {
+        from: 'ayushmediagroup.noreply@gmail.com',  // sender address
+        to: mail,   // list of receivers
+        subject: 'Email Confirmation',
+        text: 'Test Email Works!',
+        html:  `<h2>Hi! Welcome to LifeLifeIndia.</h2><br><h4>${otp}</h4><h5>Is your mail confirmation OTP. Paste this otp in the otp section of the application.<br> Please do not share it with anyone.</h5><br>If you didn't initiate this request, Please Ignore.`,
+    };
+    return mailData
+}
+let storage = multer.diskStorage({
+    destination: function(req, file, cb){
+        cb(null, './uploads')
+    }
+})
+const upload = multer({storage: storage})
 /**
  *  SIMPLE COMMANDS - required for some purpose, written beside every app
  *  
@@ -127,6 +158,8 @@ function addCaseToUserCaseList(userid,caseid) {
  *      /register -> For register
  *      /profile  -> For User Profile
  *      /password-cahange   -> For User Password Change
+ *      
+ *      /upload-data -> upload-file 
 */
 
 // Cookie Test
@@ -207,22 +240,31 @@ app.post('/register', validate_register_details, (req,res)=>{
                     bcrypt.hash(password, saltRounds, function(err, hash) {
                         // Store hash in your password DB.
                         hashedPasscode = hash;
-                        ngoid = "000", ngoadminid = "000", volunteerid = "000", caselist = "000", karma = "000", mailVerified = false, phoneVerified = true
+                        ngoid = "000", ngoadminid = "000", volunteerid = "000", caselist = "000", karma = "000", mailVerified = false, phoneVerified = true, profilepicurl='000'
                         dac = new Date()
                         let data_to_create_new_user = {}    
                         mailSecret = parseInt(Math.abs(Math.random()*1000000))
                         if(position=='volunteer'){
-                            data_to_create_new_user = {fname, lname, age, password:hashedPasscode, mail, mailVerified,phone, phoneVerified,position, dob, ngoid, ngoadminid, volunteerid, caselist,dac, mailSecret, karma, casesVolIn:[] }
+                            data_to_create_new_user = {fname, lname, age, password:hashedPasscode, mail, mailVerified,phone, phoneVerified,position, dob, ngoid, ngoadminid, volunteerid, caselist,dac, mailSecret, karma, casesVolIn:[],profilepicurl }
                         }
                         else{
-                            data_to_create_new_user = {fname, lname, age, password:hashedPasscode, mail, mailVerified,phone, phoneVerified,position, dob, ngoid, ngoadminid, volunteerid, caselist,dac, mailSecret, karma }
+                            data_to_create_new_user = {fname, lname, age, password:hashedPasscode, mail, mailVerified,phone, phoneVerified,position, dob, ngoid, ngoadminid, volunteerid, caselist,dac, mailSecret, karma, profilepicurl }
                         }
                         const new_user = new mongo_models.USER(data_to_create_new_user)
                         
                         
                         new_user.save().then((ee)=>{
+                            
+                            mailData = getMailConfirmObj(mailSecret, new_user.mail);
+                            // Sending mail Now
+                            transporter.sendMail(mailData, function (err, info) {
+                                if(err)
+                                    console.log(err)
+                                else
+                                    console.log(info)
+
+                            });
                             res.json({message:"User Created Succesfully! You May Login now!", otp:mailSecret})
-                            console.log(`Please go to /confirmMail Route and enter your mail and ${mailSecret}`)
                         }).catch((err)=>{
                             console.log(err)
                         })
@@ -274,6 +316,7 @@ app.post('/confirmEmail', (req,res)=>{
 })
 app.post('/userProfile',verify_token, (req,res)=>{
     // console.log(`Decoded User Id : ${req.userId.prototype.toString()}`)
+    // start = performance.now()
     var query = { _id: new ObjectId(req.userId) };
     mongo_models.USER.findOne(query).then((stat)=>{
         if(stat){
@@ -284,6 +327,9 @@ app.post('/userProfile',verify_token, (req,res)=>{
             
         }
     })
+    end = performance.now()
+    // t = end - start
+    // console.log("Time taken = "+(t/1000)+" Seconds.")
     // res.status(200).json({message:`User Id : ${req.userId}`})
 })
 app.post('/createNewCase', verify_token, validate_newcase_details, (req,res)=>{
@@ -521,7 +567,16 @@ app.post('/sendForgotPasswordOtp', (req,res)=>{
         mongo_models.USER.findOne({mail:mail}).then((status)=>{
             if(status){
                 // User found now we will send the mailSecret to the user
-                res.status(200).json({otp:status.mailSecret})   
+                mailData = getMailConfirmObj(status.mailSecret, status.mail);
+                    // Sending mail Now
+                    transporter.sendMail(mailData, function (err, info) {
+                        if(err)
+                            console.log(err)
+                        else
+                            console.log(info)
+
+                });
+                res.status(200).json({otp:"Sent on mail."})   
             }
             else{
                 res.status(422).json({error:"No User Found!"})
@@ -572,12 +627,14 @@ app.post('/forgotPasswordVerify', (req,res)=>{
 
 // NGO Stuff
 app.post('/registerNGO', verify_token,(req, res)=>{
+
     // validate that the user is of a type admin. and does not already has a ngo registered.
     mongo_models.USER.findOne({_id : new ObjectId(req.userId)}).then((ud)=>{
         if(ud.position=='ngo-admin'){
             // Now check if ngo-admin already has a ngo!
             if(ud.ngoid=="000"){
                 // No prior ngo exsist
+                // Create a new entry in files DB and add it's 
                 // Create NGO here!
                 let jsonD = {
                     ngoFullName : req.body.ngoFullName,
@@ -592,8 +649,10 @@ app.post('/registerNGO', verify_token,(req, res)=>{
                     ngoAddDistrict : req.body.ngoAddDistrict,
                     ngoAddState : req.body.ngoAddState,
                     ngoAddPincode : req.body.ngoAddPincode,
-                    ngoLogoUrl : req.body.ngoLogoUrl,
-                    ngoDocumentsUrl : req.body.ngoDocumentsUrl,
+                    
+                    ngoLogoUrl : "Not Yet Usable",
+                    ngoDocumentsUrl : "Not Yet Usable",
+                    
                     ngoBoardMembers : req.body.ngoBoardMembers,
                     ngoRefrenceCode : req.userId,
                     ngoVolunteerList : [],
@@ -601,7 +660,10 @@ app.post('/registerNGO', verify_token,(req, res)=>{
                     ngoDeclineRequestList : [],
                     ngoKarma : "000",
                     ngoKarmaList : [],
-                    ngoAdminId : req.userId
+                    ngoAdminId : req.userId,
+                    
+                    ngoDocumentsFileId:"=*=*",
+                    ngoLogoFileId:"====="
                 }
                 const newNGO = mongo_models.NGO(jsonD)
                 newNGO.save().then((e)=>{
@@ -643,6 +705,8 @@ app.post('/getMyNgoDetails',verify_token, (req,res)=>{
                 userNgoId = resp.ngoid
                 // Now find this Ngo from NGO mongo_models
                 mongo_models.NGO.findOne({_id : userNgoId}).then((rr)=>{
+                    // Now also send files ....
+
                     res.status(200).json(rr)
                 })
                 .catch((err)=>{res.status(500).json({err:`Error is ${err}`})})
@@ -718,7 +782,136 @@ app.post('/getAllVolunteers', verify_token, (req,res)=>{
         }
     })
 })
+app.post('/ngo-docs-upload', verify_token, upload.array('ngo_docs', 2), function (req, res, next) {
+    // req.file is the `avatar` file
+    // req.body will hold the text fields, if there were any
+    // console.log(`File name = ${req.files[0].filename}`)
+    // console.log(req.files[1].filename)
+    // console.log(req.body.name)
+    // res.send(200)
+    let ff = {
 
+        filename: req.files[0].filename,
+        uploaderId : req.userId,
+        fileTag : "ngo-logo",
+        originalname: req.files[0].originalname,
+        encoding : req.files[0].encoding,
+        mimetype : req.files[0].mimetype,
+        destination : req.files[0].destination,
+        path : req.files[0].path,
+        size : req.files[0].size,
+
+    }
+    let ffs = {
+
+        filename: req.files[1].filename,
+        uploaderId : req.userId,
+        fileTag : "ngo-doc",
+        originalname: req.files[1].originalname,
+        encoding : req.files[1].encoding,
+        mimetype : req.files[1].mimetype,
+        destination : req.files[1].destination,
+        path : req.files[1].path,
+        size : req.files[1].size,
+
+    }
+    const logoDBObj = mongo_models.FILEUPLOAD(ff)
+    logoDBObj.save().then((e)=>{
+        console.log("Uploaded File 1 LOGO")
+    })
+    const docDBObj = mongo_models.FILEUPLOAD(ffs)
+    docDBObj.save().then((e)=>{
+        console.log("Uploaded File 2 DOCS")
+    })
+    // Now update newfile url to ngo DB
+    console.log(`LOGO ID : ${logoDBObj._id}`)
+    mongo_models.NGO.findOne({'ngoAdminId':req.userId}).then((stat)=>{
+        
+        stat['ngoLogoFileId'] = logoDBObj._id
+        stat['ngoDocumentsFileId'] = docDBObj._id
+        stat['ngoLogoUrl'] = logoDBObj.filename
+        stat['ngoDocumentsUrl'] = docDBObj.filename
+
+        stat.save().then(()=>{
+            console.log("Fields @ NGO updated with logo and docs")
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+    })
+
+    res.status(200).json({msg:"File Uploaded!"})
+})
+app.post('/profile-pic-upload', verify_token, upload.array('profile_pic', 1), function (req, res, next){
+    
+    let ffs = {
+        filename: req.files[0].filename,
+        uploaderId : req.userId,
+        fileTag : "propic",
+        originalname: req.files[0].originalname,
+        encoding : req.files[0].encoding,
+        mimetype : req.files[0].mimetype,
+        destination : req.files[0].destination,
+        path : req.files[0].path,
+        size : req.files[0].size,
+    }
+
+    const propic = mongo_models.FILEUPLOAD(ffs)
+    propic.save().then((e)=>{
+        console.log("Profile Picture Uploaded!")
+    })
+    // Add it to the database
+    mongo_models.USER.findOne({_id : new ObjectId(req.userId)})
+    .then((ss)=>{
+        ss['profilepicurl'] = req.files[0].filename
+        ss.save().then(()=>{
+            console.log("Profile Picture Url Updated")
+            res.status(200).json({msg:"Profile Picture Updated!"})
+        })
+    })
+    .catch((err)=>{
+        res.status(400).json({msg:"Failed to Update Picture."})
+    })
+
+})
+
+app.post('/upload-case-file',verify_token,upload.single('case_docs'), (req,res)=>{
+    // type ->
+    // Now add this f._id to gallery entry of that specific case.
+    let ffs = {
+        filename: req.file.filename,
+        uploaderId : req.userId,
+        fileTag : 'case-doc',
+        originalname: req.file.originalname,
+        encoding : req.file.encoding,
+        mimetype : req.file.mimetype,
+        destination : req.file.destination,
+        path : req.file.path,
+        size : req.file.size,
+    }
+    const f = mongo_models.FILEUPLOAD(ffs)
+    f.save().then((e)=>{
+        console.log(`Case File Uploaded! for case ${req.body.uploadCaseId}`)
+        res.status(200).json({msg:"File Uploaded!"})
+    })
+    // res.status(200).json({req:req.body})
+    // mongo_models.USER.findOne({_id : new ObjectId(req.userId)})
+    // .then((ss)=>{
+    
+    // })
+
+})
+
+app.post('/sendMail', (req,res)=>{
+    
+    // Sending mail Now
+    transporter.sendMail(mailData, function (err, info) {
+        if(err)
+            res.status(400).json({err:err})
+        else
+            res.status(200).json({info:info})
+    });
+})
 app.listen(process.env.port || 8080, ()=>{
     console.log(`App Running @ http://localhost:${port}`)
 });

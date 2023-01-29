@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation Page 1</title>
+    <script type='text/javascript' src='https://greensock.com/js/v3/gsap.min.js?v=3879a2a0a2'  data-ips></script>
+</head>
+<body onclick="go('anim2.html')">
+    <span>Hello World!</span>
+
+    <div class="plate">
+
+    </div>
+
+    <style>
+        body{
+            height:100vh;
+            width:100%;
+            margin:0;
+            padding:0;
+            background:skyblue;
+            position: relative;
+        }
+        span{
+            position: absolute;
+            color: #111;
+            font-size: 4rem;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: lighter;
+            width: 100%;
+            text-align: center;
+            margin-left: auto;
+            top: calc(50vh - 50px);
+        }
+        .plate{
+            position: fixed;
+            top:0;
+            left: 0%;
+            height: 100vh;
+            width: 100%;
+            background-color: #fff;
+            z-index: 21;
+        }
+    </style>
+    <script src="./script.js" defer ></script>
+</body>
+</html>

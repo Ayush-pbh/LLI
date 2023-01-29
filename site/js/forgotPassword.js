@@ -67,3 +67,7 @@ function verifyOTPAndChangePassword(){
     }
 
 }
+
+function removePlate() {
+    gsap.to('.plate', { left: '100%', duration: .3 })
+}

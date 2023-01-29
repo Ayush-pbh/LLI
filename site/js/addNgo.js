@@ -17,8 +17,8 @@ function addNGO(){
     let addDistrict = document.getElementById('add-district').value
     let addState = document.getElementById('add-state').value
     let addPincode = document.getElementById('add-pincode').value
-    let ngo_logo = document.getElementById('ngo_logo').value
-    let ngo_documents = document.getElementById('ngo_documents').value
+    // let ngo_logo = document.getElementById('ngo_logo').value
+    // let ngo_documents = document.getElementById('ngo_documents').value
     
     let boardM1_fullname = document.getElementById('boardM1_fullname').value
     let boardM1_mail = document.getElementById('boardM1_mail').value
@@ -36,7 +36,7 @@ function addNGO(){
     let boardM3_position = document.getElementById('boardM3_position').value
 
     // Check for empty values and reoprt them!
-    if(!organisationFullname || !officalMailId || !contactNumber || !dateOfOrigin || !totalMembers || !totalActiveMembers || !address || !addCity || !addDistrict || !addState || !addPincode || !ngo_logo || !ngo_documents || !boardM1_fullname || !boardM1_mail || !boardM1_contact || !boardM1_position || !boardM2_fullname || !boardM2_mail || !boardM2_contact || !boardM2_position || !boardM3_fullname || !boardM3_mail || !boardM3_contact || !boardM3_position){
+    if(!organisationFullname || !officalMailId || !contactNumber || !dateOfOrigin || !totalMembers || !totalActiveMembers || !address || !addCity || !addDistrict || !addState || !addPincode ||  !boardM1_fullname || !boardM1_mail || !boardM1_contact || !boardM1_position || !boardM2_fullname || !boardM2_mail || !boardM2_contact || !boardM2_position || !boardM3_fullname || !boardM3_mail || !boardM3_contact || !boardM3_position){
         alert("Please Don't Leave Any Field Empty!");
         return 1;
     }
@@ -53,8 +53,6 @@ function addNGO(){
         ngoAddDistrict : addDistrict,
         ngoAddState : addState,
         ngoAddPincode : addPincode,
-        ngoLogoUrl : ngo_logo,
-        ngoDocumentsUrl : ngo_documents,
         ngoBoardMembers : [
             {
                 fullname : boardM1_fullname,
@@ -92,7 +90,11 @@ function addNGO(){
     .then((response)=>{
         if(response.status==200){
             console.log("Success")
+            M.toast({html: `Success! Now let's Upload Logo & Documents`})
             console.log(response.json())
+            setTimeout(() => {
+                goToPageWithAnimation('/uploadNGODOCS.html')
+            }, 1000);
         }
         else{
             console.log("Faliure")
@@ -134,3 +136,5 @@ function shelterPropertyChanged(){
         // document.getElementById('add-pincode')
     }
 }
+
+window.onload = removePlate()

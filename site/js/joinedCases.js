@@ -152,6 +152,7 @@ function getJoinedCases() {
 
 window.onload = function(){
     getJoinedCases()
+    removePlate()
 }
 
 
@@ -159,4 +160,8 @@ function caseInfo(caseId){
     // Add Case Id to LocalStorage and Redirect to case.html
     localStorage.setItem('case-info-case-id', caseId)
     window.open('case.html', '_self')
+}
+
+function removePlate() {
+    gsap.to('.plate', { left: '100%', duration: .3 })
 }

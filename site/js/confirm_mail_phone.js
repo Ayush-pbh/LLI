@@ -1,4 +1,4 @@
-api_server = "https://lli.onrender.com/"
+// api_server = "https://lli.onrender.com/"
 
 function validateEmailViaOTP() {
     // Animate the Validate Button
@@ -50,3 +50,7 @@ function validateEmailViaOTP() {
 
 
 document.getElementsByClassName('validate-otp-btn')[0].addEventListener('click', validateEmailViaOTP)
+
+function removePlate() {
+    gsap.to('.plate', { left: '100%', duration: .3 })
+}

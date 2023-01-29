@@ -121,3 +121,7 @@ function init(){
 window.addEventListener('load', function(){
     init()
 })
+
+function removePlate() {
+    gsap.to('.plate', { left: '100%', duration: .3 })
+}

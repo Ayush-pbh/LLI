@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProfilePic</title>
+    <!-- CSS Imports! -->
+    <!-- MaterializeCSS  -->
+    <link rel="stylesheet" href="./css/materialize.min.css">
+    <!-- Materialize Fonts -->
+    <link rel="stylesheet" href="./css/materialfonts.css">
+    <!-- Universal CSS -->
+    <link rel="stylesheet" href="./css/universal-style.css">
+    
+    <!-- JS Imports! -->
+    <!-- MaterializeCSS  -->
+    <script src="./js/materialize.min.js"></script>
+</head>
+<body>
+    <div class="row">
+        <div class="col s12">
+            <div class="container">
+                <h3>Upload Profile Picture</h3>
+            </div>
+        </div>
+    </div>
+<form id="myform">
+    <div class="row">
+        <div class="col s12">
+            <div class="container">
+                
+                    <div class="col s12 center-align">
+                        Profile Picture
+                        <input id="ngo_logo" type="file" name="profile_pic" class="waves-effect waves-light btn">
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <div class="container">
+                <div class="col s12">
+                    <div value="SUBMIT" class=" waves-effect waves-light btn" onclick="uplaodFiles()">SUBMIT</div>
+                </div>
+            </div>
+        </div>
+    </div>    
+    </form>
+    <div class="plate"></div>
+    <script src="./js/universal-script.js"></script>  
+    <script type='text/javascript' src='https://greensock.com/js/v3/gsap.min.js?v=3879a2a0a2'  data-ips></script>
+    <script>
+    
+        window.onload = removePlate()
+        function uplaodFiles() {
+            let logo = document.getElementById('ngo_logo')
+
+
+            if(logo.value)
+            {
+                let fd = new FormData(document.getElementById('myform'))
+                fetch('/profile-pic-upload', {
+                    method: 'POST',
+                    headers : {
+                        'x-access-token' : localStorage.getItem('token')
+                    },
+                    body: fd
+                })
+                .then((res)=>{
+                    if(res.status == 200){
+                        M.toast({html: `Success Uploading Profile Picture! Going to Homepage.`})
+                        setTimeout(() => {
+                            localStorage.setItem('currentLoginUser', undefined)
+                            goToPageWithAnimation('./homepage.html')
+                        }, 1000);
+                    }
+                })
+            }
+
+            else{
+                alert("Please Select Files")
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -77,6 +77,10 @@ const userSchema = new mongoose.Schema({
     casesVolIn : {
         type:Array,
         required:false
+    },
+    profilepicurl : {
+        type:String,
+        required: false
     }
     
 })
@@ -219,7 +223,14 @@ const ngoSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    
+    ngoLogoFileId : {
+        type: String,
+        required : true
+    },
+    ngoDocumentsFileId : {
+        type: String,
+        required: true
+    },
     ngoLogoUrl : {
         type: String,
         required: true
@@ -232,7 +243,6 @@ const ngoSchema = new mongoose.Schema({
         type: Array,
         required: true
     },
-
     ngoRefrenceCode : {
         type: String,
         required: true
@@ -262,16 +272,61 @@ const ngoSchema = new mongoose.Schema({
         required:true
     }
 })
+
+const fileSchema = new mongoose.Schema({
+    filename : {
+        type: String,
+        required: true
+    },
+    uploaderId : {
+        type: String,
+        required : true
+    },
+    fileTag: {
+        type: String,
+        required: true
+    },
+	originalname : {
+        type: String,
+        required: true
+    },
+	encoding:  {
+        type: String,
+        required: true
+    },
+	mimetype:  {
+        type: String,
+        required: true
+    },
+	destination:  {
+        type: String,
+        required: true
+    },
+	path: {
+        type: String,
+        required: true
+    },
+	size: {
+        type: String,
+        required: true
+    },
+    doc :  {
+        type:Date,
+        required: false
+    }
+})
 // MODELS
 const USER = mongoose.model('USER', userSchema)
 const CASE = mongoose.model('CASE', caseSchema)
 const GALLERY = mongoose.model('GALLERY', gallerySchema)
 const NGO = mongoose.model('NGO', ngoSchema)
+const FILEUPLOAD = mongoose.model('FILE', fileSchema)
 module.exports = {
     USER : USER,
     GALLERY : GALLERY,
     CASE : CASE,
-    NGO: NGO
+    NGO: NGO,
+    FILEUPLOAD : FILEUPLOAD
 }
 
 // const NGO = {

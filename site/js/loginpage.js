@@ -1,8 +1,8 @@
 // VARIABLES
-login_uri = "http://192.168.130.50:3000/login"
-user_info_uri = "http://192.168.130.50:3000/userProfile"
-server_host = "http://192.168.130.68:3000/"
-api_server = "https://lli.onrender.com/"
+// login_uri = "http://192.168.130.50:3000/login"
+// user_info_uri = "http://192.168.130.50:3000/userProfile"
+// server_host = "http://192.168.130.68:3000/"
+// api_server = "https://lli.onrender.com/"
 
 // server_host = "http://localhost:3000/"
 // login_uri = "http://localhost:3000/login"
@@ -46,7 +46,7 @@ async function loginUser(){
         if(response){
             console.log(response.token)
             // Store the token in the local-Storage
-
+            localStorage.clear()
             localStorage.setItem('token',response.token)
             
             fetch(api_server+"userProfile", {
@@ -60,6 +60,9 @@ async function loginUser(){
             .then((resp)=>{
                 btn.innerHTML = `Welcome! ${resp.fname}`  
                 M.toast({html: `Hi ${resp.fname}, Login Succesful!`})
+                // Now setting all the default localStorage variables
+                localSet('fr_homepage','true')
+                localSet('fr_userinfo','true')
                 // Redirect to Homepage.html after 1.5 second!
                 setTimeout(() => {
                     window.open('./homepage.html','_self')
@@ -75,3 +78,7 @@ async function loginUser(){
 
 // @Listener
 // document.getElementsByClassName('login-form-login-button')[0].addEventListener('click', loginUser);
+
+function removePlate() {
+    gsap.to('.plate', { left: '100%', duration: .3 })
+}

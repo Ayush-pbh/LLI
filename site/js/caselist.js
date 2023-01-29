@@ -196,3 +196,8 @@ function caseInfo(caseId){
     localStorage.setItem('case-info-case-id', caseId)
     window.open('case.html', '_self')
 }
+
+
+function removePlate() {
+    gsap.to('.plate', { left: '100%', duration: .3 })
+}

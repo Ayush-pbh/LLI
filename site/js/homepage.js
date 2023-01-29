@@ -1,29 +1,44 @@
 // import { verifyLogin, localGet, localSet, setupSidenav, fetch_user_details } from "./universal-script";
 // Variables
-server_host = "http://localhost:3000/"
-api_server = "https://lli.onrender.com/"
+// server_host = "http://localhost:3000/"
+// api_server = "https://lli.onrender.com/"
 
-var map ;
-function setupMinimap(){
+
+
+
+
+var map;
+function setupMinimap() {
     console.log("Setting up MiniMap")
-    
+
     mapbox_token = "pk.eyJ1IjoiYXl1c2hwYmgiLCJhIjoiY2xidzNmeHcxMDUzeDN4bHB3eHJjZ3czMSJ9.QqwJl13b-XbrXatNKFcJ4w";
-        
+
     var mapboxTiles = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=' + mapbox_token, {
         attribution: '© <a href="https://www.mapbox.com/feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         tileSize: 512,
         zoomOffset: -1
     });
     map = L.map('minimap')
-    .addLayer(mapboxTiles)
-    .setView([28.614034419696885, 77.23181496247136], 7);
-    
+        .addLayer(mapboxTiles)
+        .setView([28.614034419696885, 77.23181496247136], 7);
+
 }
-    
-    var addressPoints = [
-        {
-            location: [28.623493144771466, 77.40220897359319],
-            title: "Dogs to case",
+
+function setupProfilePic(){
+    console.log("Setup Profile Pic");
+    let userInfo = localGet('currentLoginUser', true)
+    if(userInfo.profilepicurl=='000'){
+        if(confirm(`Hi ${userInfo.fname}, You don't have a profile picture setup. Do you want to setup now?`)) {
+            goToPageWithAnimation('./changeProfilePic.html')
+        } else {
+            // Do nothing!
+        }
+    }
+}
+var addressPoints = [
+    {
+        location: [28.623493144771466, 77.40220897359319],
+        title: "Dogs to case",
         caseid: "sladjbhskjvsdsadfvasudfvsdfsdfd",
     },
     {
@@ -121,47 +136,32 @@ function setupMinimap(){
         title: "",
         caseid: "sladjbhskjvsdsadfvasudfvsdfsdfd",
     },
-    
-    ];
-	
-function drawMiniMapCluster(){
+
+];
+
+function drawMiniMapCluster() {
     var temp_markers = L.markerClusterGroup()
 
     for (var i = 0; i < addressPoints.length; i++) {
         var a = addressPoints[i];
         let l = a.location
         var marker = L.marker(new L.LatLng(l[0], l[1]), { title: a.title });
-        marker.bindPopup(`Case #${i+1} ${a.title}`);
+        marker.bindPopup(`Case #${i + 1} ${a.title}`);
         temp_markers.addLayer(marker);
     }
     map.addLayer(temp_markers)
 }
-
-window.onload = function(){
-    console.log("ON LOAD PER")
-    // if(verifyLogin()){
-    //     fetch_user_details()
-    //     setTimeout(() => {
-    //         setupSidenav()
-    //         console.log("Sidenav setup!")
-    //     }, 500);
-    //     // Setup map
-    // }
-    
-    fetch_user_details() 
-    setTimeout(() => {
-        setupSidenav()
-    }, 1500);
-        setupMinimap()
-        drawMiniMapCluster()
+function removePlate() {
+    gsap.to('.plate', { left: '100%', duration: .3 })
 }
 let notificationPaneVsible = false
-function toggleNavigationPane(){
-    if(notificationPaneVsible){
+
+function toggleNavigationPane() {
+    if (notificationPaneVsible) {
         notificationPaneVsible = false
         document.getElementsByClassName('top-right-navbar-icon')[0].innerHTML = '<i class="material-icons">notifications</i>'
     }
-    else{
+    else {
         notificationPaneVsible = true
         document.getElementsByClassName('top-right-navbar-icon')[0].innerHTML = '<i class="material-icons">clear</i>'
     }
@@ -169,21 +169,48 @@ function toggleNavigationPane(){
     console.log("JJ")
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     var elems = document.querySelectorAll('.materialboxed');
     var instances = M.Materialbox.init(elems, {});
-  });
+});
 
 chatSectionVisible = false
-function toggleChatSection(){
+function toggleChatSection() {
     // Just toggle Chat section visibility
     document.getElementsByClassName('chatSection')[0].classList.toggle('visible');
-    if(chatSectionVisible){
-        document.getElementsByClassName('top-right-navbar-icon')[0].innerHTML = `<i class="material-icons">chat</i>`        
+    if (chatSectionVisible) {
+        document.getElementsByClassName('top-right-navbar-icon')[0].innerHTML = `<i class="material-icons">chat</i>`
         chatSectionVisible = false
     }
-    else{
-        document.getElementsByClassName('top-right-navbar-icon')[0].innerHTML = `<i class="material-icons">clear</i>`        
+    else {
+        document.getElementsByClassName('top-right-navbar-icon')[0].innerHTML = `<i class="material-icons">clear</i>`
         chatSectionVisible = true
     }
+}
+
+// Check for pre fetched data 
+
+window.onload = function () {
+
+    console.log("ON LOAD PER")
+    // Look for cached data in the localstorage
+    currentLoginUser = localGet('currentLoginUser')
+    if(currentLoginUser){
+        console.log("Refreing to Cache")
+        setupSidenav();
+        setupProfilePic();
+
+    }
+    else{
+        console.log("No Cache FOund!")
+        fetch_user_details()
+        setTimeout(() => {
+            setupSidenav()
+            setupProfilePic();
+        }, 1500);
+    }
+
+
+    setupMinimap()
+    drawMiniMapCluster()
 }

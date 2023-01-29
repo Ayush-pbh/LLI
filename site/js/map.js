@@ -183,6 +183,7 @@ for (var i = 0; i < addressPoints.length; i++) {
     marker.bindPopup(`Case #${i+1} ${a.title}`);
     temp_markers.addLayer(marker);
 }
+removePlate();
 
 map.addLayer(temp_markers)
 

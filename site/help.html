@@ -46,8 +46,7 @@
             <div class="navbar-fixed">
                 <nav>
                     <div class="nav-wrapper green lighten-1">
-                        <span class="left brand-logo my-nav-trigger" onclick="window.open('./homepage.html','_self')"><i class="material-icons sidenav-trigger">keyboard_backspace</i></span>
-                        <a class="right brand-logo"><i class="material-icons">chat</i></a>
+                        <span class="left brand-logo" onclick="goToPageWithAnimation('./homepage.html')"><i class="material-icons sidenav-trigger">keyboard_backspace</i></span>                        
                     </div>
                 </nav>
             </div>
@@ -108,6 +107,14 @@
             </div>
         </main>
     </div>
+    <div class="plate"></div>
+
+    <script type='text/javascript' src='https://greensock.com/js/v3/gsap.min.js?v=3879a2a0a2'  data-ips></script>
     <script src="./js/universal-script.js" defer></script>
+    <script>
+        window.onload = function(){
+            gsap.to('.plate', {left:'100%', duration:.3})
+        }
+    </script>
 </body>
 </html>

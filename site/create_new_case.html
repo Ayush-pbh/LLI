@@ -15,7 +15,7 @@
 </head>
 <body >
     
-    <div data-barba="wrapper">
+    <div data-barba="wrapper" class="visible" id="caseDetail">
         <div class="load-container">
             <div class="loading-screen"></div>
         </div>
@@ -148,15 +148,44 @@
 
                 </div>
             </div>
-            
-            <div class="homepage-style">
-                <footer class="grey darken-4 animate-this center-align">
-                    <div class="container white-text">
-                        © 2022 Lifeline India
-                    </div>
-                </footer>
-            </div>
         </main>
+    </div>
+    <div id="caseFileUploader">
+        <div class="row">
+            <div class="col s12">
+                <div class="container">
+                    <h1 class="t-playfair">Upload Files related to the case.</h1>
+                    <h5 class="t-playfair">Images and Bill details can very useful in understanding the case in detail.</h5> 
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col s12">
+                <div class="container">
+                    <h6 class="">
+                        You can upload multiple files one-by-one below
+                    </h6>
+                    <br>
+                </div>
+            </div>
+            <div class="col s12 center-align">
+                <h6>Select File</h6>
+                <form id="myform">
+                    <input name="case_docs" id="case_docs" type="file" class="waves-effect waves-light btn">
+                    <input type="text" value="image" name="uploadCaseId" id="uploadCaseId">
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <div class="container">
+                    <div class="col s12 center-align">
+                        <div id="ngo_logo" type="file" class="waves-effect waves-light btn upload-file-btn">Upload!</div>
+                    </div>        
+                </div>
+            </div>
+        </div>
     </div>
     <script src="./js/universal-script.js" defer></script>
     <script src="./js/create_new_case.js" defer></script>

@@ -1,5 +1,6 @@
 
-api_server = "https://lli.onrender.com/"
+
+// api_server = "https://lli.onrender.com/"
 
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.parallax');
@@ -20,21 +21,18 @@ function setup() {
     current_user_phone = document.getElementsByClassName('current_user_phone')[0];
     current_user_position = document.getElementsByClassName('current_user_position')[0];   
 
-    fetch(api_server+"userProfile/", {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'x-access-token' : localStorage.getItem('token')
-        },
-    })
-    .then(response=>response.json())
-    .then((response)=>{
-        // User Info
+    // See if data is already available
+    currentLoginUser = localGet('currentLoginUser')
+    if(currentLoginUser){
+        console.log("Refreing to Cache")
+
+        let response = currentLoginUser
         current_user_name.innerHTML = response.fname + " " + response.lname    
         current_user_mail.innerHTML =  `<h6><i class="material-icons">mail</i> ${response.mail}</h6>`    
         current_user_phone.innerHTML = `<i class="material-icons">phone</i> ${response.phone}`
         current_user_position.innerHTML = `<i class="material-icons">person</i>Position : ${response.position}`    
+
+        document.getElementsByClassName('my-nav-trigger')[0].classList.add('visible');
         
         if(response.position==='volunteer'){
             document.getElementsByClassName('karma-section')[0].classList.add('visible');
@@ -43,10 +41,43 @@ function setup() {
             document.getElementsByClassName('ngo-karma-section')[0].classList.add('visible');
 
         }
+        removePlate()
+    }
+
+    fetch(api_server+"userProfile/", {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'x-access-token' : localStorage.getItem('token')
+        },
+    }) 
+    .then(response=>response.json())
+    .then((response)=>{
+        // User Info
+        current_user_name.innerHTML = response.fname + " " + response.lname    
+        current_user_mail.innerHTML =  `<h6><i class="material-icons">mail</i> ${response.mail}</h6>`    
+        current_user_phone.innerHTML = `<i class="material-icons">phone</i> ${response.phone}`
+        current_user_position.innerHTML = `<i class="material-icons">person</i>Position : ${response.position}`    
+
+        document.getElementsByClassName('my-nav-trigger')[0].classList.add('visible');
+        
+        if(response.position==='volunteer'){
+            document.getElementsByClassName('karma-section')[0].classList.add('visible');
+        }
+        if(response.position==='ngo-admin'){
+            document.getElementsByClassName('ngo-karma-section')[0].classList.add('visible');
+
+        }
+        removePlate()
     })
     .catch(err=>console.log(err))
 }
 
 window.onload = function(){
     setup()
+}
+
+function removePlate() {
+    gsap.to('.plate', { left: '100%', duration: .3 })
 }

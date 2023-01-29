@@ -1,8 +1,8 @@
-api_server = "https://lli.onrender.com/"
+// api_server = "https://lli.onrender.com/"
 
 document.getElementsByClassName('register-form-register-button')[0].addEventListener('click', registerUser);
 document.getElementsByClassName('register-form-register-button')[1].addEventListener('click', ()=>{
-    window.open("./confirm_email_phone.html","_self")
+    
 });
 
 
@@ -61,8 +61,9 @@ async function registerUser(){
         if(response){
             console.log(response)
             btn.innerHTML = `User Registered!`
-            document.getElementById('OTP').innerHTML = response.otp
-            document.getElementById('OTP-frame').classList.add('visible')
+            goToPageWithAnimation('./confirm_email_phone.html')
+            // document.getElementById('OTP').innerHTML = response.otp
+            // document.getElementById('OTP-frame').classList.add('visible')
             
         }
     })
@@ -80,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.dropdown-trigger');
     var instances = M.Dropdown.init(elems, {});
     M.Sidenav.init(document.querySelectorAll('.sidenav'), {});
-  });
+});
 
 function dropdownClicked(e){
     let position_field = document.getElementById('position');
@@ -98,6 +99,12 @@ function dropdownClicked(e){
         dropdown_btn.innerHTML = "NGO-Admin"
     }
     else{
-
+        
     }
 }
+
+
+function removePlate() {
+    gsap.to('.plate', { left: '100%', duration: .3 })
+}
+window.onload = removePlate()
