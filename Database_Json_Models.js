@@ -161,6 +161,10 @@ const caseSchema = new mongoose.Schema({
     volunteerList : {
         type: Array,
         required: false
+    },
+    chatroomId : {
+        type: String,
+        required : true
     }
 })
 const gallerySchema = new mongoose.Schema({
@@ -315,18 +319,30 @@ const fileSchema = new mongoose.Schema({
         required: false
     }
 })
+const chatroom = new mongoose.Schema({
+    caseId : {
+        type: String,
+        required: true
+    },
+    chats : {
+        type: Array,
+        required: true
+    }
+})
 // MODELS
 const USER = mongoose.model('USER', userSchema)
 const CASE = mongoose.model('CASE', caseSchema)
 const GALLERY = mongoose.model('GALLERY', gallerySchema)
 const NGO = mongoose.model('NGO', ngoSchema)
 const FILEUPLOAD = mongoose.model('FILE', fileSchema)
+const CHATROOM = mongoose.model('CHATROOM', chatroom)
 module.exports = {
     USER : USER,
     GALLERY : GALLERY,
     CASE : CASE,
     NGO: NGO,
-    FILEUPLOAD : FILEUPLOAD
+    FILEUPLOAD : FILEUPLOAD,
+    CHATROOM : CHATROOM
 }
 
 // const NGO = {

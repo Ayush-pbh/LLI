@@ -194,8 +194,8 @@ window.onload = function () {
 
     console.log("ON LOAD PER")
     // Look for cached data in the localstorage
-    currentLoginUser = localGet('currentLoginUser')
-    if(currentLoginUser){
+    let currentLoginUser = localGet('currentLoginUser')
+    if(currentLoginUser!='null'){
         console.log("Refreing to Cache")
         setupSidenav();
         setupProfilePic();
@@ -209,7 +209,6 @@ window.onload = function () {
             setupProfilePic();
         }, 1500);
     }
-
 
     setupMinimap()
     drawMiniMapCluster()

@@ -11,13 +11,7 @@
     <!-- Custom CSS & JS -->
     <link rel="stylesheet" href="./css/materialfonts.css">
     <link rel="stylesheet" href="./css/universal-style.css">
-    <!-- Leaflet -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" 
-    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
-    crossorigin=""/>
-    <link rel="stylesheet" href="./css/MarkerCluster.css">
-    <link rel="stylesheet" href="./css/MarkerCluster.Default.css">
-    <link href='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css' rel='stylesheet' />
+    
       
 </head>
 <body>
@@ -32,86 +26,66 @@
     <!-- Body -->
     <div class="chatroom visible">
         <div class="chats">
-            <div class="chat chat-recv ">
-                <div class="chat-align-holder">
-                    <div class="chat-holder">
-                        <span class="writer-name">Jhon</span>
-                        Hi, What medication do you prefer for skin infections?
-                    </div>
-                    <div class="time">
-                        12:08 AM
-                    </div>
+            <div class="row">
+                <div class="col s12 center-align">
+                    <br>
+                    <div class="waves-effect waves-light btn">Load Previous Chats</div>
                 </div>
-            </div>            
-            <div class="chat chat-send ">
-                <div class="chat-align-holder">
-                    <div class="chat-holder">
-                        Well I need to see that for my self first.
-                    </div>
-                    <div class="time">
-                        12:08 AM
-                    </div>
-                </div>
-            </div>            
-            <div class="chat chat-recv ">
-                <div class="chat-align-holder">
-                    <div class="chat-holder">
-                        <span class="writer-name">Mark</span>
-                        What else does the cat need?
-                    </div>
-                    <div class="time">
-                        12:08 AM
-                    </div>
-                </div>
-            </div>            
-            <div class="chat chat-recv ">
-                <div class="chat-align-holder">
-                    <div class="chat-holder">
-                        <span class="writer-name">Jhon</span>
-                        Apart from regular asprin dosage
-                    </div>
-                    <div class="time">
-                        12:08 AM
-                    </div>
-                </div>
-            </div>            
-            <div class="chat chat-send ">
-                <div class="chat-align-holder">
-                    <div class="chat-holder">
-                        I would recommend lowering the asprin dosage, and noticing the changes.
-                    </div>
-                    <div class="time">
-                        12:08 AM
-                    </div>
-                </div>
-            </div>            
-            <div class="chat chat-recv ">
-                <div class="chat-align-holder">
-                    <div class="chat-holder">
-                        <span class="writer-name">Jhon</span>
-                        Okay then!
-                    </div>
-                    <div class="time">
-                        12:08 AM
-                    </div>
-                </div>
-            </div>            
-            <div class="chat chat-send ">
-                <div class="chat-align-holder">
-                    <div class="chat-holder">
-                        Okay then!
-                    </div>
-                    <div class="time">
-                        12:08 AM
-                    </div>
-                </div>
-            </div>            
+            </div>
+            
         </div>
         <div class="input-f">
-            <input type="text" placeholder="write-text-here!">            
-            <div class="btn-floating send waves-effect waves-light green lighten-1"><i class="material-icons">send</i></div>
+            <input type="text" placeholder="write-text-here!" class="send-text">            
+            <div class="btn-floating send waves-effect waves-light green lighten-1 " onclick="sendd()"><i class="material-icons">send</i></div>
             <div class="btn-floating insertDocs waves-effect waves-light green lighten-1"><i class="material-icons">add</i></div>
         </div>
     </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./js/universal-script.js"></script>
+    <script>
+        var socket = io();
+        // Client sends the first message to the server while connecting 
+        // caseId = case chatroom user wants to chat in...
+        // loginToken = to verify that the user exsist in the chatroom or not.
+        let caseId = localStorage.getItem('chat-case-id')
+        let loginToken = localStorage.getItem('token')
+        let myId = localGet('currentLoginUser',true)._id
+        let myname = localGet('currentLoginUser',true).fname
+
+        socket.emit("chat-init", {caseId : caseId, loginToken : loginToken}, (response) => {
+            console.log(response);
+        });
+        socket.on('chat-message', (arg)=>{
+            if(arg.senderId != myId){
+                console.log(arg.msg)
+                document.getElementsByClassName('chats')[0].innerHTML +=  `<div class="chat chat-recv ">
+    <div class="chat-align-holder"><div class="chat-holder"><span class="writer-name">${arg.senderName}</span>${arg.msg}</div><div class="time"></div></div></div>`
+            let ss = document.getElementsByClassName('chats')[0]
+            ss.scroll(0,ss.scrollHeight)
+            }
+
+        })
+
+        function sendMessage(msg){
+            let currentDate = new Date()
+            socket.emit("chat-message", {
+                caseId : caseId,
+                senderId : myId,
+                senderName : myname,
+                datetime : currentDate,
+                msg:msg
+            }); 
+            
+            document.getElementsByClassName('chats')[0].innerHTML +=  `<div class="chat chat-send ">
+    <div class="chat-align-holder"><div class="chat-holder"><span class="writer-name"></span>${msg}</div><div class="time"></div></div></div>`
+        }
+        function sendd(){
+            let txt = document.getElementsByClassName('send-text')[0].value
+            sendMessage(txt)
+            document.getElementsByClassName('send-text')[0].value = ''
+            let ss = document.getElementsByClassName('chats')[0]
+            ss.scroll(0,ss.scrollHeight)
+        }
+    </script>
 </body>
 </html>

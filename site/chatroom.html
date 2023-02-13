@@ -11,13 +11,6 @@
     <!-- Custom CSS & JS -->
     <link rel="stylesheet" href="./css/materialfonts.css">
     <link rel="stylesheet" href="./css/universal-style.css">
-    <!-- Leaflet -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" 
-    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
-    crossorigin=""/>
-    <link rel="stylesheet" href="./css/MarkerCluster.css">
-    <link rel="stylesheet" href="./css/MarkerCluster.Default.css">
-    <link href='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css' rel='stylesheet' />
 </head>
 <body>
     <div class="navbar-fixed">
@@ -28,54 +21,54 @@
         </nav>
     </div>
     <div class="chatSection visible">
-                
-        <div class="chatHolder waves-effect waves-dark">
-            <div class="dpHolder">
-                <img src="./img/dp.jpg" alt="" class="dp">
-            </div>
-            <div class="infoHolder">
-                <div class="uname">
-                    Ayush
-                </div>
-                <div class="lastmsg">
-                    Kill me once i'll die twice
-                </div>
-            </div>
-        </div>
-        <div class="chatHolder waves-effect waves-dark">
-            <div class="dpHolder">
-                <img src="./img/dp.jpg" alt="" class="dp">
-            </div>
-            <div class="infoHolder" onclick="openchatroom(1)">
-                <div class="uname">
-                    Ayush
-                </div>
-                <div class="lastmsg">
-                    Kill me once i'll die twice
-                </div>
-            </div>
-        </div>
-        <div class="chatHolder waves-effect waves-dark">
-            <div class="dpHolder">
-                <img src="./img/dp.jpg" alt="" class="dp">
-            </div>
-            <div class="infoHolder">
-                <div class="uname">
-                    Ayush
-                </div>
-                <div class="lastmsg">
-                    Kill me once i'll die twice
-                </div>
-            </div>
-        </div>
-              
+        <div class="plate"></div>
     </div> 
+    <script type='text/javascript' src='https://greensock.com/js/v3/gsap.min.js?v=3879a2a0a2'  data-ips></script>
+    <script src="./js/universal-script.js"></script>
     <script defer>
         function openchatroom(n){
-            localStorage.setItem('chat-user-id','')
-            localStorage.setItem('chat-case-id','')
+            console.log(n)
+            // To chat we require two things userid - user who chats. & caseid - case in which chat is happening
+
+            localStorage.setItem('chat-case-id',n)
             window.open('chat.html', '_self')
         }
+        // Get all cases of the user and display them
+        function getAllCasesAndPaint() {
+            fetch(api_server + "getVolJoinedCases/", {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'x-access-token': localStorage.getItem('token')
+                },
+            })
+            .then(response => response.json())
+            .then((response) => {
+                // Now listing all the available chatrooms
+                let chatroom_list = '';
+                console.log(response.message)
+                response.message.forEach(res => {
+                    
+                    chatroom_list +=  `<div class="chatHolder waves-effect waves-dark" onclick="openchatroom('${res._id}')">
+                           <div class="dpHolder">
+                           <img src="./img/dp.jpg" alt="" class="dp">
+                           </div>
+                           <div class="infoHolder">
+                           <div class="uname">
+                               ${res.caseAnimalName}, ${res.caseAnimalType}
+                           </div>
+                           <div class="lastmsg">
+                           </div>
+                           </div>
+                           </div>  `
+                        });
+                document.getElementsByClassName('chatSection')[0].innerHTML = chatroom_list
+                removePlate()
+            })
+            .catch(err => console.log(err))
+            }
+        window.onload = getAllCasesAndPaint()
     </script>
 </body>
 </html>

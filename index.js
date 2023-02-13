@@ -120,7 +120,20 @@ function createNewGalleryForCaseAndUpdateCase(case_id) {
         console.log(`Error in creating the Gallery for Case[${case_id}]`+err)
     })
 }
-
+function createChatroomForCaseAndUpdateCase(case_id){
+    full_json = {
+        caseId : case_id,
+        chats : []
+    }
+    const newChatroom = mongo_models.CHATROOM(full_json)
+    newChatroom.save().then((ee)=>{
+        var idd = {_id : new ObjectId(case_id)}
+        mongo_models.CASE.updateOne({_id : idd}, {chatroomId : newChatroom._id}).catch(err=>console.log('Error in linking chatroom to case'))
+    })
+    .catch((err)=>{
+        console.log('Error in creating chatroom!')
+    })
+}
 function addCaseToUserCaseList(userid,caseid) {
     var idd = { _id: new ObjectId(userid) };
     mongo_models.USER.updateOne({_id: idd}, {$push : {caselist : caseid}}).then((resp)=>{
@@ -359,6 +372,7 @@ app.post('/createNewCase', verify_token, validate_newcase_details, (req,res)=>{
         caseVerified : false,
         volunteerHeadId : "",
         volunteerList : [],
+        chatroomId : "000"
     }
     
     // Creating the new case
@@ -367,6 +381,8 @@ app.post('/createNewCase', verify_token, validate_newcase_details, (req,res)=>{
         console.log("Case Created Successfully " + newCase._id)
         // Creating a new Gallery and link it to the case
         createNewGalleryForCaseAndUpdateCase(newCase._id)
+        // Creating a new Chatroom and linking it to the case
+        createChatroomForCaseAndUpdateCase(newCase._id)
         // Adding the newCase id to the user's case list who is, creating the case
         addCaseToUserCaseList(req.userId, newCase._id)
         res.status(200).json({message:"Case Created Successfully!",caseId : newCase._id})
@@ -912,12 +928,37 @@ app.post('/sendMail', (req,res)=>{
             res.status(200).json({info:info})
     });
 })
-app.listen(process.env.port || 8080, ()=>{
+const http = require('http')
+const server = http.createServer(app);
+server.listen(process.env.port || 8080, ()=>{
     console.log(`App Running @ http://localhost:${port}`)
 });
 
-// app.listen(port, ()=>{
-// })
+// Here we will write the socket code.
+const {Server} = require('socket.io') 
+const io = new Server(server);
+
+io.on('connection', (socket) => {
+    console.log("A new user connected.");
+    socket.broadcast.emit("Welcome to the server.")
+    console.log(`Socket ID : ${socket.id}`)
+    socket.on('disconnect', (socket) =>{
+        console.log("user Disconnected.")
+    })
+    
+    socket.on('chat-init', (arg,callback)=>{
+        socket.join(arg.caseId)   //joining thesocket to it's case room.
+        callback(`Joined : ChatRoom - ${arg.caseId}`) //sending back the confirmation
+    })
+
+    socket.on("chat-message", (arg,callback) =>{
+        // Passing on the chat to all the sockets in the group...
+        io.to(arg.caseId).emit("chat-message", arg);
+        // Adding the chat to the Database
+        mongo_models.CHATROOM.findOneAndUpdate({caseId : arg.caseId}, {$push : {chats : arg}})
+        .catch(err=>console.log(err))
+    })
+})
 
 
 

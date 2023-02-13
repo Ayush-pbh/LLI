@@ -63,6 +63,8 @@ async function loginUser(){
                 // Now setting all the default localStorage variables
                 localSet('fr_homepage','true')
                 localSet('fr_userinfo','true')
+                localSet('currentLoginUser','null')
+
                 // Redirect to Homepage.html after 1.5 second!
                 setTimeout(() => {
                     window.open('./homepage.html','_self')

@@ -35,7 +35,7 @@ function getHtmlElement(obj,type,number){
                             </div>
                             <div class="card-action border-radius-curve-card-below">
                               <a class="" onclick="caseInfo('${obj._id}')">More Info</a>
-                              <a href="chat.html">Jump to chat!</a>
+                              <a onclick='jumptochat("${obj._id}")'>Jump to chat!</a>
                               <i class="material-icons right green-text">people</i>
                               <span class="right case-vacany-counter green-text lighten-2">${number}/6</span>
                             </div>
@@ -82,6 +82,10 @@ function getHtmlElement(obj,type,number){
     }
 }
 
+function jumptochat(objid){
+    localStorage.setItem('chat-case-id',objid)
+    window.open('chat.html', '_self')
+}
 function getJoinedCases() {
     // Fetch Joined Cases & then create list then write to innerHtml
     let loadingGif = document.getElementsByClassName('loading-gif')[0]

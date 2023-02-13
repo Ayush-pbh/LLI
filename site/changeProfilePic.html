@@ -71,7 +71,7 @@
                     if(res.status == 200){
                         M.toast({html: `Success Uploading Profile Picture! Going to Homepage.`})
                         setTimeout(() => {
-                            localStorage.setItem('currentLoginUser', undefined)
+                            localStorage.setItem('currentLoginUser', 'null')
                             goToPageWithAnimation('./homepage.html')
                         }, 1000);
                     }
