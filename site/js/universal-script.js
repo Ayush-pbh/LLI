@@ -151,9 +151,10 @@ function goToPageWithAnimation(uri) {
     gsap.to('.plate', { left: 0, duration: .3 })
 
 }
-var socket = io();
+var socket = undefined
+
 function initSocket(){
-    // var socket = io();
+    socket = io();
     
     let loginToken = localStorage.getItem('token')
     let myId = localGet('currentLoginUser',true)._id
