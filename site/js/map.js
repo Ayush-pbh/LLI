@@ -6,8 +6,8 @@ mapbox_token = "pk.eyJ1IjoiYXl1c2hwYmgiLCJhIjoiY2xidzNmeHcxMDUzeDN4bHB3eHJjZ3czM
 // var map = L.map('map').setView([28.622,77.209], 13);
 
 L.mapbox.accessToken = mapbox_token;
-    
-var mapboxTiles = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=' + L.mapbox.accessToken, {
+// mapbox://styles/mapbox/dark-v11
+var mapboxTiles = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/dark-v11/tiles/{z}/{x}/{y}?access_token=' + L.mapbox.accessToken, {
        attribution: '© <a href="https://www.mapbox.com/feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
        tileSize: 512,
        zoomOffset: -1

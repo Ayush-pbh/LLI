@@ -1,5 +1,9 @@
+
+
 // VARIABLES
-api_server = "http://localhost:8080/"
+// api_server = "http://192.168.43.168:8080/"
+// api_server = "http://localhost:8080/"
+api_server = "/"
 // api_server = "https://lli.onrender.com/"
 
 // login_uri = "http://192.168.130.114:3000/login"
@@ -147,26 +151,113 @@ function goToPageWithAnimation(uri) {
     gsap.to('.plate', { left: 0, duration: .3 })
 
 }
-// window.onload = function(){
-//     console.log("ON LOAD UNI")
-//     if(verifyLogin()){
-//         console.log("User Login Verified!")
-//         fetch_user_details()
-//         setTimeout(() => {
-//             setupSidenav()
-//             console.log("Sidenav setup!")
-//         }, 500);
-//     }
-//     else{
-//         console.log("User Login Verified!")
-//     }
-// }
 
-// export {
-//     localGet, localSet, verifyLogin,setupSidenav, fetch_user_details
-// }
+function initSocket(){
+    var socket = io();
+    
+    let loginToken = localStorage.getItem('token')
+    let myId = localGet('currentLoginUser',true)._id
+
+    if(localGet('currentLoginUser').position == 'volunteer'){
+
+        // Send the init event to the socket controller so that we get init and added to a room
+        socket.emit("init-off",
+        {
+            userId : myId,
+            loginToken : loginToken
+        }
+        , (resp)=>{
+            console.log(resp)
+        })
+        // Now after initializing.
+        // Setup all the events.
+        socket.on("from-console", (arg)=>{
+            console.log("Wiredly awesome : "+arg)
+        })
+    }
+    else{
+
+        // Send the init event to the socket controller so that we get init and added to a room
+        socket.emit("init-user",
+        {
+            userId : myId,
+            loginToken : loginToken
+        }
+        , (resp)=>{
+            console.log(resp)
+        })
+        // Now after initializing.
+        // Setup all the events.
+        socket.on("from-console", (arg)=>{
+            console.log("Wiredly awesome : ")
+            // alert(`Got Message from Console : ${arg.msg}`)
+            // Now we need to add this alert notification...
+            //  to The user screen. Turn on the flash of the user...
+            // Torch and Vibrate
+            ddf()
+            // Show Notification
+            document.getElementsByClassName('shared-info')[0].innerHTML = arg.msg
+            toggleNavigationPane()
+            
+        })
+        // socket.on("from-console", (arg)=>{
+
+        // })
+    }
+}
 
 
-// TODO Add animations and cache
-// BUG: We have a bug here!
-// [ ] :Do Something here!
+// TORCH
+
+
+// //Test browser support
+const SUPPORTS_MEDIA_DEVICES = 'mediaDevices' in navigator;
+
+if (SUPPORTS_MEDIA_DEVICES) {
+  //Get the environment camera (usually the second one)
+  navigator.mediaDevices.enumerateDevices().then(devices => {
+  
+    const cameras = devices.filter((device) => device.kind === 'videoinput');
+
+    if (cameras.length === 0) {
+        throw 'No camera found on this device.';
+    }
+    const camera = cameras[cameras.length - 1];
+
+    // Create stream and get video track
+    navigator.mediaDevices.getUserMedia({
+      video: {
+        deviceId: camera.deviceId,
+        facingMode: ['user', 'environment'],
+        height: {ideal: 1080},
+        width: {ideal: 1920}
+      }
+    }).then(stream => {
+      const track = stream.getVideoTracks()[0];
+
+      //Create image capture object and get camera capabilities
+      const imageCapture = new ImageCapture(track)
+      const photoCapabilities = imageCapture.getPhotoCapabilities().then(() => {
+
+        //todo: check if camera has a torch
+
+        //let there be light!
+        const btn = document.querySelector('.switch');
+        btn.addEventListener('click', function(){
+          track.applyConstraints({
+            advanced: [{torch: true}]
+          });
+        //   Vibrate in SOS mode....
+          navigator.vibrate([100,30,100,30,100,30,200,30,200,30,200,30,100,30,100,30,100]);
+        });
+      });
+    });
+  });
+  
+}
+
+
+function ddf(){
+    const btn = document.querySelector('.switch')
+    btn.click();
+}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Console</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="./css/universal-style.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+            
+</head>
+<body class="grey darken-3 ">
+    <!-- SideNav Start -->
+    <ul id="slide-out" class="grey darken-4 sidenav sidenav-fixed">
+    <li><div class="user-view">
+      <a href="#user"><img style="height:200px" src="./img/logo.jpeg"></a>
+    </div></li>
+    <li><div class="divider"></div></li>
+    <!-- <div class="input-field container">
+        <input style="padding-left: 5px;" placeholder=" 🔍 Search Query" id="search_query" type="text" class="white-text">        
+    </div> -->
+    <li><a class="waves-effect waves-light white-text" href="./mapview_console.html">MAP Section</a></li>
+    <!-- <li><a class="waves-effect waves-light white-text" href="#!">Send Custom Alerts / Flash</a></li> -->
+    <li><a class="waves-effect waves-light white-text" href="#!">History Review and Analysis</a></li>
+    <li><a class="waves-effect waves-light white-text" href="#!">Future Predictions</a></li>
+    <li><a class="waves-effect waves-light white-text" href="#!">Daily User Reports</a></li>
+    <li><a class="waves-effect waves-light white-text" href="#!">Case Summary Reports</a></li>
+    <li><a class="waves-effect waves-light white-text" href="#!">Settings (Knobs)</a></li>
+    <li><a class="waves-effect waves-light white-text" href="#!">Logout</a></li>
+  </ul>
+  <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./js/console_ui.js"></script>  
+    <!-- SideNav End -->
+    <div class="body-data">
+      <div class="row">
+        <div class="col s6 m3">
+          <div class="card-panel blue darken-1">
+            <span class="white-text">
+              <h5>Total Active Users : <span class="tau">100</span> </h5>
+            </span>
+          </div>
+        </div>
+        <div class="col s6 m3">
+          <div class="card-panel blue darken-1">
+            <span class="white-text">
+              <h5>Total Active Officials : <span class="tau">100</span> </h5>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6 m3 grey darken-1">
+          <div class="card-panel blue darken-1">
+            <span class="white-text">
+              <h6>Custom Alerts to Users</h6>
+            </span>
+          </div>
+
+          <div class="input-field col s12 white">
+            <textarea id="textarea1" class="materialize-textarea" placeholder="Writeup Custom Alert Here"></textarea>
+          </div>
+          <a class="waves-effect waves-light btn blue" onclick="sendEvent()"><i class="material-icons right">arrow_forward</i>Send</a>
+          <hr>
+        </div>
+        <div class="col s6 m3 ">
+          <div class="card-panel blue darken-1">
+            <span class="white-text">
+              <h6>Active Officials List</h6>
+            </span>
+          </div>
+        <input placeholder=" 🔍 Search Query" id="searchbar" type="text" class="black-text white" onkeypress="searchOff()">        
+
+          <ul class="collapsible popout">
+            <li class="off-list">
+              <div class="collapsible-header"><i class="material-icons">person</i>Virendr Gupta</div>
+              <div class="collapsible-body white"><span>Lorem ipsum dolor sit amet.</span></div>
+            </li>
+            <li  class="off-list">
+              <div class="collapsible-header"><i class="material-icons">person</i>Vijay Chaudhary</div>
+              <div class="collapsible-body white"><span>Lorem ipsum dolor sit amet.</span></div>
+            </li>
+            <li  class="off-list">
+              <div class="collapsible-header"><i class="material-icons">person</i>Pranjal Kamra</div>
+              <div class="collapsible-body white"><span>Lorem ipsum dolor sit amet.</span></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

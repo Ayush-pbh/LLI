@@ -187,7 +187,6 @@ function toggleChatSection() {
         chatSectionVisible = true
     }
 }
-
 // Check for pre fetched data 
 
 window.onload = function () {
@@ -212,4 +211,6 @@ window.onload = function () {
 
     setupMinimap()
     drawMiniMapCluster()
+    // Socket
+    initSocket()
 }

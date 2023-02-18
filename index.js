@@ -9,6 +9,7 @@
 const express = require('express')
 var bodyParser = require('body-parser')
 const multer = require('multer')
+
 const mongoose = require('mongoose')
 const mongo_models = require('./Database_Json_Models.js')
 const jwt = require('jsonwebtoken')
@@ -942,24 +943,66 @@ io.on('connection', (socket) => {
     console.log("A new user connected.");
     socket.broadcast.emit("Welcome to the server.")
     console.log(`Socket ID : ${socket.id}`)
-    socket.on('disconnect', (socket) =>{
+    
+    socket.on('disconnect', (socke) =>{
         console.log("user Disconnected.")
+        // Flash code below
+        io.to('the-real-console').emit('user-disconnected', socket.id)
+
     })
     
     socket.on('chat-init', (arg,callback)=>{
         socket.join(arg.caseId)   //joining thesocket to it's case room.
         callback(`Joined : ChatRoom - ${arg.caseId}`) //sending back the confirmation
     })
-
+    
     socket.on("chat-message", (arg,callback) =>{
         // Passing on the chat to all the sockets in the group...
         io.to(arg.caseId).emit("chat-message", arg);
         // Adding the chat to the Database
+        arg.datetime = Date.now()
+
         mongo_models.CHATROOM.findOneAndUpdate({caseId : arg.caseId}, {$push : {chats : arg}})
         .catch(err=>console.log(err))
     })
+
+
+    // Flash Messages / Alerts
+    socket.on("to-flash-console", (arg, callback)=>{
+        // This event point is for officials & users to send info to the console.
+        // Forwarding the message to the console.
+        io.to('the-real-console').emit("to-flash-console", arg)
+        // Storing it in DB will do later.
+    })
+
+    socket.on("init-user", (arg,callback)=>{
+        // This event initializes the users to their rooms.
+        socket.join("all-users")        //all users
+        socket.join(arg.userId)         // for personal data transfers
+        // Now send these new user details to the console
+        arg.socketId = socket.id
+        io.to("the-real-console").emit("new-user", arg)
+        console.log("New User came to us")
+    })
+    socket.on("init-off", (arg,c_)=>{
+        socket.join("all-off")
+        arg.socketId = socket.id
+        socket.join(arg.userId)
+        io.to("the-real-console").emit("new-user", arg)
+        console.log("OFFFFF")
+    })
+    socket.on("init-console", (arg,c_)=>{
+        console.log("Console Initalized")
+        // Now adding it to the the-real-console room 
+        socket.join("the-real-console")
+    })
+    socket.on("to-user", (arg,c_)=>{
+        // Send to user of a particular group
+        io.to(arg.targetRoom).emit("from-console",arg)
+    })
+
+    socket.on("to-off", (arg,c_)=>{
+        // Send to user of a particular group
+        io.to(arg.targetRoom).emit("from-console",arg)
+    })
 })
-
-
-
-

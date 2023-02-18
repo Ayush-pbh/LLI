@@ -65,8 +65,8 @@
                     <div class="nav-wrapper green lighten-1">
                     <span class="left brand-logo my-nav-trigger visible" onclick="toggleSidenav()"><i class="material-icons sidenav-trigger">menu</i></span>
                     <span class="left brand-logo chatroom-close-logo" onclick="openchatroom()"><i class="material-icons sidenav-trigger">arrow_back</i></span>
-                    <a class="right brand-logo top-right-navbar-icon navbar-icon-chat " onclick="window.open('chatroom.html','_self')"><i class="material-icons">chat</i></a>
-                    <a class="right brand-logo top-right-navbar-icon navbar-icon-notifi" onclick="toggleNavigationPane()"><i class="material-icons">notifications</i></a>
+                    <a class="right brand-logo top-right-navbar-iconn navbar-icon-chat " onclick="window.open('chatroom.html','_self')"><i class="material-icons">chat</i></a>
+                    <a class=" brand-logo top-right-navbar-icon navbar-icon-notifi visible" onclick="toggleNavigationPane()"><i class="material-icons">notifications</i></a>
                     </div>
                 </nav>
             </div>
@@ -102,7 +102,7 @@
                                     <div class="white-text center-align">CASE HISTORY</div>
                                 </div>
                             </div>
-                        </div>
+                        </div>alert(`Got Message from Console : ${arg.msg}`)
                         <div class="col s12 animate-this" onclick="goToPageWithAnimation('./about.html')">
                             <div class="card-panel greenbtn card-panel-custom green lighten-1 waves-effect waves-light border-radius-curve">
                                 <div class="holder">
@@ -120,7 +120,7 @@
                         <div class="col s12 animate-this" onclick="goToPageWithAnimation('./help.html')">
                             <div class="card-panel greenbtn card-panel-custom green lighten-1 waves-effect waves-light border-radius-curve">
                                 <div class="holder">
-                                    <div class="white-text center-align help-inc">HELP</div>
+                                    <div class="white-text center-alert(`Got Message from Console : ${arg.msg}`)align help-inc">HELP</div>
                                 </div>
                             </div>
                         </div>
@@ -154,7 +154,9 @@
                                 </div>
                             </div>
                         </div>
+                        <button class="switch" style="display: none;"></button>
                     </div>
+                    
                     <div class="container ngoadmin-green-button hidden">
                         <div class="col s12 animate-this" onclick="goToPageWithAnimation('./viewNgo.html')" >
                             <div class="card-panel greenbtn card-panel-custom green lighten-1 waves-effect waves-light border-radius-curve">
@@ -187,7 +189,7 @@
                     </div>
                 </div>
                 <div class="row report-case-block">
-                    <div class="container animate-this" onclick="goToPageWithAnimation('./create_new_case.html')" >
+                    <div class="container animate-this" onclick="goToPageWithAnimation('./create_new_case.html')"  >
                         <div class="col s12 m6">
                           <div class="card red lighten-1 border-radius-curve">
                             <div class="card-content white-text">
@@ -228,6 +230,7 @@
                                         <span>(+91) 896-070-4965</span>
                                     </div>
                                 </div>
+                                <h6 class="shared-info red white-text" style="padding:5px;border-radius:8px"></h6>
                                 <h6 class="center-align">Documents Uploaded</h6>
                                 <br>
                                 <div class="row">
@@ -266,7 +269,7 @@
     <script src='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.js'></script>
 
     <script src="./js/leaflet.markercluster.js"></script>
-
+    <script src="/socket.io/socket.io.js"></script>
     <script src="./js/universal-script.js" defer></script>
     
     <script src="./js/homepage.js" defer></script>

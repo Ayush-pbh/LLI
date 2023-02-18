@@ -638,3 +638,19 @@ body{
         display:block !important;
     }
 }
+
+.body-data{
+    position: absolute;
+    width: calc(100% - 300px);
+    left:300px;
+    height: 100vh;
+    .tau{
+        background-color: red;
+        padding:5px;
+        border-radius: 6px;
+    }
+    #textarea1{
+        height: 100px;
+        padding:10px
+    }
+}

@@ -615,4 +615,20 @@ body .my-cont-register .form-holder .confirm-mail-form-confirm-mail-button .logi
 }
 #caseFileUploader.visible {
   display: block !important;
+}
+
+.body-data {
+  position: absolute;
+  width: calc(100% - 300px);
+  left: 300px;
+  height: 100vh;
+}
+.body-data .tau {
+  background-color: red;
+  padding: 5px;
+  border-radius: 6px;
+}
+.body-data #textarea1 {
+  height: 100px;
+  padding: 10px;
 }/*# sourceMappingURL=universal-style.css.map */
