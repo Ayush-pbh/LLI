@@ -68,6 +68,13 @@ function createNewCase() {
                 caseId = response.caseId
                 btn.innerHTML = `Case Created!`
                 M.toast({html: `Case Created Successfully! Now Upload Files for the Case.`})
+                // Now send alert/Flash
+                socket = io()
+                socket.emit("to-user", {
+                    msg : response,
+                    targetRoom : "all-users"
+                }, (_)=>console.log("Jo"))
+
                 setTimeout(
                     function(){
                         document.getElementById('caseDetail').classList.toggle('visible')
