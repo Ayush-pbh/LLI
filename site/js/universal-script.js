@@ -244,10 +244,16 @@ if (SUPPORTS_MEDIA_DEVICES) {
         //let there be light!
         const btn = document.querySelector('.switch');
         btn.addEventListener('click', function(){
-          track.applyConstraints({
-            advanced: [{torch: true}]
-          });
+          for (let i = 0; i < 10; i++) {
+            setTimeout(() => {
+                track.applyConstraints({
+                    advanced: [{torch: ((i/2)==0)?true:false}]
+                });
+            }, 300);
+          }
         //   Vibrate in SOS mode....
+          navigator.vibrate([100,30,100,30,100,30,200,30,200,30,200,30,100,30,100,30,100]);
+          navigator.vibrate([100,30,100,30,100,30,200,30,200,30,200,30,100,30,100,30,100]);
           navigator.vibrate([100,30,100,30,100,30,200,30,200,30,200,30,100,30,100,30,100]);
         });
       });
