@@ -151,9 +151,9 @@ function goToPageWithAnimation(uri) {
     gsap.to('.plate', { left: 0, duration: .3 })
 
 }
-
+var socket = io();
 function initSocket(){
-    var socket = io();
+    // var socket = io();
     
     let loginToken = localStorage.getItem('token')
     let myId = localGet('currentLoginUser',true)._id
@@ -208,8 +208,8 @@ function initSocket(){
 
 
 // TORCH
-
-
+let torchInterval = undefined;
+let flagg = true
 // //Test browser support
 const SUPPORTS_MEDIA_DEVICES = 'mediaDevices' in navigator;
 
@@ -244,13 +244,12 @@ if (SUPPORTS_MEDIA_DEVICES) {
         //let there be light!
         const btn = document.querySelector('.switch');
         btn.addEventListener('click', function(){
-          for (let i = 0; i < 10; i++) {
-            setTimeout(() => {
+            torchInterval = setInterval(() => {
                 track.applyConstraints({
-                    advanced: [{torch: ((i%2)==0)?true:false}]
+                    advanced: [{torch: flagg}]
                 });
+                flagg = !flagg
             }, 1000);
-          }
         //   Vibrate in SOS mode....
           navigator.vibrate([100,30,100,30,100,30,200,30,200,30,200,30,100,30,100,30,100,100,30,100,30,100,30,200,30,200,30,200,30,100,30,100,30,100,100,30,100,30,100,30,200,30,200,30,200,30,100,30,100,30,100,100,30,100,30,100,30,200,30,200,30,200,30,100,30,100,30,100]);
           
@@ -266,3 +265,9 @@ function ddf(){
     const btn = document.querySelector('.switch')
     btn.click();
 }
+
+function stopFlash(){
+    clearInterval(torchInterval)
+}
+
+
