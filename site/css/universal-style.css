@@ -631,4 +631,63 @@ body .my-cont-register .form-holder .confirm-mail-form-confirm-mail-button .logi
 .body-data #textarea1 {
   height: 100px;
   padding: 10px;
+}
+
+.mapoptions {
+  position: fixed;
+  width: 100%;
+  background: #fff;
+  height: 45vh;
+  z-index: 100;
+  bottom: 0px;
+  border-radius: 15% 15% 0px 0px;
+}
+.mapoptions .controls {
+  margin-top: 30px;
+}
+.mapoptions .controls div {
+  display: inline;
+  margin: 10px;
+}
+.mapoptions .route-info {
+  width: 100%;
+  height: 40px;
+  background: rgba(104, 193, 111, 0.5019607843);
+  border-radius: 30px;
+}
+
+.sos_turn {
+  background-color: red;
+  overflow: hidden;
+}
+.sos_turn .sos_mode_on {
+  color: #fff;
+}
+.sos_turn.white {
+  background-color: white;
+}
+.sos_turn.white .sos_mode_on {
+  color: red;
+}
+.sos_turn.green {
+  background-color: #4bed53;
+}
+
+.sos_mode_on {
+  position: fixed;
+  width: 100%;
+  top: calc(50vh - 20px);
+  text-align: center;
+}
+.sos_mode_on .stop_btn {
+  font-size: 25px;
+  background-color: black;
+  padding: 10px;
+  font-weight: bolder;
+  border-radius: 12px;
+  color: white;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
 }/*# sourceMappingURL=universal-style.css.map */

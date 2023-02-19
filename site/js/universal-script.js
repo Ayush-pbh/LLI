@@ -191,13 +191,22 @@ function initSocket(){
         // Setup all the events.
         socket.on("from-console", (arg)=>{
             console.log("Wiredly awesome : ")
+            console.log(arg)
             // alert(`Got Message from Console : ${arg.msg}`)
             // Now we need to add this alert notification...
             //  to The user screen. Turn on the flash of the user...
             // Torch and Vibrate
             ddf()
             // Show Notification
-            document.getElementsByClassName('shared-info')[0].innerHTML = arg.msg
+            if(arg.msg.description){
+                document.getElementsByClassName('shared-info')[0].innerHTML = arg.msg.description + "<hr>"+arg.msg.additionalNotes
+                document.getElementsByClassName('submiterinfo')[0].innerHTML = `<span>${arg.msg.userSubmitFName +' '+ arg.msg.userSubmitLName}</span><br><span>${arg.msg.userSubmitContact}</span>`
+            }
+            else{
+                document.getElementsByClassName('shared-info')[0].innerHTML = arg.msg
+
+            }
+            
             toggleNavigationPane()
             
         })

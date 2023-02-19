@@ -277,7 +277,13 @@ function ddf(){
 }
 
 function stopFlash(){
+    console.log("Flashing Stopped")
     clearInterval(torchInterval)
 }
 
 
+function Gotonav(){
+    stopFlash();
+    console.log('ddd');
+    window.open('navigation.html','_self')
+}

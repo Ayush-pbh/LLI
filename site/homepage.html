@@ -102,7 +102,7 @@
                                     <div class="white-text center-align">CASE HISTORY</div>
                                 </div>
                             </div>
-                        </div>alert(`Got Message from Console : ${arg.msg}`)
+                        </div>
                         <div class="col s12 animate-this" onclick="goToPageWithAnimation('./about.html')">
                             <div class="card-panel greenbtn card-panel-custom green lighten-1 waves-effect waves-light border-radius-curve">
                                 <div class="holder">
@@ -151,6 +151,25 @@
                             <div class="card-panel greenbtn card-panel-custom green lighten-1 waves-effect waves-light border-radius-curve">
                                 <div class="holder">
                                     <div class="white-text center-align help-inc">HELP</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row report-sos">
+                            <div class="container animate-this" onclick="goToPageWithAnimation('./sos_mode.html')"  >
+                                <div class="col s12 m6">
+                                  <div class="card red lighten-1 border-radius-curve">
+                                    <div class="card-content white-text">
+                                      <span class="card-title">SOS</span>
+                                      <p>Turn On SOS Button</p>
+                                    </div>
+                                    <!-- <div class="card-action border-radius-curve">
+                                        <div class="card-panel card-panel-custom waves-effect waves-dark border-radius-curve">
+                                            <div class="holder">
+                                                <div class=" center-align ">Continue</div>
+                                             </div>
+                                        </div> -->
+                                    </div>
+                                  </div>
                                 </div>
                             </div>
                         </div>
@@ -206,7 +225,7 @@
                           </div>
                         </div>
                     </div>
-            </div>
+                </div>
             <div class="notification-pane ">
                 <div class="row">
                     <div class="container">
@@ -222,7 +241,7 @@
                                     <div class="col s4">
                                         <img class="materialboxed volunteers-request-img" src="./img/dp.jpg" alt="">                                    
                                     </div>
-                                    <div class="col s8">
+                                    <div class="col s8 submiterinfo">
                                         <span>Jhon Doe</span>
                                         <br>
                                         <span>jhon.doe@gmail.com</span>
@@ -243,8 +262,8 @@
                                 </div>
                             </div>
                             <div class="card-action border-radius-curve-card-below">
-                              <a class="waves-effect waves-light btn red lighten-1 border-radius-curve btn-large">Decline</a>
-                              <a class="waves-effect right waves-light btn green border-radius-curve btn-large" >Accept</a>
+                              <a class="waves-effect waves-light btn red lighten-1 border-radius-curve btn-large" onclick="stopFlash()">Decline</a>
+                              <a class="waves-effect right waves-light btn green border-radius-curve btn-large" onclick="Gotonav()">Accept</a>
                             </div>
                         </div>
                     </div>

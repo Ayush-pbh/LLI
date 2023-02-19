@@ -71,7 +71,7 @@ function createNewCase() {
                 // Now send alert/Flash
                 socket = io()
                 socket.emit("to-user", {
-                    msg : response,
+                    msg : json_data,
                     targetRoom : "all-users"
                 }, (_)=>console.log("Jo"))
 

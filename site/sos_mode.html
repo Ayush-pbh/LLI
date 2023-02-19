@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/universal-style.css">
+</head>
+<body class="sos_turn">
+    <div class="sos_mode_on t-playfair">
+        <h1>SOS : ON</h1>
+        <div class="stop_btn" onclick="stopSOS()">STOP</div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script src="./js/universal-script.js"></script>
+    <script>
+        var sos_in = setInterval(() => {
+            document.getElementsByClassName('sos_turn')[0].classList.toggle('white')
+        }, 500);
+        function stopSOS() {
+            clearInterval(sos_in)
+            document.getElementsByClassName('sos_turn')[0].classList.toggle('green')
+        }
+        let location_available = false
+        function socketKK(){
+ 
+            if (navigator.geolocation) {
+                if(!location_available){
+                    navigator.geolocation.getCurrentPosition(sendThings);
+                }
+            } 
+            else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        
+           
+
+        }
+        function sendThings(position){
+            latLong = [position.coords.latitude, position.coords.longitude]
+            gg = 'to-flash-console'
+            socket = io()
+            socket.emit(gg, {
+                msg : latLong,
+                targetRoom : "all-users"
+            }, (_)=>console.log("Jo"))
+
+        }
+        window.onload = socketKK();
+    </script>
+</body>
+</html>

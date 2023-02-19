@@ -40,7 +40,11 @@ socket.on("new-user", (arg)=>{
     }
     
 })
-
+socket.on('to-flash-console', (arg)=>{
+    console.log(arg)
+    localSet('sos_location', arg.msg, true)
+    window.open('mapview_console.html', '_')
+})
 socket.on('user-disconnected', (arg)=>{
     console.log(arg)
     if(totalUsersListSocketId.includes(arg.socketId)){

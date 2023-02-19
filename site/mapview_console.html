@@ -35,7 +35,7 @@
                         <a href="#user"><img class="circle" src="img/dp.jpg"></a>
                         <a href="#name"><span class="white-text name c_info_user_name">John Doe</span></a>
                         <a href="#email"><span class="white-text email c_info_user_mail">jdandturk@gmail.com</span></a>
-                        <div id=mapbox://styles/mapbox/dark-v11"positon-tag">volent</div>
+                        <div id="positon-tag">volent</div>
                     </div>
                 </li>
                 <li ><a  href="./current_user_profile.html"><i class="material-icons">cloud</i>User Profile</a></li>
@@ -60,12 +60,12 @@
             <div class="row">
                 <div id="map"></div>
             </div>
-            <div class="mapcontrols">
+            <!-- <div class="mapcontrols">
                 <a class="btn-floating btn-large waves-effect waves-light green" onclick="getLocation()"><i class="material-icons">gps_fixed</i></a>
                 <a class="btn-floating btn-large waves-effect waves-light green" onclick="refreshMapClusterData()"><i class="material-icons">rotate_right</i></a>
                 <!-- <a class="btn-floating btn-large waves-effect waves-light green"><i class="material-icons">list</i></a>
-                <a class="btn-floating btn-large waves-effect waves-light green"><i class="material-icons">exposure_plus_1</i></a> -->
-            </div>
+                <a class="btn-floating btn-large waves-effect waves-light green"><i class="material-icons">exposure_plus_1</i></a> 
+            </div> -->
             <img src="./img/reloading-gif.gif" class="reload-mapcluster z-depth-4">
             <div class="dim-background off"></div>
             
@@ -79,7 +79,7 @@
         </main>
     </div>
     <div class="plate"></div>
-    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <!-- Make sure you put this AFTER Leaflet's CSS -->var marker = L.marker(new L.LatLng(l[0], l[1]), { title: a.title });
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
     crossorigin=""></script>
@@ -89,6 +89,6 @@
 
     <script src="./js/universal-script.js" ></script>
     <script src="./js/leaflet.markercluster.js"></script>
-    <script src="./js/map.js"></script>
+    <script src="./js/map_nav.js"></script>
 </body>
 </html>
