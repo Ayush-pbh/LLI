@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
   });
 // Global Variables
-let totalUsers = 100;
-let totalOff = 100;
+let totalUsers = 0;
+let totalOff = 0;
 let totalUsersList = Array();
 let totalUsersListSocketId = Array();
 // init socket.
