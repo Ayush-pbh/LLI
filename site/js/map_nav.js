@@ -1,113 +1,131 @@
 
+current_position = [77.96672676049816, 30.416703571740868];
 
-// This token will be given by the server in prod!
-mapbox_token = "pk.eyJ1IjoiYXl1c2hwYmgiLCJhIjoiY2xidzNmeHcxMDUzeDN4bHB3eHJjZ3czMSJ9.QqwJl13b-XbrXatNKFcJ4w";
 
-// var map = L.map('map').setView([28.622,77.209], 13);
 
-L.mapbox.accessToken = mapbox_token;
-// mapbox://styles/mapbox/dark-v11
-var mapboxTiles = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/dark-v11/tiles/{z}/{x}/{y}?access_token=' + L.mapbox.accessToken, {
-       attribution: '© <a href="https://www.mapbox.com/feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-       tileSize: 512,
-       zoomOffset: -1
+// document.addEventListener('DOMContentLoaded', function () {
+//     setup();
+//     setTimeout(() => {
+//         drawToiletList();
+//     }, 1500);
+//     var elems = document.querySelectorAll('.sidenav');
+//     var instances = M.Sidenav.init(elems, { edge: 'left', draggable: true, preventScrolling: true });
+// });
+
+
+
+
+// MAPS
+mapboxgl.accessToken = 'pk.eyJ1IjoiYXl1c2hwYmgiLCJhIjoiY2xlYXJ1eGJnMTI3MDNvbWUyY3lhdWJkOSJ9.MLBfllkNNA2UwCFOGtcQtA';
+const map = new mapboxgl.Map({
+container: 'map',
+style: 'mapbox://styles/mapbox/dark-v11',
+center: current_position,
+zoom: 14
 });
-let l = localGet('sos_location', true)
+
+ToiletMarkers = Array();
+
+function addMapMarkers(){
+    // Point A --- police
+    ToiletMarkers.push(new mapboxgl.Marker({color:"#111"}).setLngLat([77.9532119396738,30.343376113278268]).addTo(map));
+    // Point B --> Us
+    ToiletMarkers.push(new mapboxgl.Marker({color:"#111"}).setLngLat(current_position).addTo(map));
+}
 
 
 
-var map = L.map('map')
-  .addLayer(mapboxTiles)
-  .setView([l[0],l[1]], 10);
-let location_available = false
-function getLocation() {
-    if (navigator.geolocation) {
-        if(!location_available){
-            navigator.geolocation.getCurrentPosition(setuserlocation);
-            location_available = true
+currLocationMarker = undefined;
+
+async function openMapAndNavigateTo(d){
+    // if(!map_visible) toggleMapVisiblity();
+    // addCurrentLocationMarker();
+    console.log(d);
+    profile = 'cycling'
+    start = '77.96672676049816,30.416703571740868'
+    end = `${d[0]},${d[1]}`
+    url = `https://api.mapbox.com/directions/v5/mapbox/${profile}/${start};${end}?geometries=geojson&access_token=pk.eyJ1IjoiYXl1c2hwYmgiLCJhIjoiY2xlYXJ1eGJnMTI3MDNvbWUyY3lhdWJkOSJ9.MLBfllkNNA2UwCFOGtcQtA`;
+    const query = await fetch(
+        url,
+        { method: 'GET' }
+      );
+      const json = await query.json();
+      const data = json.routes[0];
+      const route = data.geometry.coordinates;
+      const geojson = {
+        type: 'Feature',
+        properties: {},
+        geometry: {
+          type: 'LineString',
+          coordinates: route
         }
-        else{
-            navigator.geolocation.getCurrentPosition(function(position){
-                map.panTo(new L.LatLng(position.coords.latitude,position.coords.longitude));
-                console.log("Map Panning")
-            });
-        }
-    } 
-    else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
+      };
+      // if the route already exists on the map, we'll reset it using setData
+      if (map.getSource('route')) {
+        map.getSource('route').setData(geojson);
+      }
+      // otherwise, we'll make a new request
+      else {
+        map.addLayer({
+          id: 'route',
+          type: 'line',
+          source: {
+            type: 'geojson',
+            data: geojson
+          },
+          layout: {
+            'line-join': 'round',
+            'line-cap': 'round'
+          },
+          paint: {
+            'line-color': '#3887be',
+            'line-width': 5,
+            'line-opacity': 0.75
+          }
+        });
+      }
+      // add turn instructions here at the end
+      end_journey = new mapboxgl.Marker().setLngLat()
     }
-}
-
-
-var userLocationIcon = L.icon({
-    iconUrl: '../img/sos_symbol.png',
-    iconSize:     [40,40], // size of the icon
-    popupAnchor:  [0,0 ] // point from which the popup should open relative to the iconAnchor
-});
-
-function setuserlocation(position){
-
-    let userLocation = [position.coords.latitude,position.coords.longitude]
-    console.log(`User Location : [Latt,Long] = [${position.coords.latitude},${position.coords.longitude}]`)
-    map.setView(userLocation,15)
     
-    marker_userlocation = L.marker(userLocation, {icon: userLocationIcon}).addTo(map);
-    marker_userlocation.bindPopup("You are here!");
+    function drawRouteOnMap(){
+      // make an initial directions request that
+      // starts and ends at the same location
+    
+      // Add starting point to the map
+      map.addLayer({
+        id: 'point',
+        type: 'circle',
+        source: {
+          type: 'geojson',
+          data: {
+            type: 'FeatureCollection',
+            features: [
+              {
+                type: 'Feature',
+                properties: {},
+                geometry: {
+                  type: 'Point',
+                  coordinates: current_position
+                }
+              }
+            ]
+          }
+        },
+        paint: {
+          'circle-radius': 5,
+          'circle-color': '#3887be'
+        }
+      });
+      // this is where the code from the next step will go
+    }
+
+r = 1
+a = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiNjJlZDE2OGI0ZWU1ODkzZDZjZWFlNTIwIiwiaWF0IjoxNjU5NzU0ODczfQ.EimbMlMVXdtMpwmq7Jy4aCFNVqYKBuuhEb6fhPrHxe4'
+jwt_token = a
+
+window.onload = function(){
+    removePlate();
+    addMapMarkers()
+    openMapAndNavigateTo([77.9532119396738,30.343376113278268])
 }
-
-function refreshMapClusterData() {
-    // Animate the loading icon...
-    document.getElementsByClassName('reload-mapcluster')[0].classList.add('visible')
-    document.getElementsByClassName('dim-background')[0].classList.remove('off')
-    setTimeout(() => {
-        document.getElementsByClassName('reload-mapcluster')[0].classList.remove('visible')
-        document.getElementsByClassName('dim-background')[0].classList.add('off')
-    }, 1000);
-}
-
-
-var temp_markers = L.markerClusterGroup()
-
-function initMap(){
-    // getLocation()
-}
-
-		
-// for (var i = 0; i < addressPoints.length; i++) {
-//     var a = addressPoints[i];
-//     let l = a.location
-//     var marker = L.marker(new L.LatLng(l[0], l[1]), { title: a.title });
-//     marker.bindPopup(`Case #${i+1} ${a.title}`);
-//     temp_markers.addLayer(marker);
-// }
-
-// Adding the marker for sos call
-
-// var marker = L.marker(new L.LatLng(l[0], l[1]), { title: "SOS CALL" }); 
-// marker.bindPopup('!! SOS CALL !!')
-// temp_markers.addLayer(marker)
-
-let userLocation = [l[0], l[1]] 
-map.setView(userLocation,12)
-
-marker_userlocation = L.marker(userLocation, {icon: userLocationIcon}).addTo(map);
-marker_userlocation.bindPopup("!! SOS CALL !!");
-
-// map.addLayer(temp_markers)
-
-
-var policeLocIcon = L.icon({
-    iconUrl: '../img/police_symbol.png',
-    iconSize:     [40,40], // size of the icon
-    popupAnchor:  [0,0 ] // point from which the popup should open relative to the iconAnchor
-});
-
-let simulated_police_location = [30.343409550416425, 77.95322184536796]
-
-let policeLoc = [simulated_police_location[0], simulated_police_location[1]] 
-// map.setView(policeLoc,15)
-
-marker_policeLoc = L.marker(policeLoc, {icon: policeLocIcon}).addTo(map);
-marker_policeLoc.bindPopup("!! SOS CALL !!");
-console.log("yay")
-removePlate();
