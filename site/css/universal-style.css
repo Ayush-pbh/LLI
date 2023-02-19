@@ -654,6 +654,38 @@ body .my-cont-register .form-holder .confirm-mail-form-confirm-mail-button .logi
   height: 40px;
   background: rgba(104, 193, 111, 0.5019607843);
   border-radius: 30px;
+  position: relative;
+}
+.mapoptions .route-info .progress_bar {
+  height: 100%;
+  width: 50%;
+  background-color: #68c16f;
+  border-radius: 30px 0px 0px 30px;
+}
+.mapoptions .route-info span {
+  color: rgb(66, 66, 66);
+  font-weight: bold;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  text-align: center;
+  line-height: 40px;
+}
+.mapoptions .off-info .dpp {
+  margin-left: 20px;
+}
+.mapoptions .off-info .innfoo h6 {
+  margin-left: 40px;
+}
+.mapoptions .off-info .innfoo h6:nth-child(1) {
+  margin-top: 33px;
+}
+.mapoptions .off-info .police-name {
+  text-align: center;
+  padding-left: 25px !important;
+}
+.mapoptions .off-info .police-dp {
+  height: 100px;
 }
 
 .sos_turn {

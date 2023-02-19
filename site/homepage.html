@@ -72,11 +72,11 @@
             </div>
             
             <div class="homepage-style">
-                <div class="row">
+                <!-- <div class="row">
                     <div class="container">
                         <div class="white-box"></div>
                     </div>
-                </div>
+                </div> -->
                 <div class="row animate-this">
                     <div class="container">
                         <div class="col s12 m6">
@@ -126,6 +126,19 @@
                         </div>
                     </div>
                     <div class="container voln-green-button hidden">
+                        <div class="row report-sos">
+                            <div class="container animate-this" onclick="goToPageWithAnimation('./sos_mode.html')"  >
+                                <div class="col s12 m6">
+                                  <div class="card red lighten-1 border-radius-curve">
+                                    <div class="card-content white-text">
+                                      <span class="card-title">SOS</span>
+                                      <p>Turn On SOS Button</p>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="col s12 animate-this" onclick="goToPageWithAnimation('./case_list.html')" >
                             <div class="card-panel greenbtn card-panel-custom green lighten-1 waves-effect waves-light border-radius-curve">
                                 <div class="holder" >
@@ -151,25 +164,6 @@
                             <div class="card-panel greenbtn card-panel-custom green lighten-1 waves-effect waves-light border-radius-curve">
                                 <div class="holder">
                                     <div class="white-text center-align help-inc">HELP</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row report-sos">
-                            <div class="container animate-this" onclick="goToPageWithAnimation('./sos_mode.html')"  >
-                                <div class="col s12 m6">
-                                  <div class="card red lighten-1 border-radius-curve">
-                                    <div class="card-content white-text">
-                                      <span class="card-title">SOS</span>
-                                      <p>Turn On SOS Button</p>
-                                    </div>
-                                    <!-- <div class="card-action border-radius-curve">
-                                        <div class="card-panel card-panel-custom waves-effect waves-dark border-radius-curve">
-                                            <div class="holder">
-                                                <div class=" center-align ">Continue</div>
-                                             </div>
-                                        </div> -->
-                                    </div>
-                                  </div>
                                 </div>
                             </div>
                         </div>
@@ -212,7 +206,7 @@
                         <div class="col s12 m6">
                           <div class="card red lighten-1 border-radius-curve">
                             <div class="card-content white-text">
-                              <span class="card-title">Reoprt a case.</span>
+                              <span class="card-title">Report a case.</span>
                               <p>You can report a case for an animal in need by filling a form.</p>
                             </div>
                             <!-- <div class="card-action border-radius-curve">

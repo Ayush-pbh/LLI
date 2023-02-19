@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.collapsible');
     var instances = M.Collapsible.init(elems, {});
+
   });
 // Global Variables
 let totalUsers = 100;
@@ -21,6 +22,8 @@ socket.emit("init-console",{}, (resp)=>{
 
 socket.on("new-user", (arg)=>{
     console.log("New User Came")
+    M.toast({html: `New Police Van Online`})
+
     console.log(arg)
     
     if(!totalUsersList.includes(arg.userId)){

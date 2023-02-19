@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,7 +17,10 @@
     crossorigin=""/>
     <link rel="stylesheet" href="./css/MarkerCluster.css">
     <link rel="stylesheet" href="./css/MarkerCluster.Default.css">
-    <link href='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css' rel='stylesheet' />
+    <!-- <link href='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css' rel='stylesheet' /> -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.js"></script>
+
 </head>
 <body >
     
@@ -72,9 +75,9 @@
                         <div class="controls center-align">
                 <a class="btn-floating btn-large waves-effect waves-light green" onclick="getLocation()"><i class="material-icons">gps_fixed</i></a>
                 <div class="start"></div>
-                <a class="btn-floating btn-large waves-effect waves-light green" onclick="refreshMapClusterData()"><i class="material-icons">rotate_right</i></a>
+                <a class="btn-floating btn-large waves-effect waves-light green" href="tel:+911234567890"><i class="material-icons">phone</i></a>
                 <div class="msg"></div>
-                <a class="btn-floating btn-large waves-effect waves-light green" onclick="refreshMapClusterData()"><i class="material-icons">rotate_right</i></a>
+                <a class="btn-floating btn-large waves-effect waves-light green" onclick="sendMessagetoPolice()"><i class="material-icons">chat</i></a>
                 <div class="phone"></div>
                 <a class="btn-floating btn-large waves-effect waves-light green" onclick="refreshMapClusterData()"><i class="material-icons">rotate_right</i></a>
                 <div class="reload"></div>
@@ -84,20 +87,20 @@
                 <div class="row">
                     <div class="col s12">
                         <div class="route-info">
-                            <div class="progress-bar">
-                                <span class="arrivalTime">ETA 5:40 AM</span>
+                            <div class="progress_bar">
                             </div>
+                            <span class="arrivalTime">ETA 5:40 AM</span>
                         </div>
                     </div>
                 </div>
                 <div class="off-info">
                     <div class="row">
-                        <div class="col s4">
-                            <img class="police-dp circle">
+                        <div class="col s3 dpp">
+                            <img class="police-dp circle" src="./img/dp.jpg">
                             <br>
-                            <div class="police-name">Vivek Chaudhary</div>
+                            <div class="police-name">Vivek Rai</div>
                         </div>
-                        <div class="col s8">
+                        <div class="col s8 innfoo">
                             <h6>Van No. : Victor 7</h6>
                             <h6>Station. : NANDCHK</h6>
                         </div>
@@ -126,6 +129,6 @@
 
     <script src="./js/universal-script.js" ></script>
     <script src="./js/leaflet.markercluster.js"></script>
-    <script src="./js/map_nav.js"></script>
+    <script src="./js/map_nav_user.js"></script>
 </body>
 </html>
